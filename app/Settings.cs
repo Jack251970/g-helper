@@ -19,6 +19,8 @@ namespace GHelper
 {
     public partial class SettingsForm : RForm
     {
+        #region Properties
+
         public GPUModeControl gpuControl;
         public AllyControl allyControl;
         ScreenControl screenControl = new ScreenControl();
@@ -47,11 +49,15 @@ namespace GHelper
 
         bool sliderGammaIgnore = false;
 
+        #endregion
+
         public SettingsForm()
         {
 
             InitializeComponent();
             InitTheme(true);
+
+            #region Create & Strings
 
             gpuControl = new GPUModeControl(this);
             updateControl = new AutoUpdateControl(this);
@@ -121,6 +127,8 @@ namespace GHelper
             buttonKeyboard.AccessibleName = Properties.Strings.ExtraSettings;
             buttonKeyboardColor.AccessibleName = Properties.Strings.LaptopKeyboard + " " + Properties.Strings.Color;
             comboKeyboard.AccessibleName = Properties.Strings.LaptopBacklight;
+
+            #endregion
 
             FormClosing += SettingsForm_FormClosing;
             Deactivate += SettingsForm_LostFocus;
