@@ -53,7 +53,6 @@ namespace GHelper
 
         public SettingsForm()
         {
-
             InitializeComponent();
             InitTheme(true);
 
@@ -171,7 +170,6 @@ namespace GHelper
             buttonQuit.Click += ButtonQuit_Click;
 
             buttonKeyboardColor.Click += ButtonKeyboardColor_Click;
-
             
             buttonKeyboard.Click += ButtonKeyboard_Click;
             buttonController.Click += ButtonHandheld_Click;
@@ -842,6 +840,8 @@ namespace GHelper
         }
 
         #endregion
+
+        #region Others
 
         public void InitVisual()
         {
@@ -1852,5 +1852,7 @@ namespace GHelper
                 buttonFnLock.AccessibleName = "Fn-Lock off";
             }
         }
+
+        #endregion
     }
 }
