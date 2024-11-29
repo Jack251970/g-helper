@@ -881,7 +881,6 @@ namespace GHelper
 
         public void InitVisual()
         {
-
             if (AppConfig.Is("hide_visual")) return;
 
             if (AppConfig.IsOLED())
@@ -979,8 +978,6 @@ namespace GHelper
             Program.toast.RunToast(comboVisual.GetItemText(comboVisual.SelectedItem), ToastIcon.BrightnessUp);
         }
 
-        
-
         public void VisualiseBrightness()
         {
             Invoke(delegate
@@ -999,8 +996,6 @@ namespace GHelper
                 if (comboGamut.Items.Count > 0) comboGamut.SelectedIndex = 0;
             });
         }
-
-        
 
         public void VisualiseAlly(bool visible = false)
         {
@@ -1129,9 +1124,6 @@ namespace GHelper
             }
         }
 
-        
-
-
         public void SetVersionLabel(string label, bool update = false)
         {
             if (InvokeRequired)
@@ -1188,8 +1180,6 @@ namespace GHelper
             }
 
         }
-
-        
 
         private void SetColorPicker(string colorField = "aura_color")
         {
@@ -1311,7 +1301,6 @@ namespace GHelper
 
         }
 
-
         public void CycleMatrix(int delta)
         {
             comboMatrix.SelectedIndex = Math.Min(Math.Max(0, comboMatrix.SelectedIndex + delta), comboMatrix.Items.Count - 1);
@@ -1319,7 +1308,6 @@ namespace GHelper
             matrixControl.SetDevice();
             Program.toast.RunToast(comboMatrix.GetItemText(comboMatrix.SelectedItem), delta > 0 ? ToastIcon.BacklightUp : ToastIcon.BacklightDown);
         }
-
 
         public void CycleAuraMode()
         {
@@ -1333,7 +1321,6 @@ namespace GHelper
 
         public void VisualiseScreen(bool screenEnabled, bool screenAuto, int frequency, int maxFrequency, int overdrive, bool overdriveSetting, int miniled1, int miniled2, bool hdr, int fhd)
         {
-
             ButtonEnabled(button60Hz, screenEnabled);
             ButtonEnabled(button120Hz, screenEnabled);
             ButtonEnabled(buttonScreenAuto, screenEnabled);
@@ -1433,11 +1420,6 @@ namespace GHelper
 
         }
 
-        
-
-        /// <summary>
-        /// Closes all forms except the settings. Hides the settings
-        /// </summary>
         public void HideAll()
         {
             this.Hide();
@@ -1450,18 +1432,11 @@ namespace GHelper
 
         }
 
-        /// <summary>
-        /// Brings all visible windows to the top, with settings being the focus
-        /// </summary>
         public void ShowAll()
         {
             this.Activate();
         }
 
-        /// <summary>
-        /// Check if any of fans, keyboard, update, or itself has focus
-        /// </summary>
-        /// <returns>Focus state</returns>
         public bool HasAnyFocus(bool lostFocusCheck = false)
         {
             return (fansForm != null && fansForm.ContainsFocus) ||
@@ -1576,7 +1551,6 @@ namespace GHelper
             }
         }
 
-
         public void SetModeLabel(string modeText)
         {
             if (InvokeRequired)
@@ -1594,8 +1568,6 @@ namespace GHelper
             }
 
         }
-
-
 
         public void VisualizeXGM(int GPUMode = -1)
         {
@@ -1666,7 +1638,6 @@ namespace GHelper
             panelGPU.Visible = gpuExists;
 
         }
-
 
         public void LockGPUModes(string text = null)
         {
@@ -1747,9 +1718,7 @@ namespace GHelper
                 labelTipScreen.Visible = false;
                 Top = 5;
             }
-
         }
-
 
         public void VisualiseIcon()
         {
@@ -1770,10 +1739,7 @@ namespace GHelper
             }
         }
 
-        
-
-
-        public void ButtonEnabled(RButton but, bool enabled)
+        private void ButtonEnabled(RButton but, bool enabled)
         {
             but.Enabled = enabled;
             but.BackColor = but.Enabled ? Color.FromArgb(255, but.BackColor) : Color.FromArgb(100, but.BackColor);
@@ -1811,7 +1777,6 @@ namespace GHelper
             }
 
         }
-
 
         public void VisualizePeripherals()
         {
@@ -1874,7 +1839,6 @@ namespace GHelper
 
         public void VisualiseFnLock()
         {
-
             if (AppConfig.Is("fn_lock"))
             {
                 buttonFnLock.BackColor = colorStandard;
