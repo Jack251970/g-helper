@@ -129,8 +129,21 @@ namespace GHelper
 
             #endregion
 
+            Text = "G-Helper " + (ProcessHelper.IsUserAdministrator() ? "—" : "-") + " " + AppConfig.GetModelShort();
+            TopMost = AppConfig.Is("topmost");
+
+            //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
+            Resize += SettingsForm_Resize;
+
+            VisibleChanged += SettingsForm_VisibleChanged;
             FormClosing += SettingsForm_FormClosing;
             Deactivate += SettingsForm_LostFocus;
+
+            Program.trayIcon.MouseMove += TrayIcon_MouseMove;
+
+            #region Performance Mode
+
+            labelCPUFan.Click += LabelCPUFan_Click;
 
             buttonSilent.BorderColor = colorEco;
             buttonBalanced.BorderColor = colorStandard;
@@ -142,43 +155,78 @@ namespace GHelper
             buttonTurbo.Click += ButtonTurbo_Click;
             buttonFans.Click += ButtonFans_Click;
 
+            #endregion
+
+            #region GPU Mode
+
+            labelGPUFan.Click += LabelCPUFan_Click;
+
+            tableGPU.MouseMove += ButtonXGM_MouseMove;
+            tableGPU.MouseLeave += ButtonGPU_MouseLeave;
+
             buttonEco.BorderColor = colorEco;
             buttonStandard.BorderColor = colorStandard;
             buttonUltimate.BorderColor = colorTurbo;
             buttonOptimized.BorderColor = colorEco;
             buttonXGM.BorderColor = colorTurbo;
 
-            button60Hz.BorderColor = colorGray;
-            button120Hz.BorderColor = colorGray;
-            buttonScreenAuto.BorderColor = colorGray;
-            buttonMiniled.BorderColor = colorTurbo;
-
             buttonEco.Click += ButtonEco_Click;
+            buttonStopGPU.Click += ButtonStopGPU_Click;
             buttonStandard.Click += ButtonStandard_Click;
             buttonUltimate.Click += ButtonUltimate_Click;
             buttonOptimized.Click += ButtonOptimized_Click;
-            buttonStopGPU.Click += ButtonStopGPU_Click;
+            buttonXGM.Click += ButtonXGM_Click;
 
-            VisibleChanged += SettingsForm_VisibleChanged;
+            buttonEco.MouseMove += ButtonEco_MouseHover;
+            buttonEco.MouseLeave += ButtonGPU_MouseLeave;
+            buttonStandard.MouseMove += ButtonStandard_MouseHover;
+            buttonStandard.MouseLeave += ButtonGPU_MouseLeave;
+            buttonUltimate.MouseMove += ButtonUltimate_MouseHover;
+            buttonUltimate.MouseLeave += ButtonGPU_MouseLeave;
+            buttonOptimized.MouseMove += ButtonOptimized_MouseHover;
+            buttonOptimized.MouseLeave += ButtonGPU_MouseLeave;
 
+            buttonAutoTDP.BorderColor = colorTurbo;
+
+            buttonFPS.Click += ButtonFPS_Click;
+            buttonOverlay.Click += ButtonOverlay_Click;
+            buttonAutoTDP.Click += ButtonAutoTDP_Click;
+
+            #endregion
+
+            #region Laptop Screen
+
+            buttonScreenAuto.BorderColor = colorGray;
+            button60Hz.BorderColor = colorGray;
+            button120Hz.BorderColor = colorGray;
+            buttonMiniled.BorderColor = colorTurbo;
+
+            buttonScreenAuto.Click += ButtonScreenAuto_Click;
             button60Hz.Click += Button60Hz_Click;
             button120Hz.Click += Button120Hz_Click;
-            buttonScreenAuto.Click += ButtonScreenAuto_Click;
-            buttonMiniled.Click += ButtonMiniled_Click;
             buttonFHD.Click += ButtonFHD_Click;
+            buttonMiniled.Click += ButtonMiniled_Click;
 
-            buttonQuit.Click += ButtonQuit_Click;
+            buttonScreenAuto.MouseMove += ButtonScreenAuto_MouseHover;
+            buttonScreenAuto.MouseLeave += ButtonScreen_MouseLeave;
+            button60Hz.MouseMove += Button60Hz_MouseHover;
+            button60Hz.MouseLeave += ButtonScreen_MouseLeave;
+            button120Hz.MouseMove += Button120Hz_MouseHover;
+            button120Hz.MouseLeave += ButtonScreen_MouseLeave;
+            buttonFHD.MouseMove += ButtonFHD_MouseHover;
+            buttonFHD.MouseLeave += ButtonScreen_MouseLeave;
 
-            buttonKeyboardColor.Click += ButtonKeyboardColor_Click;
-            
-            buttonKeyboard.Click += ButtonKeyboard_Click;
-            buttonController.Click += ButtonHandheld_Click;
+            #endregion
 
-            pictureColor.Click += PictureColor_Click;
-            pictureColor2.Click += PictureColor2_Click;
+            #region Flicker-free Dimming
 
-            labelCPUFan.Click += LabelCPUFan_Click;
-            labelGPUFan.Click += LabelCPUFan_Click;
+            InitVisual();
+
+            labelVisual.Click += LabelVisual_Click;
+
+            #endregion
+
+            #region Anime Matrix
 
             comboMatrix.DropDownStyle = ComboBoxStyle.DropDownList;
             comboMatrixRunning.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -186,60 +234,33 @@ namespace GHelper
 
             comboMatrix.DropDownClosed += ComboMatrix_SelectedValueChanged;
             comboMatrixRunning.DropDownClosed += ComboMatrixRunning_SelectedValueChanged;
+            buttonMatrix.Click += ButtonMatrix_Click;
             comboInterval.DropDownClosed += ComboInterval_DropDownClosed;
 
-            buttonMatrix.Click += ButtonMatrix_Click;
+            #endregion
 
-            checkStartup.Checked = Startup.IsScheduled();
-            checkStartup.CheckedChanged += CheckStartup_CheckedChanged;
+            #region Keyboard
 
-            labelVersion.Click += LabelVersion_Click;
-            labelVersion.ForeColor = Color.FromArgb(128, Color.Gray);
+            VisualiseFnLock();
+            buttonFnLock.Click += ButtonFnLock_Click;
 
-            buttonOptimized.MouseMove += ButtonOptimized_MouseHover;
-            buttonOptimized.MouseLeave += ButtonGPU_MouseLeave;
+            buttonKeyboardColor.Click += ButtonKeyboardColor_Click;
+            pictureColor.Click += PictureColor_Click;
+            pictureColor2.Click += PictureColor2_Click;
+            buttonKeyboard.Click += ButtonKeyboard_Click;
+            labelDynamicLighting.Click += LabelDynamicLighting_Click;
 
-            buttonEco.MouseMove += ButtonEco_MouseHover;
-            buttonEco.MouseLeave += ButtonGPU_MouseLeave;
+            #endregion
 
-            buttonStandard.MouseMove += ButtonStandard_MouseHover;
-            buttonStandard.MouseLeave += ButtonGPU_MouseLeave;
+            #region Ally Controller
 
-            buttonUltimate.MouseMove += ButtonUltimate_MouseHover;
-            buttonUltimate.MouseLeave += ButtonGPU_MouseLeave;
+            buttonControllerMode.Click += ButtonControllerMode_Click;
+            buttonBacklight.Click += ButtonBacklight_Click;
+            buttonController.Click += ButtonHandheld_Click;
 
-            tableGPU.MouseMove += ButtonXGM_MouseMove;
-            tableGPU.MouseLeave += ButtonGPU_MouseLeave;
+            #endregion
 
-            buttonXGM.Click += ButtonXGM_Click;
-
-            buttonScreenAuto.MouseMove += ButtonScreenAuto_MouseHover;
-            buttonScreenAuto.MouseLeave += ButtonScreen_MouseLeave;
-
-            button60Hz.MouseMove += Button60Hz_MouseHover;
-            button60Hz.MouseLeave += ButtonScreen_MouseLeave;
-
-            button120Hz.MouseMove += Button120Hz_MouseHover;
-            button120Hz.MouseLeave += ButtonScreen_MouseLeave;
-
-            buttonFHD.MouseMove += ButtonFHD_MouseHover;
-            buttonFHD.MouseLeave += ButtonScreen_MouseLeave;
-
-            buttonUpdates.Click += ButtonUpdates_Click;
-
-            sliderBattery.MouseUp += SliderBattery_MouseUp;
-            sliderBattery.KeyUp += SliderBattery_KeyUp;
-            sliderBattery.ValueChanged += SliderBattery_ValueChanged;
-
-            Program.trayIcon.MouseMove += TrayIcon_MouseMove;
-
-            sensorTimer = new System.Timers.Timer(AppConfig.Get("sensor_timer", 1000));
-            sensorTimer.Elapsed += OnTimedEvent;
-            sensorTimer.Enabled = true;
-
-            labelCharge.MouseEnter += PanelBattery_MouseEnter;
-            labelCharge.MouseLeave += PanelBattery_MouseLeave;
-            labelBattery.Click += LabelBattery_Click;
+            #region Peripheral
 
             buttonPeripheral1.Click += ButtonPeripheral_Click;
             buttonPeripheral2.Click += ButtonPeripheral_Click;
@@ -249,32 +270,44 @@ namespace GHelper
             buttonPeripheral2.MouseEnter += ButtonPeripheral_MouseEnter;
             buttonPeripheral3.MouseEnter += ButtonPeripheral_MouseEnter;
 
+            #endregion
+
+            #region Battery
+
+            labelBattery.Click += LabelBattery_Click;
+
+            sliderBattery.MouseUp += SliderBattery_MouseUp;
+            sliderBattery.KeyUp += SliderBattery_KeyUp;
+            sliderBattery.ValueChanged += SliderBattery_ValueChanged;
             buttonBatteryFull.MouseEnter += ButtonBatteryFull_MouseEnter;
             buttonBatteryFull.MouseLeave += ButtonBatteryFull_MouseLeave;
             buttonBatteryFull.Click += ButtonBatteryFull_Click;
 
-            buttonControllerMode.Click += ButtonControllerMode_Click;
-            buttonBacklight.Click += ButtonBacklight_Click;
+            #endregion
 
-            buttonFPS.Click += ButtonFPS_Click;
-            buttonOverlay.Click += ButtonOverlay_Click;
+            #region Startup & LabelCharge
 
-            buttonAutoTDP.Click += ButtonAutoTDP_Click;
-            buttonAutoTDP.BorderColor = colorTurbo;
+            checkStartup.Checked = Startup.IsScheduled();
+            checkStartup.CheckedChanged += CheckStartup_CheckedChanged;
 
-            Text = "G-Helper " + (ProcessHelper.IsUserAdministrator() ? "—" : "-") + " " + AppConfig.GetModelShort();
-            TopMost = AppConfig.Is("topmost");
-
-            //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
-            Resize += SettingsForm_Resize;
-
-            VisualiseFnLock();
-            buttonFnLock.Click += ButtonFnLock_Click;
-
-            labelVisual.Click += LabelVisual_Click;
+            labelCharge.MouseEnter += PanelBattery_MouseEnter;
+            labelCharge.MouseLeave += PanelBattery_MouseLeave;
             labelCharge.Click += LabelCharge_Click;
 
+            #endregion
+
+            #region Version
+
+            labelVersion.Click += LabelVersion_Click;
+            labelVersion.ForeColor = Color.FromArgb(128, Color.Gray);
+
+            #endregion
+
+            #region Donate & Update & Quit
+
             buttonDonate.Click += ButtonDonate_Click;
+            buttonUpdates.Click += ButtonUpdates_Click;
+            buttonQuit.Click += ButtonQuit_Click;
 
             int click = AppConfig.Get("donate_click");
             if (AppConfig.Get("start_count") >= ((click < 10) ? 10 : click + 50))
@@ -283,10 +316,13 @@ namespace GHelper
                 buttonDonate.Badge = true;
             }
 
-            labelDynamicLighting.Click += LabelDynamicLighting_Click;
+            #endregion
+
+            sensorTimer = new System.Timers.Timer(AppConfig.Get("sensor_timer", 1000));
+            sensorTimer.Elapsed += OnTimedEvent;
+            sensorTimer.Enabled = true;
 
             panelPerformance.Focus();
-            InitVisual();
         }
 
         #region Click Event
