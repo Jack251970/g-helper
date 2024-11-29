@@ -19,9 +19,6 @@ namespace GHelper
 {
     public partial class SettingsForm : RForm
     {
-        ContextMenuStrip contextMenuStrip = new CustomContextMenu();
-        ToolStripMenuItem menuSilent, menuBalanced, menuTurbo, menuEco, menuStandard, menuUltimate, menuOptimized;
-
         public GPUModeControl gpuControl;
         public AllyControl allyControl;
         ScreenControl screenControl = new ScreenControl();
@@ -263,7 +260,6 @@ namespace GHelper
 
             //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
             this.Resize += SettingsForm_Resize;
-            SetContextMenu();
 
             VisualiseFnLock();
             buttonFnLock.Click += ButtonFnLock_Click;
@@ -716,89 +712,6 @@ namespace GHelper
             {
                 Debug.WriteLine(ex.ToString());
             }
-        }
-
-        public void SetContextMenu()
-        {
-
-            var mode = Modes.GetCurrent();
-
-            contextMenuStrip.Items.Clear();
-            Padding padding = new Padding(15, 5, 5, 5);
-
-            var title = new ToolStripMenuItem(Properties.Strings.PerformanceMode);
-            title.Margin = padding;
-            title.Enabled = false;
-            contextMenuStrip.Items.Add(title);
-
-            menuSilent = new ToolStripMenuItem(Properties.Strings.Silent);
-            menuSilent.Click += ButtonSilent_Click;
-            menuSilent.Margin = padding;
-            menuSilent.Checked = (mode == AsusACPI.PerformanceSilent);
-            contextMenuStrip.Items.Add(menuSilent);
-
-            menuBalanced = new ToolStripMenuItem(Properties.Strings.Balanced);
-            menuBalanced.Click += ButtonBalanced_Click;
-            menuBalanced.Margin = padding;
-            menuBalanced.Checked = (mode == AsusACPI.PerformanceBalanced);
-            contextMenuStrip.Items.Add(menuBalanced);
-
-            menuTurbo = new ToolStripMenuItem(Properties.Strings.Turbo);
-            menuTurbo.Click += ButtonTurbo_Click;
-            menuTurbo.Margin = padding;
-            menuTurbo.Checked = (mode == AsusACPI.PerformanceTurbo);
-            contextMenuStrip.Items.Add(menuTurbo);
-
-            contextMenuStrip.Items.Add("-");
-
-            if (isGpuSection)
-            {
-                var titleGPU = new ToolStripMenuItem(Properties.Strings.GPUMode);
-                titleGPU.Margin = padding;
-                titleGPU.Enabled = false;
-                contextMenuStrip.Items.Add(titleGPU);
-
-                menuEco = new ToolStripMenuItem(Properties.Strings.EcoMode);
-                menuEco.Click += ButtonEco_Click;
-                menuEco.Margin = padding;
-                contextMenuStrip.Items.Add(menuEco);
-
-                menuStandard = new ToolStripMenuItem(Properties.Strings.StandardMode);
-                menuStandard.Click += ButtonStandard_Click;
-                menuStandard.Margin = padding;
-                contextMenuStrip.Items.Add(menuStandard);
-
-                menuUltimate = new ToolStripMenuItem(Properties.Strings.UltimateMode);
-                menuUltimate.Click += ButtonUltimate_Click;
-                menuUltimate.Margin = padding;
-                contextMenuStrip.Items.Add(menuUltimate);
-
-                menuOptimized = new ToolStripMenuItem(Properties.Strings.Optimized);
-                menuOptimized.Click += ButtonOptimized_Click;
-                menuOptimized.Margin = padding;
-                contextMenuStrip.Items.Add(menuOptimized);
-
-                contextMenuStrip.Items.Add("-");
-            }
-
-
-            var quit = new ToolStripMenuItem(Properties.Strings.Quit);
-            quit.Click += ButtonQuit_Click;
-            quit.Margin = padding;
-            contextMenuStrip.Items.Add(quit);
-
-            //contextMenuStrip.ShowCheckMargin = true;
-            contextMenuStrip.RenderMode = ToolStripRenderMode.System;
-
-            if (darkTheme)
-            {
-                contextMenuStrip.BackColor = this.BackColor;
-                contextMenuStrip.ForeColor = this.ForeColor;
-            }
-
-            Program.trayIcon.ContextMenuStrip = contextMenuStrip;
-
-
         }
 
         private void ButtonXGM_Click(object? sender, EventArgs e)
@@ -1492,23 +1405,16 @@ namespace GHelper
             buttonTurbo.Activated = false;
             buttonFans.Activated = false;
 
-            menuSilent.Checked = false;
-            menuBalanced.Checked = false;
-            menuTurbo.Checked = false;
-
             switch (mode)
             {
                 case AsusACPI.PerformanceSilent:
                     buttonSilent.Activated = true;
-                    menuSilent.Checked = true;
                     break;
                 case AsusACPI.PerformanceTurbo:
                     buttonTurbo.Activated = true;
-                    menuTurbo.Checked = true;
                     break;
                 case AsusACPI.PerformanceBalanced:
                     buttonBalanced.Activated = true;
-                    menuBalanced.Checked = true;
                     break;
                 default:
                     buttonFans.Activated = true;
@@ -1581,8 +1487,6 @@ namespace GHelper
         {
             if (!eco)
             {
-                menuEco.Visible = buttonEco.Visible = false;
-                menuOptimized.Visible = buttonOptimized.Visible = false;
                 buttonStopGPU.Visible = true;
                 tableGPU.ColumnCount = 3;
                 tableScreen.ColumnCount = 3;
@@ -1594,7 +1498,6 @@ namespace GHelper
 
             if (!ultimate)
             {
-                menuUltimate.Visible = buttonUltimate.Visible = false;
                 tableGPU.ColumnCount = 3;
                 tableScreen.ColumnCount = 3;
             }
@@ -1611,8 +1514,6 @@ namespace GHelper
             buttonStopGPU.Visible = true;
 
             tableGPU.ColumnCount = 0;
-
-            SetContextMenu();
 
             panelGPU.Visible = gpuExists;
 
@@ -1690,14 +1591,6 @@ namespace GHelper
 
             VisualiseIcon();
             VisualizeXGM(GPUMode);
-
-            if (isGpuSection)
-            {
-                menuEco.Checked = buttonEco.Activated;
-                menuStandard.Checked = buttonStandard.Activated;
-                menuUltimate.Checked = buttonUltimate.Activated;
-                menuOptimized.Checked = buttonOptimized.Activated;
-            }
 
             // UI Fix for small screeens
             if (Top < 0)
