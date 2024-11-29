@@ -138,6 +138,11 @@ namespace GHelper
             buttonTurbo.BorderColor = colorTurbo;
             buttonFans.BorderColor = colorCustom;
 
+            buttonSilent.Click += ButtonSilent_Click;
+            buttonBalanced.Click += ButtonBalanced_Click;
+            buttonTurbo.Click += ButtonTurbo_Click;
+            buttonFans.Click += ButtonFans_Click;
+
             buttonEco.BorderColor = colorEco;
             buttonStandard.BorderColor = colorStandard;
             buttonUltimate.BorderColor = colorTurbo;
@@ -148,10 +153,6 @@ namespace GHelper
             button120Hz.BorderColor = colorGray;
             buttonScreenAuto.BorderColor = colorGray;
             buttonMiniled.BorderColor = colorTurbo;
-
-            buttonSilent.Click += ButtonSilent_Click;
-            buttonBalanced.Click += ButtonBalanced_Click;
-            buttonTurbo.Click += ButtonTurbo_Click;
 
             buttonEco.Click += ButtonEco_Click;
             buttonStandard.Click += ButtonStandard_Click;
@@ -171,7 +172,7 @@ namespace GHelper
 
             buttonKeyboardColor.Click += ButtonKeyboardColor_Click;
 
-            buttonFans.Click += ButtonFans_Click;
+            
             buttonKeyboard.Click += ButtonKeyboard_Click;
             buttonController.Click += ButtonHandheld_Click;
 
@@ -267,7 +268,7 @@ namespace GHelper
             TopMost = AppConfig.Is("topmost");
 
             //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
-            this.Resize += SettingsForm_Resize;
+            Resize += SettingsForm_Resize;
 
             VisualiseFnLock();
             buttonFnLock.Click += ButtonFnLock_Click;
@@ -289,6 +290,8 @@ namespace GHelper
             panelPerformance.Focus();
             InitVisual();
         }
+
+        #region Click Event
 
         private void LabelBattery_Click(object? sender, EventArgs e)
         {
@@ -313,21 +316,6 @@ namespace GHelper
             screenControl.ToogleFHD();
         }
 
-        private void SliderBattery_ValueChanged(object? sender, EventArgs e)
-        {
-            VisualiseBatteryTitle(sliderBattery.Value);
-        }
-
-        private void SliderBattery_KeyUp(object? sender, KeyEventArgs e)
-        {
-            BatteryControl.SetBatteryChargeLimit(sliderBattery.Value);
-        }
-
-        private void SliderBattery_MouseUp(object? sender, MouseEventArgs e)
-        {
-            BatteryControl.SetBatteryChargeLimit(sliderBattery.Value);
-        }
-
         private void ButtonAutoTDP_Click(object? sender, EventArgs e)
         {
             allyControl.ToggleAutoTDP();
@@ -343,6 +331,517 @@ namespace GHelper
             labelVisual.Visible = false;
             VisualControl.forceVisual = true;
         }
+
+        private async void ButtonInstallColorProfile_Click(object? sender, EventArgs e)
+        {
+            await ColorProfileHelper.InstallProfile();
+            InitVisual();
+        }
+
+        private void ButtonOverlay_Click(object? sender, EventArgs e)
+        {
+            KeyboardHook.KeyKeyKeyPress(Keys.LControlKey, Keys.LShiftKey, Keys.O);
+        }
+
+        private void ButtonHandheld_Click(object? sender, EventArgs e)
+        {
+            if (handheldForm == null || handheldForm.Text == "")
+            {
+                handheldForm = new Handheld();
+                AddOwnedForm(handheldForm);
+            }
+
+            if (handheldForm.Visible)
+            {
+                handheldForm.Close();
+            }
+            else
+            {
+                //handheldForm.FormPosition();
+                handheldForm.Show();
+            }
+        }
+
+        private void ButtonFPS_Click(object? sender, EventArgs e)
+        {
+            allyControl.ToggleFPSLimit();
+        }
+
+        private void ButtonBacklight_Click(object? sender, EventArgs e)
+        {
+            allyControl.ToggleBacklight();
+        }
+
+        private void ButtonControllerMode_Click(object? sender, EventArgs e)
+        {
+            allyControl.ToggleMode();
+        }
+
+        private void ButtonBatteryFull_Click(object? sender, EventArgs e)
+        {
+            BatteryControl.ToggleBatteryLimitFull();
+        }
+
+        private void ButtonUpdates_Click(object? sender, EventArgs e)
+        {
+            if (updatesForm == null || updatesForm.Text == "")
+            {
+                updatesForm = new Updates();
+                AddOwnedForm(updatesForm);
+            }
+
+            if (updatesForm.Visible)
+            {
+                updatesForm.Close();
+            }
+            else
+            {
+                updatesForm.Show();
+            }
+        }
+
+        private void ButtonXGM_Click(object? sender, EventArgs e)
+        {
+            gpuControl.ToggleXGM();
+        }
+
+
+        private void LabelVersion_Click(object? sender, EventArgs e)
+        {
+            updateControl.LoadReleases();
+        }
+
+        private void ButtonScreenAuto_Click(object? sender, EventArgs e)
+        {
+            AppConfig.Set("screen_auto", 1);
+            screenControl.AutoScreen();
+        }
+
+        private void ButtonMatrix_Click(object? sender, EventArgs e)
+        {
+
+            if (matrixForm == null || matrixForm.Text == "")
+            {
+                matrixForm = new Matrix();
+                AddOwnedForm(matrixForm);
+            }
+
+            if (matrixForm.Visible)
+            {
+                matrixForm.Close();
+            }
+            else
+            {
+                matrixForm.FormPosition();
+                matrixForm.Show();
+            }
+
+        }
+
+        private void LabelCPUFan_Click(object? sender, EventArgs e)
+        {
+            FanSensorControl.fanRpm = !FanSensorControl.fanRpm;
+            RefreshSensors(true);
+        }
+
+        private void PictureColor2_Click(object? sender, EventArgs e)
+        {
+            SetColorPicker("aura_color2");
+        }
+
+        private void PictureColor_Click(object? sender, EventArgs e)
+        {
+            buttonKeyboardColor.PerformClick();
+        }
+
+        private void ButtonKeyboard_Click(object? sender, EventArgs e)
+        {
+            if (extraForm == null || extraForm.Text == "")
+            {
+                extraForm = new Extra();
+                AddOwnedForm(extraForm);
+            }
+
+            if (extraForm.Visible)
+            {
+                extraForm.Close();
+            }
+            else
+            {
+                extraForm.Show();
+            }
+        }
+
+        private void ButtonFans_Click(object? sender, EventArgs e)
+        {
+            FansToggle();
+        }
+
+        private void ButtonKeyboardColor_Click(object? sender, EventArgs e)
+        {
+            SetColorPicker("aura_color");
+        }
+
+        private void Button120Hz_Click(object? sender, EventArgs e)
+        {
+            AppConfig.Set("screen_auto", 0);
+            screenControl.SetScreen(ScreenControl.MAX_REFRESH, 1);
+        }
+
+        private void Button60Hz_Click(object? sender, EventArgs e)
+        {
+            AppConfig.Set("screen_auto", 0);
+            screenControl.SetScreen(ScreenControl.MIN_RATE, 0);
+        }
+
+
+        private void ButtonMiniled_Click(object? sender, EventArgs e)
+        {
+            screenControl.ToogleMiniled();
+        }
+
+        private void ButtonQuit_Click(object? sender, EventArgs e)
+        {
+            matrixControl.Dispose();
+            Close();
+            Program.trayIcon.Visible = false;
+            Application.Exit();
+        }
+
+        private void ButtonUltimate_Click(object? sender, EventArgs e)
+        {
+            gpuControl.SetGPUMode(AsusACPI.GPUModeUltimate);
+        }
+
+        private void ButtonStandard_Click(object? sender, EventArgs e)
+        {
+            gpuControl.SetGPUMode(AsusACPI.GPUModeStandard);
+        }
+
+        private void ButtonEco_Click(object? sender, EventArgs e)
+        {
+            gpuControl.SetGPUMode(AsusACPI.GPUModeEco);
+        }
+
+
+        private void ButtonOptimized_Click(object? sender, EventArgs e)
+        {
+            AppConfig.Set("gpu_auto", (AppConfig.Get("gpu_auto") == 1) ? 0 : 1);
+            VisualiseGPUMode();
+            gpuControl.AutoGPUMode(true);
+        }
+
+        private void ButtonStopGPU_Click(object? sender, EventArgs e)
+        {
+            gpuControl.KillGPUApps();
+        }
+
+        private void ButtonSilent_Click(object? sender, EventArgs e)
+        {
+            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceSilent);
+        }
+
+        private void ButtonBalanced_Click(object? sender, EventArgs e)
+        {
+            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceBalanced);
+        }
+
+        private void ButtonTurbo_Click(object? sender, EventArgs e)
+        {
+            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceTurbo);
+        }
+
+        private void ButtonPeripheral_Click(object? sender, EventArgs e)
+        {
+            if (mouseSettings is not null)
+            {
+                mouseSettings.Close();
+                return;
+            }
+
+            int index = 0;
+            if (sender == buttonPeripheral2) index = 1;
+            if (sender == buttonPeripheral3) index = 2;
+
+            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
+
+            if (iph is null)
+            {
+                //Can only happen when the user hits the button in the exact moment a device is disconnected.
+                return;
+            }
+
+            if (iph.DeviceType() == PeripheralType.Mouse)
+            {
+                AsusMouse? am = iph as AsusMouse;
+                if (am is null || !am.IsDeviceReady)
+                {
+                    //Should not happen if all device classes are implemented correctly. But better safe than sorry.
+                    return;
+                }
+                mouseSettings = new AsusMouseSettings(am);
+                mouseSettings.TopMost = AppConfig.Is("topmost");
+                mouseSettings.FormClosed += MouseSettings_FormClosed;
+                mouseSettings.Disposed += MouseSettings_Disposed;
+                if (!mouseSettings.IsDisposed)
+                {
+                    mouseSettings.Show();
+                }
+                else
+                {
+                    mouseSettings = null;
+                }
+
+            }
+        }
+
+        private void ButtonFnLock_Click(object? sender, EventArgs e)
+        {
+            InputDispatcher.ToggleFnLock();
+        }
+
+        #endregion
+
+        #region Other Event
+
+        private void SliderBattery_ValueChanged(object? sender, EventArgs e)
+        {
+            VisualiseBatteryTitle(sliderBattery.Value);
+        }
+
+        private void SliderBattery_KeyUp(object? sender, KeyEventArgs e)
+        {
+            BatteryControl.SetBatteryChargeLimit(sliderBattery.Value);
+        }
+
+        private void SliderBattery_MouseUp(object? sender, MouseEventArgs e)
+        {
+            BatteryControl.SetBatteryChargeLimit(sliderBattery.Value);
+        }
+
+        private void ComboGamut_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            VisualControl.SetGamut((int)comboGamut.SelectedValue);
+        }
+
+        private void ComboVisual_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            VisualControl.SetVisual((SplendidCommand)comboVisual.SelectedValue, (int)comboColorTemp.SelectedValue);
+        }
+
+        private void SliderGamma_ValueChanged(object? sender, EventArgs e)
+        {
+            if (sliderGammaIgnore) return;
+            VisualControl.SetBrightness(sliderGamma.Value);
+        }
+
+        private void SettingsForm_LostFocus(object? sender, EventArgs e)
+        {
+            lastLostFocus = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        }
+
+        private void ButtonBatteryFull_MouseLeave(object? sender, EventArgs e)
+        {
+            batteryFullMouseOver = false;
+            RefreshSensors(true);
+        }
+
+        private void ButtonBatteryFull_MouseEnter(object? sender, EventArgs e)
+        {
+            batteryFullMouseOver = true;
+            labelCharge.Text = Properties.Strings.BatteryLimitFull;
+        }
+
+        private void SettingsForm_Resize(object? sender, EventArgs e)
+        {
+            Left = Screen.FromControl(this).WorkingArea.Width - 10 - Width;
+            Top = Screen.FromControl(this).WorkingArea.Height - 10 - Height;
+        }
+
+        private void PanelBattery_MouseEnter(object? sender, EventArgs e)
+        {
+            batteryMouseOver = true;
+            ShowBatteryWear();
+        }
+
+        private void PanelBattery_MouseLeave(object? sender, EventArgs e)
+        {
+            batteryMouseOver = false;
+            RefreshSensors(true);
+        }
+
+        private void SettingsForm_VisibleChanged(object? sender, EventArgs e)
+        {
+            sensorTimer.Enabled = this.Visible;
+            if (this.Visible)
+            {
+                screenControl.InitScreen();
+                VisualizeXGM();
+
+                Task.Run((Action)RefreshPeripheralsBattery);
+                updateControl.CheckForUpdates();
+            }
+        }
+
+        private static void TrayIcon_MouseMove(object? sender, MouseEventArgs e)
+        {
+            Program.settingsForm.RefreshSensors();
+        }
+
+        private static void OnTimedEvent(object? sender, ElapsedEventArgs? e)
+        {
+            Program.settingsForm.RefreshSensors();
+        }
+
+        private void ButtonFHD_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipScreen.Text = "Switch to " + ((buttonFHD.Text == "FHD") ? "UHD" : "FHD") + " Mode";
+        }
+
+        private void Button120Hz_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipScreen.Text = Properties.Strings.MaxRefreshTooltip;
+        }
+
+        private void Button60Hz_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipScreen.Text = Properties.Strings.MinRefreshTooltip.Replace("60", ScreenControl.MIN_RATE.ToString());
+        }
+
+        private void ButtonScreen_MouseLeave(object? sender, EventArgs e)
+        {
+            labelTipScreen.Text = "";
+        }
+
+        private void ButtonScreenAuto_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipScreen.Text = Properties.Strings.AutoRefreshTooltip.Replace("60", ScreenControl.MIN_RATE.ToString());
+        }
+
+        private void ButtonUltimate_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipGPU.Text = Properties.Strings.UltimateGPUTooltip;
+        }
+
+        private void ButtonStandard_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipGPU.Text = Properties.Strings.StandardGPUTooltip;
+        }
+
+        private void ButtonEco_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipGPU.Text = Properties.Strings.EcoGPUTooltip;
+        }
+
+        private void ButtonOptimized_MouseHover(object? sender, EventArgs e)
+        {
+            labelTipGPU.Text = Properties.Strings.OptimizedGPUTooltip;
+        }
+
+        private void ButtonGPU_MouseLeave(object? sender, EventArgs e)
+        {
+            labelTipGPU.Text = "";
+        }
+
+        private void ButtonXGM_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (sender is null) return;
+            TableLayoutPanel table = (TableLayoutPanel)sender;
+
+            if (!buttonXGM.Visible) return;
+
+            labelTipGPU.Text = buttonXGM.Bounds.Contains(table.PointToClient(Cursor.Position)) ?
+                "XGMobile toggle works only in Standard mode" : "";
+
+        }
+
+        private void CheckStartup_CheckedChanged(object? sender, EventArgs e)
+        {
+            if (sender is null) return;
+            CheckBox chk = (CheckBox)sender;
+
+            if (chk.Checked)
+                Startup.Schedule();
+            else
+                Startup.UnSchedule();
+        }
+
+        private void CheckMatrix_CheckedChanged(object? sender, EventArgs e)
+        {
+            AppConfig.Set("matrix_auto", checkMatrix.Checked ? 1 : 0);
+            matrixControl.SetBatteryAuto();
+        }
+
+        private void CheckMatrixLid_CheckedChanged(object? sender, EventArgs e)
+        {
+            AppConfig.Set("matrix_lid", checkMatrixLid.Checked ? 1 : 0);
+            matrixControl.SetLidMode(true);
+        }
+
+        private void ComboInterval_DropDownClosed(object? sender, EventArgs e)
+        {
+            AppConfig.Set("matrix_interval", comboInterval.SelectedIndex);
+            matrixControl.SetDevice();
+        }
+
+        private void ComboMatrixRunning_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            AppConfig.Set("matrix_running", comboMatrixRunning.SelectedIndex);
+            matrixControl.SetDevice();
+        }
+
+        private void ComboMatrix_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            AppConfig.Set("matrix_brightness", comboMatrix.SelectedIndex);
+            matrixControl.SetDevice();
+        }
+
+        private void ComboKeyboard_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            AppConfig.Set("aura_mode", (int)comboKeyboard.SelectedValue);
+            SetAura();
+        }
+
+        private void SettingsForm_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                HideAll();
+            }
+        }
+
+        private void ButtonPeripheral_MouseEnter(object? sender, EventArgs e)
+        {
+            int index = 0;
+            if (sender == buttonPeripheral2) index = 1;
+            if (sender == buttonPeripheral3) index = 2;
+            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
+
+
+            if (iph is null)
+            {
+                return;
+            }
+
+            if (!iph.IsDeviceReady)
+            {
+                //Refresh battery on hover if the device is marked as "Not Ready"
+                iph.ReadBattery();
+            }
+        }
+
+        private void MouseSettings_Disposed(object? sender, EventArgs e)
+        {
+            mouseSettings = null;
+        }
+
+        private void MouseSettings_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            mouseSettings = null;
+        }
+
+        #endregion
 
         public void InitVisual()
         {
@@ -444,21 +943,7 @@ namespace GHelper
             Program.toast.RunToast(comboVisual.GetItemText(comboVisual.SelectedItem), ToastIcon.BrightnessUp);
         }
 
-        private async void ButtonInstallColorProfile_Click(object? sender, EventArgs e)
-        {
-            await ColorProfileHelper.InstallProfile();
-            InitVisual();
-        }
-
-        private void ComboGamut_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            VisualControl.SetGamut((int)comboGamut.SelectedValue);
-        }
-
-        private void ComboVisual_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            VisualControl.SetVisual((SplendidCommand)comboVisual.SelectedValue, (int)comboColorTemp.SelectedValue);
-        }
+        
 
         public void VisualiseBrightness()
         {
@@ -479,50 +964,7 @@ namespace GHelper
             });
         }
 
-        private void SliderGamma_ValueChanged(object? sender, EventArgs e)
-        {
-            if (sliderGammaIgnore) return;
-            VisualControl.SetBrightness(sliderGamma.Value);
-        }
-
-        private void ButtonOverlay_Click(object? sender, EventArgs e)
-        {
-            KeyboardHook.KeyKeyKeyPress(Keys.LControlKey, Keys.LShiftKey, Keys.O);
-        }
-
-        private void ButtonHandheld_Click(object? sender, EventArgs e)
-        {
-            if (handheldForm == null || handheldForm.Text == "")
-            {
-                handheldForm = new Handheld();
-                AddOwnedForm(handheldForm);
-            }
-
-            if (handheldForm.Visible)
-            {
-                handheldForm.Close();
-            }
-            else
-            {
-                //handheldForm.FormPosition();
-                handheldForm.Show();
-            }
-        }
-
-        private void ButtonFPS_Click(object? sender, EventArgs e)
-        {
-            allyControl.ToggleFPSLimit();
-        }
-
-        private void ButtonBacklight_Click(object? sender, EventArgs e)
-        {
-            allyControl.ToggleBacklight();
-        }
-
-        private void ButtonControllerMode_Click(object? sender, EventArgs e)
-        {
-            allyControl.ToggleMode();
-        }
+        
 
         public void VisualiseAlly(bool visible = false)
         {
@@ -570,46 +1012,6 @@ namespace GHelper
             buttonAutoTDP.Activated = status;
         }
 
-        private void SettingsForm_LostFocus(object? sender, EventArgs e)
-        {
-            lastLostFocus = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        }
-
-        private void ButtonBatteryFull_Click(object? sender, EventArgs e)
-        {
-            BatteryControl.ToggleBatteryLimitFull();
-        }
-
-        private void ButtonBatteryFull_MouseLeave(object? sender, EventArgs e)
-        {
-            batteryFullMouseOver = false;
-            RefreshSensors(true);
-        }
-
-        private void ButtonBatteryFull_MouseEnter(object? sender, EventArgs e)
-        {
-            batteryFullMouseOver = true;
-            labelCharge.Text = Properties.Strings.BatteryLimitFull;
-        }
-
-        private void SettingsForm_Resize(object? sender, EventArgs e)
-        {
-            Left = Screen.FromControl(this).WorkingArea.Width - 10 - Width;
-            Top = Screen.FromControl(this).WorkingArea.Height - 10 - Height;
-        }
-
-        private void PanelBattery_MouseEnter(object? sender, EventArgs e)
-        {
-            batteryMouseOver = true;
-            ShowBatteryWear();
-        }
-
-        private void PanelBattery_MouseLeave(object? sender, EventArgs e)
-        {
-            batteryMouseOver = false;
-            RefreshSensors(true);
-        }
-
         private void ShowBatteryWear()
         {
             //Refresh again only after 15 Minutes since the last refresh
@@ -625,40 +1027,9 @@ namespace GHelper
             }
         }
 
-        private void SettingsForm_VisibleChanged(object? sender, EventArgs e)
-        {
-            sensorTimer.Enabled = this.Visible;
-            if (this.Visible)
-            {
-                screenControl.InitScreen();
-                VisualizeXGM();
-
-                Task.Run((Action)RefreshPeripheralsBattery);
-                updateControl.CheckForUpdates();
-            }
-        }
-
         private void RefreshPeripheralsBattery()
         {
             PeripheralsProvider.RefreshBatteryForAllDevices(true);
-        }
-
-        private void ButtonUpdates_Click(object? sender, EventArgs e)
-        {
-            if (updatesForm == null || updatesForm.Text == "")
-            {
-                updatesForm = new Updates();
-                AddOwnedForm(updatesForm);
-            }
-
-            if (updatesForm.Visible)
-            {
-                updatesForm.Close();
-            }
-            else
-            {
-                updatesForm.Show();
-            }
         }
 
         public void VisualiseMatrixPicture(string image)
@@ -722,10 +1093,7 @@ namespace GHelper
             }
         }
 
-        private void ButtonXGM_Click(object? sender, EventArgs e)
-        {
-            gpuControl.ToggleXGM();
-        }
+        
 
 
         public void SetVersionLabel(string label, bool update = false)
@@ -743,138 +1111,6 @@ namespace GHelper
             }
         }
 
-
-        private void LabelVersion_Click(object? sender, EventArgs e)
-        {
-            updateControl.LoadReleases();
-        }
-
-        private static void TrayIcon_MouseMove(object? sender, MouseEventArgs e)
-        {
-            Program.settingsForm.RefreshSensors();
-        }
-
-
-        private static void OnTimedEvent(Object? source, ElapsedEventArgs? e)
-        {
-            Program.settingsForm.RefreshSensors();
-        }
-
-        private void ButtonFHD_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipScreen.Text = "Switch to " + ((buttonFHD.Text == "FHD") ? "UHD" : "FHD") + " Mode";
-        }
-
-        private void Button120Hz_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipScreen.Text = Properties.Strings.MaxRefreshTooltip;
-        }
-
-        private void Button60Hz_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipScreen.Text = Properties.Strings.MinRefreshTooltip.Replace("60", ScreenControl.MIN_RATE.ToString());
-        }
-
-        private void ButtonScreen_MouseLeave(object? sender, EventArgs e)
-        {
-            labelTipScreen.Text = "";
-        }
-
-        private void ButtonScreenAuto_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipScreen.Text = Properties.Strings.AutoRefreshTooltip.Replace("60", ScreenControl.MIN_RATE.ToString());
-        }
-
-        private void ButtonUltimate_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipGPU.Text = Properties.Strings.UltimateGPUTooltip;
-        }
-
-        private void ButtonStandard_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipGPU.Text = Properties.Strings.StandardGPUTooltip;
-        }
-
-        private void ButtonEco_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipGPU.Text = Properties.Strings.EcoGPUTooltip;
-        }
-
-        private void ButtonOptimized_MouseHover(object? sender, EventArgs e)
-        {
-            labelTipGPU.Text = Properties.Strings.OptimizedGPUTooltip;
-        }
-
-        private void ButtonGPU_MouseLeave(object? sender, EventArgs e)
-        {
-            labelTipGPU.Text = "";
-        }
-
-        private void ButtonXGM_MouseMove(object? sender, MouseEventArgs e)
-        {
-            if (sender is null) return;
-            TableLayoutPanel table = (TableLayoutPanel)sender;
-
-            if (!buttonXGM.Visible) return;
-
-            labelTipGPU.Text = buttonXGM.Bounds.Contains(table.PointToClient(Cursor.Position)) ?
-                "XGMobile toggle works only in Standard mode" : "";
-
-        }
-
-
-        private void ButtonScreenAuto_Click(object? sender, EventArgs e)
-        {
-            AppConfig.Set("screen_auto", 1);
-            screenControl.AutoScreen();
-        }
-
-
-        private void CheckStartup_CheckedChanged(object? sender, EventArgs e)
-        {
-            if (sender is null) return;
-            CheckBox chk = (CheckBox)sender;
-
-            if (chk.Checked)
-                Startup.Schedule();
-            else
-                Startup.UnSchedule();
-        }
-
-        private void CheckMatrix_CheckedChanged(object? sender, EventArgs e)
-        {
-            AppConfig.Set("matrix_auto", checkMatrix.Checked ? 1 : 0);
-            matrixControl.SetBatteryAuto();
-        }
-
-        private void CheckMatrixLid_CheckedChanged(object? sender, EventArgs e)
-        {
-            AppConfig.Set("matrix_lid", checkMatrixLid.Checked ? 1 : 0);
-            matrixControl.SetLidMode(true);
-        }
-
-
-        private void ButtonMatrix_Click(object? sender, EventArgs e)
-        {
-
-            if (matrixForm == null || matrixForm.Text == "")
-            {
-                matrixForm = new Matrix();
-                AddOwnedForm(matrixForm);
-            }
-
-            if (matrixForm.Visible)
-            {
-                matrixForm.Close();
-            }
-            else
-            {
-                matrixForm.FormPosition();
-                matrixForm.Show();
-            }
-
-        }
-
         public void VisualiseMatrixRunning(int mode)
         {
             Invoke(delegate
@@ -882,60 +1118,6 @@ namespace GHelper
                 comboMatrixRunning.SelectedIndex = mode;
                 if (comboMatrix.SelectedIndex == 0) comboMatrix.SelectedIndex = 3;
             });
-        }
-
-        private void ComboInterval_DropDownClosed(object? sender, EventArgs e)
-        {
-            AppConfig.Set("matrix_interval", comboInterval.SelectedIndex);
-            matrixControl.SetDevice();
-        }
-
-        private void ComboMatrixRunning_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            AppConfig.Set("matrix_running", comboMatrixRunning.SelectedIndex);
-            matrixControl.SetDevice();
-        }
-
-
-        private void ComboMatrix_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            AppConfig.Set("matrix_brightness", comboMatrix.SelectedIndex);
-            matrixControl.SetDevice();
-        }
-
-
-        private void LabelCPUFan_Click(object? sender, EventArgs e)
-        {
-            FanSensorControl.fanRpm = !FanSensorControl.fanRpm;
-            RefreshSensors(true);
-        }
-
-        private void PictureColor2_Click(object? sender, EventArgs e)
-        {
-            SetColorPicker("aura_color2");
-        }
-
-        private void PictureColor_Click(object? sender, EventArgs e)
-        {
-            buttonKeyboardColor.PerformClick();
-        }
-
-        private void ButtonKeyboard_Click(object? sender, EventArgs e)
-        {
-            if (extraForm == null || extraForm.Text == "")
-            {
-                extraForm = new Extra();
-                AddOwnedForm(extraForm);
-            }
-
-            if (extraForm.Visible)
-            {
-                extraForm.Close();
-            }
-            else
-            {
-                extraForm.Show();
-            }
         }
 
         public void FansInit()
@@ -971,10 +1153,7 @@ namespace GHelper
 
         }
 
-        private void ButtonFans_Click(object? sender, EventArgs e)
-        {
-            FansToggle();
-        }
+        
 
         private void SetColorPicker(string colorField = "aura_color")
         {
@@ -994,11 +1173,6 @@ namespace GHelper
                 AppConfig.Set(colorField, colorDlg.Color.ToArgb());
                 SetAura();
             }
-        }
-
-        private void ButtonKeyboardColor_Click(object? sender, EventArgs e)
-        {
-            SetColorPicker("aura_color");
         }
 
         public void InitAura()
@@ -1121,33 +1295,6 @@ namespace GHelper
             Program.toast.RunToast(comboKeyboard.GetItemText(comboKeyboard.SelectedItem), ToastIcon.BacklightUp);
         }
 
-        private void ComboKeyboard_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            AppConfig.Set("aura_mode", (int)comboKeyboard.SelectedValue);
-            SetAura();
-        }
-
-
-        private void Button120Hz_Click(object? sender, EventArgs e)
-        {
-            AppConfig.Set("screen_auto", 0);
-            screenControl.SetScreen(ScreenControl.MAX_REFRESH, 1);
-        }
-
-        private void Button60Hz_Click(object? sender, EventArgs e)
-        {
-            AppConfig.Set("screen_auto", 0);
-            screenControl.SetScreen(ScreenControl.MIN_RATE, 0);
-        }
-
-
-        private void ButtonMiniled_Click(object? sender, EventArgs e)
-        {
-            screenControl.ToogleMiniled();
-        }
-
-
-
         public void VisualiseScreen(bool screenEnabled, bool screenAuto, int frequency, int maxFrequency, int overdrive, bool overdriveSetting, int miniled1, int miniled2, bool hdr, int fhd)
         {
 
@@ -1250,13 +1397,7 @@ namespace GHelper
 
         }
 
-        private void ButtonQuit_Click(object? sender, EventArgs e)
-        {
-            matrixControl.Dispose();
-            Close();
-            Program.trayIcon.Visible = false;
-            Application.Exit();
-        }
+        
 
         /// <summary>
         /// Closes all forms except the settings. Hides the settings
@@ -1294,43 +1435,6 @@ namespace GHelper
                    (handheldForm != null && handheldForm.ContainsFocus) ||
                    this.ContainsFocus ||
                    (lostFocusCheck && Math.Abs(DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastLostFocus) < 300);
-        }
-
-        private void SettingsForm_FormClosing(object? sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                HideAll();
-            }
-        }
-
-        private void ButtonUltimate_Click(object? sender, EventArgs e)
-        {
-            gpuControl.SetGPUMode(AsusACPI.GPUModeUltimate);
-        }
-
-        private void ButtonStandard_Click(object? sender, EventArgs e)
-        {
-            gpuControl.SetGPUMode(AsusACPI.GPUModeStandard);
-        }
-
-        private void ButtonEco_Click(object? sender, EventArgs e)
-        {
-            gpuControl.SetGPUMode(AsusACPI.GPUModeEco);
-        }
-
-
-        private void ButtonOptimized_Click(object? sender, EventArgs e)
-        {
-            AppConfig.Set("gpu_auto", (AppConfig.Get("gpu_auto") == 1) ? 0 : 1);
-            VisualiseGPUMode();
-            gpuControl.AutoGPUMode(true);
-        }
-
-        private void ButtonStopGPU_Click(object? sender, EventArgs e)
-        {
-            gpuControl.KillGPUApps();
         }
 
         public async void RefreshSensors(bool force = false)
@@ -1630,20 +1734,7 @@ namespace GHelper
             }
         }
 
-        private void ButtonSilent_Click(object? sender, EventArgs e)
-        {
-            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceSilent);
-        }
-
-        private void ButtonBalanced_Click(object? sender, EventArgs e)
-        {
-            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceBalanced);
-        }
-
-        private void ButtonTurbo_Click(object? sender, EventArgs e)
-        {
-            Program.modeControl.SetPerformanceMode(AsusACPI.PerformanceTurbo);
-        }
+        
 
 
         public void ButtonEnabled(RButton but, bool enabled)
@@ -1745,80 +1836,6 @@ namespace GHelper
             panelPeripherals.Visible = true;
         }
 
-        private void ButtonPeripheral_MouseEnter(object? sender, EventArgs e)
-        {
-            int index = 0;
-            if (sender == buttonPeripheral2) index = 1;
-            if (sender == buttonPeripheral3) index = 2;
-            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
-
-
-            if (iph is null)
-            {
-                return;
-            }
-
-            if (!iph.IsDeviceReady)
-            {
-                //Refresh battery on hover if the device is marked as "Not Ready"
-                iph.ReadBattery();
-            }
-        }
-
-        private void ButtonPeripheral_Click(object? sender, EventArgs e)
-        {
-            if (mouseSettings is not null)
-            {
-                mouseSettings.Close();
-                return;
-            }
-
-            int index = 0;
-            if (sender == buttonPeripheral2) index = 1;
-            if (sender == buttonPeripheral3) index = 2;
-
-            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
-
-            if (iph is null)
-            {
-                //Can only happen when the user hits the button in the exact moment a device is disconnected.
-                return;
-            }
-
-            if (iph.DeviceType() == PeripheralType.Mouse)
-            {
-                AsusMouse? am = iph as AsusMouse;
-                if (am is null || !am.IsDeviceReady)
-                {
-                    //Should not happen if all device classes are implemented correctly. But better safe than sorry.
-                    return;
-                }
-                mouseSettings = new AsusMouseSettings(am);
-                mouseSettings.TopMost = AppConfig.Is("topmost");
-                mouseSettings.FormClosed += MouseSettings_FormClosed;
-                mouseSettings.Disposed += MouseSettings_Disposed;
-                if (!mouseSettings.IsDisposed)
-                {
-                    mouseSettings.Show();
-                }
-                else
-                {
-                    mouseSettings = null;
-                }
-
-            }
-        }
-
-        private void MouseSettings_Disposed(object? sender, EventArgs e)
-        {
-            mouseSettings = null;
-        }
-
-        private void MouseSettings_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            mouseSettings = null;
-        }
-
         public void VisualiseFnLock()
         {
 
@@ -1835,14 +1852,5 @@ namespace GHelper
                 buttonFnLock.AccessibleName = "Fn-Lock off";
             }
         }
-
-
-        private void ButtonFnLock_Click(object? sender, EventArgs e)
-        {
-            InputDispatcher.ToggleFnLock();
-        }
-
     }
-
-
 }
