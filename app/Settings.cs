@@ -224,6 +224,15 @@ namespace GHelper
 
             labelVisual.Click += LabelVisual_Click;
 
+            // TODO: PR.
+            sliderGamma.ValueChanged += SliderGamma_ValueChanged;//
+            sliderGamma.MouseUp += SliderGamma_ValueChanged;//
+
+            //comboVisual.SelectedValueChanged += ComboVisual_SelectedValueChanged;//
+            buttonInstallColor.Click += ButtonInstallColorProfile_Click;//
+            //comboColorTemp.SelectedValueChanged += ComboVisual_SelectedValueChanged;//
+            //comboGamut.SelectedValueChanged += ComboGamut_SelectedValueChanged;//
+
             #endregion
 
             #region Anime Matrix
@@ -891,9 +900,6 @@ namespace GHelper
 
                 VisualiseBrightness();
 
-                sliderGamma.ValueChanged += SliderGamma_ValueChanged;
-                sliderGamma.MouseUp += SliderGamma_ValueChanged;
-
             }
             else
             {
@@ -917,7 +923,6 @@ namespace GHelper
 
                     buttonInstallColor.Text = Properties.Strings.DownloadColorProfiles;
                     buttonInstallColor.Visible = true;
-                    buttonInstallColor.Click += ButtonInstallColorProfile_Click;
 
                     panelGamma.Visible = true;
                     tableVisual.Visible = true;
