@@ -287,8 +287,8 @@ namespace GHelper
 
             #region Startup & LabelCharge
 
-            checkStartup.Checked = Startup.IsScheduled();
-            checkStartup.CheckedChanged += CheckStartup_CheckedChanged;
+            checkStartup.Checked = Startup.IsScheduled();//
+            checkStartup.CheckedChanged += CheckStartup_CheckedChanged;//
 
             labelCharge.MouseEnter += PanelBattery_MouseEnter;
             labelCharge.MouseLeave += PanelBattery_MouseLeave;
@@ -298,16 +298,16 @@ namespace GHelper
 
             #region Version
 
-            labelVersion.Click += LabelVersion_Click;
-            labelVersion.ForeColor = Color.FromArgb(128, Color.Gray);
+            labelVersion.Click += LabelVersion_Click;//
+            labelVersion.ForeColor = Color.FromArgb(128, Color.Gray);//
 
             #endregion
 
             #region Donate & Update & Quit
 
-            buttonDonate.Click += ButtonDonate_Click;
-            buttonUpdates.Click += ButtonUpdates_Click;
-            buttonQuit.Click += ButtonQuit_Click;
+            buttonDonate.Click += ButtonDonate_Click;//
+            buttonUpdates.Click += ButtonUpdates_Click;//
+            buttonQuit.Click += ButtonQuit_Click;//
 
             int click = AppConfig.Get("donate_click");
             if (AppConfig.Get("start_count") >= ((click < 10) ? 10 : click + 50))
@@ -967,8 +967,8 @@ namespace GHelper
 
         public void CycleVisualMode()
         {
-
-            if (comboVisual.Items.Count < 1) return;
+            // TODO: PR.
+            if (comboVisual.Items.Count < 2) return;
 
             if (comboVisual.SelectedIndex < comboVisual.Items.Count - 1)
                 comboVisual.SelectedIndex += 1;
