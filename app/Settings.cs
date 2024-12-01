@@ -145,15 +145,15 @@ namespace GHelper
 
             labelCPUFan.Click += LabelCPUFan_Click;
 
-            buttonSilent.BorderColor = colorEco;
-            buttonBalanced.BorderColor = colorStandard;
-            buttonTurbo.BorderColor = colorTurbo;
-            buttonFans.BorderColor = colorCustom;
+            buttonSilent.BorderColor = colorEco;//
+            buttonBalanced.BorderColor = colorStandard;//
+            buttonTurbo.BorderColor = colorTurbo;//
+            buttonFans.BorderColor = colorCustom;//
 
-            buttonSilent.Click += ButtonSilent_Click;
-            buttonBalanced.Click += ButtonBalanced_Click;
-            buttonTurbo.Click += ButtonTurbo_Click;
-            buttonFans.Click += ButtonFans_Click;
+            buttonSilent.Click += ButtonSilent_Click;//
+            buttonBalanced.Click += ButtonBalanced_Click;//
+            buttonTurbo.Click += ButtonTurbo_Click;//
+            buttonFans.Click += ButtonFans_Click;//
 
             #endregion
 
@@ -161,60 +161,60 @@ namespace GHelper
 
             labelGPUFan.Click += LabelCPUFan_Click;
 
-            tableGPU.MouseMove += ButtonXGM_MouseMove;
-            tableGPU.MouseLeave += ButtonGPU_MouseLeave;
+            tableGPU.MouseMove += ButtonXGM_MouseMove;//
+            tableGPU.MouseLeave += ButtonGPU_MouseLeave;//
 
-            buttonEco.BorderColor = colorEco;
-            buttonStandard.BorderColor = colorStandard;
-            buttonUltimate.BorderColor = colorTurbo;
-            buttonOptimized.BorderColor = colorEco;
-            buttonXGM.BorderColor = colorTurbo;
+            buttonEco.BorderColor = colorEco;//
+            buttonStandard.BorderColor = colorStandard;//
+            buttonUltimate.BorderColor = colorTurbo;//
+            buttonOptimized.BorderColor = colorEco;//
+            buttonXGM.BorderColor = colorTurbo;//
+            
+            buttonEco.Click += ButtonEco_Click;//
+            buttonStopGPU.Click += ButtonStopGPU_Click;//
+            buttonStandard.Click += ButtonStandard_Click;//
+            buttonUltimate.Click += ButtonUltimate_Click;//
+            buttonOptimized.Click += ButtonOptimized_Click;//
+            buttonXGM.Click += ButtonXGM_Click;//
 
-            buttonEco.Click += ButtonEco_Click;
-            buttonStopGPU.Click += ButtonStopGPU_Click;
-            buttonStandard.Click += ButtonStandard_Click;
-            buttonUltimate.Click += ButtonUltimate_Click;
-            buttonOptimized.Click += ButtonOptimized_Click;
-            buttonXGM.Click += ButtonXGM_Click;
+            buttonEco.MouseMove += ButtonEco_MouseHover;//
+            buttonEco.MouseLeave += ButtonGPU_MouseLeave;//
+            buttonStandard.MouseMove += ButtonStandard_MouseHover;//
+            buttonStandard.MouseLeave += ButtonGPU_MouseLeave;//
+            buttonUltimate.MouseMove += ButtonUltimate_MouseHover;//
+            buttonUltimate.MouseLeave += ButtonGPU_MouseLeave;//
+            buttonOptimized.MouseMove += ButtonOptimized_MouseHover;//
+            buttonOptimized.MouseLeave += ButtonGPU_MouseLeave;//
 
-            buttonEco.MouseMove += ButtonEco_MouseHover;
-            buttonEco.MouseLeave += ButtonGPU_MouseLeave;
-            buttonStandard.MouseMove += ButtonStandard_MouseHover;
-            buttonStandard.MouseLeave += ButtonGPU_MouseLeave;
-            buttonUltimate.MouseMove += ButtonUltimate_MouseHover;
-            buttonUltimate.MouseLeave += ButtonGPU_MouseLeave;
-            buttonOptimized.MouseMove += ButtonOptimized_MouseHover;
-            buttonOptimized.MouseLeave += ButtonGPU_MouseLeave;
+            buttonAutoTDP.BorderColor = colorTurbo;//
 
-            buttonAutoTDP.BorderColor = colorTurbo;
-
-            buttonFPS.Click += ButtonFPS_Click;
-            buttonOverlay.Click += ButtonOverlay_Click;
-            buttonAutoTDP.Click += ButtonAutoTDP_Click;
+            buttonFPS.Click += ButtonFPS_Click;//
+            buttonOverlay.Click += ButtonOverlay_Click;//
+            buttonAutoTDP.Click += ButtonAutoTDP_Click;//
 
             #endregion
 
             #region Laptop Screen
 
-            buttonScreenAuto.BorderColor = colorGray;
-            button60Hz.BorderColor = colorGray;
-            button120Hz.BorderColor = colorGray;
-            buttonMiniled.BorderColor = colorTurbo;
+            buttonScreenAuto.BorderColor = colorGray;//
+            button60Hz.BorderColor = colorGray;//
+            button120Hz.BorderColor = colorGray;//
+            buttonMiniled.BorderColor = colorTurbo;//
 
-            buttonScreenAuto.Click += ButtonScreenAuto_Click;
-            button60Hz.Click += Button60Hz_Click;
-            button120Hz.Click += Button120Hz_Click;
-            buttonFHD.Click += ButtonFHD_Click;
-            buttonMiniled.Click += ButtonMiniled_Click;
+            buttonScreenAuto.Click += ButtonScreenAuto_Click;//
+            button60Hz.Click += Button60Hz_Click;//
+            button120Hz.Click += Button120Hz_Click;//
+            buttonFHD.Click += ButtonFHD_Click;//
+            buttonMiniled.Click += ButtonMiniled_Click;//
 
-            buttonScreenAuto.MouseMove += ButtonScreenAuto_MouseHover;
-            buttonScreenAuto.MouseLeave += ButtonScreen_MouseLeave;
-            button60Hz.MouseMove += Button60Hz_MouseHover;
-            button60Hz.MouseLeave += ButtonScreen_MouseLeave;
-            button120Hz.MouseMove += Button120Hz_MouseHover;
-            button120Hz.MouseLeave += ButtonScreen_MouseLeave;
-            buttonFHD.MouseMove += ButtonFHD_MouseHover;
-            buttonFHD.MouseLeave += ButtonScreen_MouseLeave;
+            buttonScreenAuto.MouseMove += ButtonScreenAuto_MouseHover;//
+            buttonScreenAuto.MouseLeave += ButtonScreen_MouseLeave;//
+            button60Hz.MouseMove += Button60Hz_MouseHover;//
+            button60Hz.MouseLeave += ButtonScreen_MouseLeave;//
+            button120Hz.MouseMove += Button120Hz_MouseHover;//
+            button120Hz.MouseLeave += ButtonScreen_MouseLeave;//
+            buttonFHD.MouseMove += ButtonFHD_MouseHover;//
+            buttonFHD.MouseLeave += ButtonScreen_MouseLeave;//
 
             #endregion
 
