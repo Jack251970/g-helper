@@ -106,6 +106,7 @@ namespace GHelper
 
             inputDispatcher = new InputDispatcher();
 
+            settingsForm.InitVisual();
             settingsForm.InitAura();
             settingsForm.InitMatrix();
 

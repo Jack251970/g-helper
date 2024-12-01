@@ -220,8 +220,6 @@ namespace GHelper
 
             #region Flicker-free Dimming
 
-            InitVisual();
-
             labelVisual.Click += LabelVisual_Click;
 
             // TODO: PR.
