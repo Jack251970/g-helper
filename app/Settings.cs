@@ -244,26 +244,30 @@ namespace GHelper
             buttonMatrix.Click += ButtonMatrix_Click;
             comboInterval.DropDownClosed += ComboInterval_DropDownClosed;
 
-            #endregion
-
-            #region Keyboard
-
-            // TODO: PR.
-            buttonFnLock.Click += ButtonFnLock_Click;
-
-            buttonKeyboardColor.Click += ButtonKeyboardColor_Click;
-            pictureColor.Click += PictureColor_Click;
-            pictureColor2.Click += PictureColor2_Click;
-            buttonKeyboard.Click += ButtonKeyboard_Click;
-            labelDynamicLighting.Click += LabelDynamicLighting_Click;
+            //checkMatrix.CheckedChanged += CheckMatrix_CheckedChanged;
+            //checkMatrixLid.CheckedChanged += CheckMatrixLid_CheckedChanged;
 
             #endregion
 
             #region Ally Controller
 
-            buttonControllerMode.Click += ButtonControllerMode_Click;
-            buttonBacklight.Click += ButtonBacklight_Click;
-            buttonController.Click += ButtonHandheld_Click;
+            buttonControllerMode.Click += ButtonControllerMode_Click;//
+            buttonBacklight.Click += ButtonBacklight_Click;//
+            buttonController.Click += ButtonHandheld_Click;//
+
+            #endregion
+
+            #region Keyboard
+
+            // TODO: PR.
+            buttonFnLock.Click += ButtonFnLock_Click;//
+
+            //comboKeyboard.SelectedValueChanged += ComboKeyboard_SelectedValueChanged;//
+            buttonKeyboardColor.Click += ButtonKeyboardColor_Click;//
+            pictureColor2.Click += PictureColor2_Click;//
+            pictureColor.Click += PictureColor_Click;//
+            buttonKeyboard.Click += ButtonKeyboard_Click;//
+            labelDynamicLighting.Click += LabelDynamicLighting_Click;//
 
             #endregion
 
@@ -486,7 +490,7 @@ namespace GHelper
         {
             // TODO: PR.
             ExtraToggle();
-            }
+        }
 
         private void ButtonFans_Click(object? sender, EventArgs e)
         {
@@ -1289,6 +1293,9 @@ namespace GHelper
 
         public void CycleAuraMode()
         {
+            // TODO: PR.
+            if (comboKeyboard.Items.Count < 2) return;
+
             if (comboKeyboard.SelectedIndex < comboKeyboard.Items.Count - 1)
                 comboKeyboard.SelectedIndex += 1;
             else
