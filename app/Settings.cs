@@ -226,26 +226,26 @@ namespace GHelper
             sliderGamma.ValueChanged += SliderGamma_ValueChanged;//
             sliderGamma.MouseUp += SliderGamma_ValueChanged;//
 
-            //comboVisual.SelectedValueChanged += ComboVisual_SelectedValueChanged;//
+            comboVisual.SelectedValueChanged -= ComboVisual_SelectedValueChanged;//
             buttonInstallColor.Click += ButtonInstallColorProfile_Click;//
-            //comboColorTemp.SelectedValueChanged += ComboVisual_SelectedValueChanged;//
-            //comboGamut.SelectedValueChanged += ComboGamut_SelectedValueChanged;//
+            comboColorTemp.SelectedValueChanged -= ComboVisual_SelectedValueChanged;//
+            comboGamut.SelectedValueChanged -= ComboGamut_SelectedValueChanged;//
 
             #endregion
 
             #region Anime Matrix
 
-            comboMatrix.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboMatrixRunning.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboInterval.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboMatrix.DropDownStyle = ComboBoxStyle.DropDownList;//
+            comboMatrixRunning.DropDownStyle = ComboBoxStyle.DropDownList;//
+            comboInterval.DropDownStyle = ComboBoxStyle.DropDownList;//
 
-            comboMatrix.DropDownClosed += ComboMatrix_SelectedValueChanged;
-            comboMatrixRunning.DropDownClosed += ComboMatrixRunning_SelectedValueChanged;
-            buttonMatrix.Click += ButtonMatrix_Click;
-            comboInterval.DropDownClosed += ComboInterval_DropDownClosed;
+            comboMatrix.DropDownClosed += ComboMatrix_SelectedValueChanged;//
+            comboMatrixRunning.DropDownClosed += ComboMatrixRunning_SelectedValueChanged;//
+            buttonMatrix.Click += ButtonMatrix_Click;//
+            comboInterval.DropDownClosed += ComboInterval_DropDownClosed;//
 
-            //checkMatrix.CheckedChanged += CheckMatrix_CheckedChanged;
-            //checkMatrixLid.CheckedChanged += CheckMatrixLid_CheckedChanged;
+            checkMatrix.CheckedChanged -= CheckMatrix_CheckedChanged;//
+            checkMatrixLid.CheckedChanged -= CheckMatrixLid_CheckedChanged;//
 
             #endregion
 
@@ -455,23 +455,8 @@ namespace GHelper
 
         private void ButtonMatrix_Click(object? sender, EventArgs e)
         {
-
-            if (matrixForm == null || matrixForm.Text == "")
-            {
-                matrixForm = new Matrix();
-                AddOwnedForm(matrixForm);
-            }
-
-            if (matrixForm.Visible)
-            {
-                matrixForm.Close();
-            }
-            else
-            {
-                matrixForm.FormPosition();
-                matrixForm.Show();
-            }
-
+            // TODO: PR.
+            MatrixToggle();
         }
 
         private void LabelCPUFan_Click(object? sender, EventArgs e)
@@ -1018,6 +1003,26 @@ namespace GHelper
             buttonBacklight.Text = Math.Round((double)backlight * 33.33).ToString() + "%";
         }
 
+        // TODO: PR.
+        private void HandheldToggle()
+        {
+            if (handheldForm == null || handheldForm.Text == "")
+            {
+                handheldForm = new Handheld();
+                AddOwnedForm(handheldForm);
+            }
+
+            if (handheldForm.Visible)
+            {
+                handheldForm.Close();
+            }
+            else
+            {
+                //handheldForm.FormPosition();
+                handheldForm.Show();
+            }
+        }
+
         public void VisualiseFPSLimit(int limit)
         {
             buttonFPS.Text = "FPS Limit " + ((limit > 0 && limit <= 120) ? limit : "OFF");
@@ -1295,6 +1300,26 @@ namespace GHelper
             Program.toast.RunToast(comboMatrix.GetItemText(comboMatrix.SelectedItem), delta > 0 ? ToastIcon.BacklightUp : ToastIcon.BacklightDown);
         }
 
+        // TODO: PR.
+        private void MatrixToggle()
+        {
+            if (matrixForm == null || matrixForm.Text == "")
+            {
+                matrixForm = new Matrix();
+                AddOwnedForm(matrixForm);
+            }
+
+            if (matrixForm.Visible)
+            {
+                matrixForm.Close();
+            }
+            else
+            {
+                matrixForm.FormPosition();
+                matrixForm.Show();
+            }
+        }
+
         public void CycleAuraMode()
         {
             // TODO: PR.
@@ -1346,6 +1371,8 @@ namespace GHelper
             else if (maxFrequency > 0)
             {
                 panelScreen.Visible = false;
+                // TODO: PR.
+                return;
             }
 
             if (fhd >= 0)
@@ -1839,26 +1866,6 @@ namespace GHelper
                 buttonFnLock.BackColor = buttonSecond;
                 buttonFnLock.ForeColor = SystemColors.ControlDark;
                 buttonFnLock.AccessibleName = "Fn-Lock off";
-            }
-        }
-
-        // TODO: PR.
-        private void HandheldToggle()
-        {
-            if (handheldForm == null || handheldForm.Text == "")
-            {
-                handheldForm = new Handheld();
-                AddOwnedForm(handheldForm);
-            }
-
-            if (handheldForm.Visible)
-            {
-                handheldForm.Close();
-            }
-            else
-            {
-                //handheldForm.FormPosition();
-                handheldForm.Show();
             }
         }
 
