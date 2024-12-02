@@ -296,7 +296,7 @@ namespace GHelper
 
             #endregion
 
-            #region Startup & LabelCharge
+            #region Startup & Charge Label
 
             checkStartup.Checked = Startup.IsScheduled();//
             checkStartup.CheckedChanged += CheckStartup_CheckedChanged;//
