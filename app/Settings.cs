@@ -273,9 +273,9 @@ namespace GHelper
 
             #region Peripheral
 
-            buttonPeripheral1.Click += ButtonPeripheral_Click;
-            buttonPeripheral2.Click += ButtonPeripheral_Click;
-            buttonPeripheral3.Click += ButtonPeripheral_Click;
+            buttonPeripheral1.Click += ButtonPeripheral_Click;//
+            buttonPeripheral2.Click += ButtonPeripheral_Click;//
+            buttonPeripheral3.Click += ButtonPeripheral_Click;//
 
             buttonPeripheral1.MouseEnter += ButtonPeripheral_MouseEnter;
             buttonPeripheral2.MouseEnter += ButtonPeripheral_MouseEnter;
@@ -287,12 +287,12 @@ namespace GHelper
 
             labelBattery.Click += LabelBattery_Click;
 
-            sliderBattery.MouseUp += SliderBattery_MouseUp;
-            sliderBattery.KeyUp += SliderBattery_KeyUp;
-            sliderBattery.ValueChanged += SliderBattery_ValueChanged;
-            buttonBatteryFull.MouseEnter += ButtonBatteryFull_MouseEnter;
-            buttonBatteryFull.MouseLeave += ButtonBatteryFull_MouseLeave;
-            buttonBatteryFull.Click += ButtonBatteryFull_Click;
+            sliderBattery.MouseUp += SliderBattery_MouseUp;//
+            sliderBattery.KeyUp += SliderBattery_KeyUp;//
+            sliderBattery.ValueChanged += SliderBattery_ValueChanged;//
+            buttonBatteryFull.MouseEnter += ButtonBatteryFull_MouseEnter;//
+            buttonBatteryFull.MouseLeave += ButtonBatteryFull_MouseLeave;//
+            buttonBatteryFull.Click += ButtonBatteryFull_Click;//
 
             #endregion
 
@@ -340,7 +340,7 @@ namespace GHelper
 
         private void LabelBattery_Click(object? sender, EventArgs e)
         {
-            HardwareControl.chargeWatt = !HardwareControl.chargeWatt;
+            HardwareControl.chargeWatt = !HardwareControl.chargeWatt;// Use wattage unit
             RefreshSensors(true);
         }
 
