@@ -329,9 +329,13 @@ namespace GHelper
 
             #endregion
 
+            #region Labels Refresh & Sensor Timer
+
             sensorTimer = new System.Timers.Timer(AppConfig.Get("sensor_timer", 1000));
             sensorTimer.Elapsed += OnTimedEvent;
             sensorTimer.Enabled = true;
+
+            #endregion
 
             panelPerformance.Focus();
         }
