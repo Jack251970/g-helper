@@ -248,7 +248,7 @@ namespace GHelper
 
             #region Keyboard
 
-            VisualiseFnLock();
+            // TODO: PR.
             buttonFnLock.Click += ButtonFnLock_Click;
 
             buttonKeyboardColor.Click += ButtonKeyboardColor_Click;

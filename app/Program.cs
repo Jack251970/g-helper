@@ -106,7 +106,9 @@ namespace GHelper
 
             inputDispatcher = new InputDispatcher();
 
+            // TODO: PR.
             settingsForm.InitVisual();
+            settingsForm.VisualiseFnLock();
             settingsForm.InitAura();
             settingsForm.InitMatrix();
 
