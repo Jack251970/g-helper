@@ -386,21 +386,8 @@ namespace GHelper
 
         private void ButtonHandheld_Click(object? sender, EventArgs e)
         {
-            if (handheldForm == null || handheldForm.Text == "")
-            {
-                handheldForm = new Handheld();
-                AddOwnedForm(handheldForm);
-            }
-
-            if (handheldForm.Visible)
-            {
-                handheldForm.Close();
-            }
-            else
-            {
-                //handheldForm.FormPosition();
-                handheldForm.Show();
-            }
+            // TODO: PR.
+            HandheldToggle();
         }
 
         private void ButtonFPS_Click(object? sender, EventArgs e)
@@ -497,21 +484,9 @@ namespace GHelper
 
         private void ButtonKeyboard_Click(object? sender, EventArgs e)
         {
-            if (extraForm == null || extraForm.Text == "")
-            {
-                extraForm = new Extra();
-                AddOwnedForm(extraForm);
+            // TODO: PR.
+            ExtraToggle();
             }
-
-            if (extraForm.Visible)
-            {
-                extraForm.Close();
-            }
-            else
-            {
-                extraForm.Show();
-            }
-        }
 
         private void ButtonFans_Click(object? sender, EventArgs e)
         {
@@ -1853,6 +1828,45 @@ namespace GHelper
                 buttonFnLock.BackColor = buttonSecond;
                 buttonFnLock.ForeColor = SystemColors.ControlDark;
                 buttonFnLock.AccessibleName = "Fn-Lock off";
+            }
+        }
+
+        // TODO: PR.
+        private void HandheldToggle()
+        {
+            if (handheldForm == null || handheldForm.Text == "")
+            {
+                handheldForm = new Handheld();
+                AddOwnedForm(handheldForm);
+            }
+
+            if (handheldForm.Visible)
+            {
+                handheldForm.Close();
+            }
+            else
+            {
+                //handheldForm.FormPosition();
+                handheldForm.Show();
+            }
+        }
+
+        // TODO: PR.
+        private void ExtraToggle()
+        {
+            if (extraForm == null || extraForm.Text == "")
+            {
+                extraForm = new Extra();
+                AddOwnedForm(extraForm);
+            }
+
+            if (extraForm.Visible)
+            {
+                extraForm.Close();
+            }
+            else
+            {
+                extraForm.Show();
             }
         }
 
