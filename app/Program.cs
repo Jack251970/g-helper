@@ -344,6 +344,8 @@ namespace GHelper
         static void OnExit(object sender, EventArgs e)
         {
             trayIcon.Visible = false;
+            // TODO: PR.
+            SettingsForm.DisposeSensorTimer();
             PeripheralsProvider.UnregisterForDeviceEvents();
             clamshellControl.UnregisterDisplayEvents();
             NativeMethods.UnregisterPowerSettingNotification(unRegPowerNotify);

@@ -53,8 +53,8 @@ namespace GHelper
 
         public SettingsForm()
         {
-            InitializeComponent();
-            InitTheme(true);
+            InitializeComponent();//
+            InitTheme(true);//
 
             #region Create & Strings
 
@@ -129,11 +129,11 @@ namespace GHelper
 
             #endregion
 
-            Text = "G-Helper " + (ProcessHelper.IsUserAdministrator() ? "—" : "-") + " " + AppConfig.GetModelShort();
+            Text = "G-Helper " + (ProcessHelper.IsUserAdministrator() ? "—" : "-") + " " + AppConfig.GetModelShort();//
             TopMost = AppConfig.Is("topmost");
 
             //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
-            Resize += SettingsForm_Resize;
+            Resize += SettingsForm_Resize;//
 
             VisibleChanged += SettingsForm_VisibleChanged;
             FormClosing += SettingsForm_FormClosing;
@@ -143,7 +143,7 @@ namespace GHelper
 
             #region Performance Mode
 
-            labelCPUFan.Click += LabelCPUFan_Click;
+            labelCPUFan.Click += LabelCPUFan_Click;//
 
             buttonSilent.BorderColor = colorEco;//
             buttonBalanced.BorderColor = colorStandard;//
@@ -159,7 +159,7 @@ namespace GHelper
 
             #region GPU Mode
 
-            labelGPUFan.Click += LabelCPUFan_Click;
+            labelGPUFan.Click += LabelCPUFan_Click;//
 
             tableGPU.MouseMove += ButtonXGM_MouseMove;//
             tableGPU.MouseLeave += ButtonGPU_MouseLeave;//
@@ -196,6 +196,9 @@ namespace GHelper
 
             #region Laptop Screen
 
+            // TODO: PR.(labelSystemFan)
+            labelMidFan.Click += LabelCPUFan_Click;//
+
             buttonScreenAuto.BorderColor = colorGray;//
             button60Hz.BorderColor = colorGray;//
             button120Hz.BorderColor = colorGray;//
@@ -220,7 +223,7 @@ namespace GHelper
 
             #region Flicker-free Dimming
 
-            labelVisual.Click += LabelVisual_Click;
+            labelVisual.Click += LabelVisual_Click;//
 
             // TODO: PR.
             sliderGamma.ValueChanged += SliderGamma_ValueChanged;//
@@ -285,7 +288,7 @@ namespace GHelper
 
             #region Battery
 
-            labelBattery.Click += LabelBattery_Click;
+            labelBattery.Click += LabelBattery_Click;//
 
             sliderBattery.MouseUp += SliderBattery_MouseUp;//
             sliderBattery.KeyUp += SliderBattery_KeyUp;//
@@ -301,9 +304,9 @@ namespace GHelper
             checkStartup.Checked = Startup.IsScheduled();//
             checkStartup.CheckedChanged += CheckStartup_CheckedChanged;//
 
-            labelCharge.MouseEnter += PanelBattery_MouseEnter;
-            labelCharge.MouseLeave += PanelBattery_MouseLeave;
-            labelCharge.Click += LabelCharge_Click;
+            labelCharge.MouseEnter += PanelBattery_MouseEnter;//
+            labelCharge.MouseLeave += PanelBattery_MouseLeave;//
+            labelCharge.Click += LabelCharge_Click;//
 
             #endregion
 
@@ -329,7 +332,7 @@ namespace GHelper
 
             #endregion
 
-            #region Labels Refresh & Sensor Timer
+            #region Sensor Timer
 
             sensorTimer = new System.Timers.Timer(AppConfig.Get("sensor_timer", 1000));
             sensorTimer.Elapsed += OnTimedEvent;
@@ -340,7 +343,7 @@ namespace GHelper
             panelPerformance.Focus();
         }
 
-        #region Click Event
+        #region Click Event (Done)
 
         private void LabelBattery_Click(object? sender, EventArgs e)
         {
@@ -441,7 +444,6 @@ namespace GHelper
             gpuControl.ToggleXGM();
         }
 
-
         private void LabelVersion_Click(object? sender, EventArgs e)
         {
             updateControl.LoadReleases();
@@ -503,7 +505,6 @@ namespace GHelper
             screenControl.SetScreen(ScreenControl.MIN_RATE, 0);
         }
 
-
         private void ButtonMiniled_Click(object? sender, EventArgs e)
         {
             screenControl.ToogleMiniled();
@@ -531,7 +532,6 @@ namespace GHelper
         {
             gpuControl.SetGPUMode(AsusACPI.GPUModeEco);
         }
-
 
         private void ButtonOptimized_Click(object? sender, EventArgs e)
         {
@@ -1886,6 +1886,12 @@ namespace GHelper
             {
                 extraForm.Show();
             }
+        }
+
+        // TODO: PR.
+        public static void DisposeSensorTimer()
+        {
+            sensorTimer?.Dispose();
         }
 
         #endregion
