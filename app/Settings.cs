@@ -42,8 +42,6 @@ namespace GHelper
         static long lastBatteryRefresh;
         static long lastLostFocus;
 
-        bool isGpuSection = true;
-
         bool batteryMouseOver = false;
         bool batteryFullMouseOver = false;
 
@@ -1641,8 +1639,6 @@ namespace GHelper
 
         public void HideGPUModes(bool gpuExists)
         {
-            isGpuSection = false;
-
             buttonEco.Visible = false;
             buttonStandard.Visible = false;
             buttonUltimate.Visible = false;
