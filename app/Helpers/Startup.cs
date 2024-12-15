@@ -53,7 +53,7 @@ public class Startup
         }
     }
 
-    public static void UnscheduleCharge()
+    private static void UnscheduleCharge()
     {
         using (TaskService taskService = new TaskService())
         {
