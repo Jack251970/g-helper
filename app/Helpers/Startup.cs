@@ -68,7 +68,7 @@ public class Startup
         }
     }
 
-    public static void ScheduleCharge()
+    private static void ScheduleCharge()
     {
 
         if (strExeFilePath is null) return;
