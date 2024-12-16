@@ -68,21 +68,19 @@ namespace GHelper
             tableBios.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
             tableBios.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22F));
             tableBios.Dock = DockStyle.Top;
-            tableBios.Location = new Point(20, 20);
-            tableBios.Margin = new Padding(4);
-            tableBios.MinimumSize = new Size(1300, 0);
+            tableBios.Location = new Point(15, 15);
+            tableBios.MinimumSize = new Size(975, 0);
             tableBios.Name = "tableBios";
-            tableBios.Size = new Size(1300, 0);
+            tableBios.Size = new Size(975, 0);
             tableBios.TabIndex = 0;
             // 
             // labelBIOS
             // 
             labelBIOS.AutoSize = true;
             labelBIOS.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelBIOS.Location = new Point(68, 23);
-            labelBIOS.Margin = new Padding(4, 0, 4, 0);
+            labelBIOS.Location = new Point(51, 17);
             labelBIOS.Name = "labelBIOS";
-            labelBIOS.Size = new Size(68, 32);
+            labelBIOS.Size = new Size(54, 25);
             labelBIOS.TabIndex = 1;
             labelBIOS.Text = "BIOS";
             // 
@@ -90,10 +88,9 @@ namespace GHelper
             // 
             pictureBios.BackgroundImage = Properties.Resources.icons8_processor_32;
             pictureBios.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBios.Location = new Point(28, 23);
-            pictureBios.Margin = new Padding(4);
+            pictureBios.Location = new Point(21, 17);
             pictureBios.Name = "pictureBios";
-            pictureBios.Size = new Size(32, 32);
+            pictureBios.Size = new Size(24, 24);
             pictureBios.TabIndex = 2;
             pictureBios.TabStop = false;
             // 
@@ -105,18 +102,18 @@ namespace GHelper
             panelBiosTitle.Controls.Add(pictureBios);
             panelBiosTitle.Dock = DockStyle.Top;
             panelBiosTitle.Location = new Point(0, 0);
-            panelBiosTitle.Margin = new Padding(4);
             panelBiosTitle.Name = "panelBiosTitle";
-            panelBiosTitle.Size = new Size(1236, 60);
+            panelBiosTitle.Size = new Size(927, 45);
             panelBiosTitle.TabIndex = 3;
             // 
             // labelUpdates
             // 
             labelUpdates.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelUpdates.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelUpdates.Location = new Point(864, 19);
+            labelUpdates.Location = new Point(648, 14);
+            labelUpdates.Margin = new Padding(2, 0, 2, 0);
             labelUpdates.Name = "labelUpdates";
-            labelUpdates.Size = new Size(302, 32);
+            labelUpdates.Size = new Size(226, 24);
             labelUpdates.TabIndex = 4;
             labelUpdates.Text = "Updates Available";
             // 
@@ -131,10 +128,11 @@ namespace GHelper
             buttonRefresh.FlatAppearance.BorderSize = 0;
             buttonRefresh.FlatStyle = FlatStyle.Flat;
             buttonRefresh.Image = Properties.Resources.icons8_refresh_32;
-            buttonRefresh.Location = new Point(1172, 11);
+            buttonRefresh.Location = new Point(879, 8);
+            buttonRefresh.Margin = new Padding(2);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Secondary = true;
-            buttonRefresh.Size = new Size(52, 46);
+            buttonRefresh.Size = new Size(39, 34);
             buttonRefresh.TabIndex = 1;
             buttonRefresh.UseVisualStyleBackColor = false;
             // 
@@ -143,11 +141,10 @@ namespace GHelper
             panelBios.AutoSize = true;
             panelBios.Controls.Add(tableBios);
             panelBios.Dock = DockStyle.Top;
-            panelBios.Location = new Point(0, 60);
-            panelBios.Margin = new Padding(4);
+            panelBios.Location = new Point(0, 45);
             panelBios.Name = "panelBios";
-            panelBios.Padding = new Padding(20);
-            panelBios.Size = new Size(1236, 40);
+            panelBios.Padding = new Padding(15);
+            panelBios.Size = new Size(927, 30);
             panelBios.TabIndex = 4;
             // 
             // panelDrivers
@@ -155,11 +152,10 @@ namespace GHelper
             panelDrivers.AutoSize = true;
             panelDrivers.Controls.Add(tableDrivers);
             panelDrivers.Dock = DockStyle.Top;
-            panelDrivers.Location = new Point(0, 144);
-            panelDrivers.Margin = new Padding(4);
+            panelDrivers.Location = new Point(0, 108);
             panelDrivers.Name = "panelDrivers";
-            panelDrivers.Padding = new Padding(20);
-            panelDrivers.Size = new Size(1236, 40);
+            panelDrivers.Padding = new Padding(15);
+            panelDrivers.Size = new Size(927, 30);
             panelDrivers.TabIndex = 6;
             // 
             // tableDrivers
@@ -172,11 +168,10 @@ namespace GHelper
             tableDrivers.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
             tableDrivers.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22F));
             tableDrivers.Dock = DockStyle.Top;
-            tableDrivers.Location = new Point(20, 20);
-            tableDrivers.Margin = new Padding(4);
-            tableDrivers.MinimumSize = new Size(1300, 0);
+            tableDrivers.Location = new Point(15, 15);
+            tableDrivers.MinimumSize = new Size(975, 0);
             tableDrivers.Name = "tableDrivers";
-            tableDrivers.Size = new Size(1300, 0);
+            tableDrivers.Size = new Size(975, 0);
             tableDrivers.TabIndex = 0;
             // 
             // panelDriversTitle
@@ -184,20 +179,18 @@ namespace GHelper
             panelDriversTitle.Controls.Add(labelDrivers);
             panelDriversTitle.Controls.Add(pictureDrivers);
             panelDriversTitle.Dock = DockStyle.Top;
-            panelDriversTitle.Location = new Point(0, 100);
-            panelDriversTitle.Margin = new Padding(4);
+            panelDriversTitle.Location = new Point(0, 75);
             panelDriversTitle.Name = "panelDriversTitle";
-            panelDriversTitle.Size = new Size(1236, 44);
+            panelDriversTitle.Size = new Size(927, 33);
             panelDriversTitle.TabIndex = 5;
             // 
             // labelDrivers
             // 
             labelDrivers.AutoSize = true;
             labelDrivers.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelDrivers.Location = new Point(68, 6);
-            labelDrivers.Margin = new Padding(4, 0, 4, 0);
+            labelDrivers.Location = new Point(51, 4);
             labelDrivers.Name = "labelDrivers";
-            labelDrivers.Size = new Size(254, 32);
+            labelDrivers.Size = new Size(190, 25);
             labelDrivers.TabIndex = 1;
             labelDrivers.Text = "Drivers and Software";
             // 
@@ -205,10 +198,9 @@ namespace GHelper
             // 
             pictureDrivers.BackgroundImage = Properties.Resources.icons8_software_32;
             pictureDrivers.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureDrivers.Location = new Point(28, 6);
-            pictureDrivers.Margin = new Padding(4);
+            pictureDrivers.Location = new Point(21, 4);
             pictureDrivers.Name = "pictureDrivers";
-            pictureDrivers.Size = new Size(32, 32);
+            pictureDrivers.Size = new Size(24, 24);
             pictureDrivers.TabIndex = 2;
             pictureDrivers.TabStop = false;
             // 
@@ -226,13 +218,13 @@ namespace GHelper
             tableLayoutLegend.Controls.Add(labelLegendRed, 1, 0);
             tableLayoutLegend.Controls.Add(labelLegend, 0, 0);
             tableLayoutLegend.Dock = DockStyle.Bottom;
-            tableLayoutLegend.Location = new Point(0, 608);
+            tableLayoutLegend.Location = new Point(0, 454);
             tableLayoutLegend.Margin = new Padding(0);
             tableLayoutLegend.Name = "tableLayoutLegend";
-            tableLayoutLegend.Padding = new Padding(10, 0, 10, 20);
+            tableLayoutLegend.Padding = new Padding(8, 0, 8, 15);
             tableLayoutLegend.RowCount = 1;
             tableLayoutLegend.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutLegend.Size = new Size(1236, 82);
+            tableLayoutLegend.Size = new Size(927, 64);
             tableLayoutLegend.TabIndex = 7;
             // 
             // labelLegendGreen
@@ -241,11 +233,11 @@ namespace GHelper
             labelLegendGreen.BackColor = Color.Green;
             labelLegendGreen.Dock = DockStyle.Top;
             labelLegendGreen.ForeColor = Color.White;
-            labelLegendGreen.Location = new Point(547, 10);
-            labelLegendGreen.Margin = new Padding(10);
+            labelLegendGreen.Location = new Point(411, 8);
+            labelLegendGreen.Margin = new Padding(8);
             labelLegendGreen.Name = "labelLegendGreen";
-            labelLegendGreen.Padding = new Padding(5);
-            labelLegendGreen.Size = new Size(323, 42);
+            labelLegendGreen.Padding = new Padding(4);
+            labelLegendGreen.Size = new Size(241, 33);
             labelLegendGreen.TabIndex = 4;
             labelLegendGreen.Text = "Updated";
             // 
@@ -255,11 +247,11 @@ namespace GHelper
             labelLegendGray.BackColor = Color.Gray;
             labelLegendGray.Dock = DockStyle.Top;
             labelLegendGray.ForeColor = Color.White;
-            labelLegendGray.Location = new Point(204, 10);
-            labelLegendGray.Margin = new Padding(10);
+            labelLegendGray.Location = new Point(154, 8);
+            labelLegendGray.Margin = new Padding(8);
             labelLegendGray.Name = "labelLegendGray";
-            labelLegendGray.Padding = new Padding(5);
-            labelLegendGray.Size = new Size(323, 42);
+            labelLegendGray.Padding = new Padding(4);
+            labelLegendGray.Size = new Size(241, 33);
             labelLegendGray.TabIndex = 3;
             labelLegendGray.Text = "Can't check local version";
             // 
@@ -269,11 +261,11 @@ namespace GHelper
             labelLegendRed.BackColor = Color.Red;
             labelLegendRed.Dock = DockStyle.Top;
             labelLegendRed.ForeColor = Color.White;
-            labelLegendRed.Location = new Point(890, 10);
-            labelLegendRed.Margin = new Padding(10);
+            labelLegendRed.Location = new Point(668, 8);
+            labelLegendRed.Margin = new Padding(8);
             labelLegendRed.Name = "labelLegendRed";
-            labelLegendRed.Padding = new Padding(5);
-            labelLegendRed.Size = new Size(326, 42);
+            labelLegendRed.Padding = new Padding(4);
+            labelLegendRed.Size = new Size(243, 33);
             labelLegendRed.TabIndex = 1;
             labelLegendRed.Text = "Update Available";
             // 
@@ -282,26 +274,25 @@ namespace GHelper
             labelLegend.AutoSize = true;
             labelLegend.Dock = DockStyle.Top;
             labelLegend.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelLegend.Location = new Point(20, 10);
-            labelLegend.Margin = new Padding(10);
+            labelLegend.Location = new Point(16, 8);
+            labelLegend.Margin = new Padding(8);
             labelLegend.Name = "labelLegend";
-            labelLegend.Padding = new Padding(5);
-            labelLegend.Size = new Size(164, 42);
+            labelLegend.Padding = new Padding(4);
+            labelLegend.Size = new Size(122, 33);
             labelLegend.TabIndex = 0;
             labelLegend.Text = "Legend";
             // 
             // Updates
             // 
-            AutoScaleDimensions = new SizeF(192F, 192F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
-            ClientSize = new Size(1236, 690);
+            ClientSize = new Size(927, 518);
             Controls.Add(tableLayoutLegend);
             Controls.Add(panelDrivers);
             Controls.Add(panelDriversTitle);
             Controls.Add(panelBios);
             Controls.Add(panelBiosTitle);
-            Margin = new Padding(4);
             MinimizeBox = false;
             Name = "Updates";
             ShowIcon = false;
