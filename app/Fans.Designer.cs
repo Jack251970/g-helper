@@ -31,14 +31,14 @@ namespace GHelper
         /// </summary>
         private void InitializeComponent()
         {
-            ChartArea chartArea1 = new ChartArea();
-            Title title1 = new Title();
-            ChartArea chartArea2 = new ChartArea();
-            Title title2 = new Title();
-            ChartArea chartArea3 = new ChartArea();
-            Title title3 = new Title();
-            ChartArea chartArea4 = new ChartArea();
-            Title title4 = new Title();
+            ChartArea chartArea5 = new ChartArea();
+            Title title5 = new Title();
+            ChartArea chartArea6 = new ChartArea();
+            Title title6 = new Title();
+            ChartArea chartArea7 = new ChartArea();
+            Title title7 = new Title();
+            ChartArea chartArea8 = new ChartArea();
+            Title title8 = new Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fans));
             panelFans = new Panel();
             labelTip = new Label();
@@ -221,23 +221,22 @@ namespace GHelper
             panelFans.Controls.Add(panelTitleFans);
             panelFans.Controls.Add(panelApplyFans);
             panelFans.Dock = DockStyle.Fill;
-            panelFans.Location = new Point(530, 0);
+            panelFans.Location = new Point(398, 0);
             panelFans.Margin = new Padding(0);
-            panelFans.MinimumSize = new Size(816, 0);
+            panelFans.MinimumSize = new Size(612, 0);
             panelFans.Name = "panelFans";
-            panelFans.Padding = new Padding(0, 0, 10, 0);
-            panelFans.Size = new Size(820, 2119);
+            panelFans.Padding = new Padding(0, 0, 8, 0);
+            panelFans.Size = new Size(614, 1590);
             panelFans.TabIndex = 12;
             // 
             // labelTip
             // 
             labelTip.AutoSize = true;
             labelTip.BackColor = SystemColors.ControlLightLight;
-            labelTip.Location = new Point(684, 92);
-            labelTip.Margin = new Padding(4, 0, 4, 0);
+            labelTip.Location = new Point(513, 69);
             labelTip.Name = "labelTip";
-            labelTip.Padding = new Padding(4);
-            labelTip.Size = new Size(105, 40);
+            labelTip.Padding = new Padding(3, 3, 3, 3);
+            labelTip.Size = new Size(82, 31);
             labelTip.TabIndex = 40;
             labelTip.Text = "500,300";
             // 
@@ -251,74 +250,73 @@ namespace GHelper
             tableFanCharts.Controls.Add(chartXGM, 0, 2);
             tableFanCharts.Controls.Add(chartMid, 0, 2);
             tableFanCharts.Dock = DockStyle.Fill;
-            tableFanCharts.Location = new Point(0, 66);
-            tableFanCharts.Margin = new Padding(4);
+            tableFanCharts.Location = new Point(0, 50);
             tableFanCharts.Name = "tableFanCharts";
-            tableFanCharts.Padding = new Padding(10, 0, 10, 5);
+            tableFanCharts.Padding = new Padding(8, 0, 8, 4);
             tableFanCharts.RowCount = 2;
             tableFanCharts.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableFanCharts.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableFanCharts.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             tableFanCharts.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-            tableFanCharts.Size = new Size(810, 1937);
+            tableFanCharts.Size = new Size(606, 1453);
             tableFanCharts.TabIndex = 36;
             // 
             // chartGPU
             // 
-            chartArea1.Name = "ChartArea1";
-            chartGPU.ChartAreas.Add(chartArea1);
+            chartArea5.Name = "ChartArea1";
+            chartGPU.ChartAreas.Add(chartArea5);
             chartGPU.Dock = DockStyle.Fill;
-            chartGPU.Location = new Point(12, 493);
-            chartGPU.Margin = new Padding(2, 10, 2, 10);
+            chartGPU.Location = new Point(10, 370);
+            chartGPU.Margin = new Padding(2, 8, 2, 8);
             chartGPU.Name = "chartGPU";
-            chartGPU.Size = new Size(786, 463);
+            chartGPU.Size = new Size(586, 346);
             chartGPU.TabIndex = 17;
             chartGPU.Text = "chartGPU";
-            title1.Name = "Title1";
-            chartGPU.Titles.Add(title1);
+            title5.Name = "Title1";
+            chartGPU.Titles.Add(title5);
             // 
             // chartCPU
             // 
-            chartArea2.Name = "ChartArea1";
-            chartCPU.ChartAreas.Add(chartArea2);
+            chartArea6.Name = "ChartArea1";
+            chartCPU.ChartAreas.Add(chartArea6);
             chartCPU.Dock = DockStyle.Fill;
-            chartCPU.Location = new Point(12, 10);
-            chartCPU.Margin = new Padding(2, 10, 2, 10);
+            chartCPU.Location = new Point(10, 8);
+            chartCPU.Margin = new Padding(2, 8, 2, 8);
             chartCPU.Name = "chartCPU";
-            chartCPU.Size = new Size(786, 463);
+            chartCPU.Size = new Size(586, 346);
             chartCPU.TabIndex = 14;
             chartCPU.Text = "chartCPU";
-            title2.Name = "Title1";
-            chartCPU.Titles.Add(title2);
+            title6.Name = "Title1";
+            chartCPU.Titles.Add(title6);
             // 
             // chartXGM
             // 
-            chartArea3.Name = "ChartAreaXGM";
-            chartXGM.ChartAreas.Add(chartArea3);
+            chartArea7.Name = "ChartAreaXGM";
+            chartXGM.ChartAreas.Add(chartArea7);
             chartXGM.Dock = DockStyle.Fill;
-            chartXGM.Location = new Point(12, 1459);
-            chartXGM.Margin = new Padding(2, 10, 2, 10);
+            chartXGM.Location = new Point(10, 1094);
+            chartXGM.Margin = new Padding(2, 8, 2, 8);
             chartXGM.Name = "chartXGM";
-            chartXGM.Size = new Size(786, 463);
+            chartXGM.Size = new Size(586, 347);
             chartXGM.TabIndex = 14;
             chartXGM.Text = "chartXGM";
-            title3.Name = "Title4";
-            chartXGM.Titles.Add(title3);
+            title7.Name = "Title4";
+            chartXGM.Titles.Add(title7);
             chartXGM.Visible = false;
             // 
             // chartMid
             // 
-            chartArea4.Name = "ChartArea3";
-            chartMid.ChartAreas.Add(chartArea4);
+            chartArea8.Name = "ChartArea3";
+            chartMid.ChartAreas.Add(chartArea8);
             chartMid.Dock = DockStyle.Fill;
-            chartMid.Location = new Point(12, 976);
-            chartMid.Margin = new Padding(2, 10, 2, 10);
+            chartMid.Location = new Point(10, 732);
+            chartMid.Margin = new Padding(2, 8, 2, 8);
             chartMid.Name = "chartMid";
-            chartMid.Size = new Size(786, 463);
+            chartMid.Size = new Size(586, 346);
             chartMid.TabIndex = 14;
             chartMid.Text = "chartMid";
-            title4.Name = "Title3";
-            chartMid.Titles.Add(title4);
+            title8.Name = "Title3";
+            chartMid.Titles.Add(title8);
             chartMid.Visible = false;
             // 
             // panelTitleFans
@@ -331,9 +329,8 @@ namespace GHelper
             panelTitleFans.Controls.Add(labelFans);
             panelTitleFans.Dock = DockStyle.Top;
             panelTitleFans.Location = new Point(0, 0);
-            panelTitleFans.Margin = new Padding(4);
             panelTitleFans.Name = "panelTitleFans";
-            panelTitleFans.Size = new Size(810, 66);
+            panelTitleFans.Size = new Size(606, 50);
             panelTitleFans.TabIndex = 42;
             // 
             // buttonRename
@@ -341,15 +338,16 @@ namespace GHelper
             buttonRename.Activated = false;
             buttonRename.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonRename.BackColor = SystemColors.ControlLight;
+            buttonRename.Badge = false;
             buttonRename.BorderColor = Color.Transparent;
             buttonRename.BorderRadius = 2;
             buttonRename.FlatStyle = FlatStyle.Flat;
             buttonRename.Image = Properties.Resources.icons8_edit_32;
-            buttonRename.Location = new Point(380, 10);
-            buttonRename.Margin = new Padding(4, 2, 4, 2);
+            buttonRename.Location = new Point(283, 8);
+            buttonRename.Margin = new Padding(3, 2, 3, 2);
             buttonRename.Name = "buttonRename";
             buttonRename.Secondary = true;
-            buttonRename.Size = new Size(52, 46);
+            buttonRename.Size = new Size(39, 34);
             buttonRename.TabIndex = 45;
             buttonRename.UseVisualStyleBackColor = false;
             // 
@@ -358,15 +356,16 @@ namespace GHelper
             buttonRemove.Activated = false;
             buttonRemove.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonRemove.BackColor = SystemColors.ControlLight;
+            buttonRemove.Badge = false;
             buttonRemove.BorderColor = Color.Transparent;
             buttonRemove.BorderRadius = 2;
             buttonRemove.FlatStyle = FlatStyle.Flat;
             buttonRemove.Image = Properties.Resources.icons8_remove_64;
-            buttonRemove.Location = new Point(326, 10);
-            buttonRemove.Margin = new Padding(4, 2, 4, 2);
+            buttonRemove.Location = new Point(242, 8);
+            buttonRemove.Margin = new Padding(3, 2, 3, 2);
             buttonRemove.Name = "buttonRemove";
             buttonRemove.Secondary = true;
-            buttonRemove.Size = new Size(52, 46);
+            buttonRemove.Size = new Size(39, 34);
             buttonRemove.TabIndex = 44;
             buttonRemove.UseVisualStyleBackColor = false;
             // 
@@ -375,15 +374,16 @@ namespace GHelper
             buttonAdd.Activated = false;
             buttonAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonAdd.BackColor = SystemColors.ControlLight;
+            buttonAdd.Badge = false;
             buttonAdd.BorderColor = Color.Transparent;
             buttonAdd.BorderRadius = 2;
             buttonAdd.FlatStyle = FlatStyle.Flat;
             buttonAdd.Image = Properties.Resources.icons8_add_64;
-            buttonAdd.Location = new Point(748, 10);
-            buttonAdd.Margin = new Padding(4, 2, 4, 2);
+            buttonAdd.Location = new Point(559, 8);
+            buttonAdd.Margin = new Padding(3, 2, 3, 2);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Secondary = true;
-            buttonAdd.Size = new Size(52, 46);
+            buttonAdd.Size = new Size(39, 34);
             buttonAdd.TabIndex = 43;
             buttonAdd.UseVisualStyleBackColor = false;
             // 
@@ -394,10 +394,10 @@ namespace GHelper
             comboModes.ButtonColor = Color.FromArgb(255, 255, 255);
             comboModes.FlatStyle = FlatStyle.Flat;
             comboModes.FormattingEnabled = true;
-            comboModes.Location = new Point(440, 14);
+            comboModes.Location = new Point(328, 10);
             comboModes.Margin = new Padding(0);
             comboModes.Name = "comboModes";
-            comboModes.Size = new Size(302, 40);
+            comboModes.Size = new Size(228, 33);
             comboModes.TabIndex = 42;
             // 
             // picturePerf
@@ -405,21 +405,20 @@ namespace GHelper
             picturePerf.BackgroundImage = Properties.Resources.icons8_fan_32;
             picturePerf.BackgroundImageLayout = ImageLayout.Zoom;
             picturePerf.InitialImage = null;
-            picturePerf.Location = new Point(18, 18);
-            picturePerf.Margin = new Padding(4, 2, 4, 2);
+            picturePerf.Location = new Point(14, 14);
+            picturePerf.Margin = new Padding(3, 2, 3, 2);
             picturePerf.Name = "picturePerf";
-            picturePerf.Size = new Size(32, 32);
+            picturePerf.Size = new Size(24, 24);
             picturePerf.TabIndex = 41;
             picturePerf.TabStop = false;
             // 
             // labelFans
             // 
             labelFans.AutoSize = true;
-            labelFans.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelFans.Location = new Point(53, 17);
-            labelFans.Margin = new Padding(4, 0, 4, 0);
+            labelFans.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelFans.Location = new Point(40, 13);
             labelFans.Name = "labelFans";
-            labelFans.Size = new Size(90, 32);
+            labelFans.Size = new Size(68, 25);
             labelFans.TabIndex = 40;
             labelFans.Text = "Profile";
             // 
@@ -430,10 +429,9 @@ namespace GHelper
             panelApplyFans.Controls.Add(checkApplyFans);
             panelApplyFans.Controls.Add(buttonReset);
             panelApplyFans.Dock = DockStyle.Bottom;
-            panelApplyFans.Location = new Point(0, 2003);
-            panelApplyFans.Margin = new Padding(4);
+            panelApplyFans.Location = new Point(0, 1503);
             panelApplyFans.Name = "panelApplyFans";
-            panelApplyFans.Size = new Size(810, 116);
+            panelApplyFans.Size = new Size(606, 87);
             panelApplyFans.TabIndex = 43;
             // 
             // buttonCalibrate
@@ -441,14 +439,15 @@ namespace GHelper
             buttonCalibrate.Activated = false;
             buttonCalibrate.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             buttonCalibrate.BackColor = SystemColors.ControlLight;
+            buttonCalibrate.Badge = false;
             buttonCalibrate.BorderColor = Color.Transparent;
             buttonCalibrate.BorderRadius = 2;
             buttonCalibrate.FlatStyle = FlatStyle.Flat;
-            buttonCalibrate.Location = new Point(275, 40);
-            buttonCalibrate.Margin = new Padding(4, 2, 4, 2);
+            buttonCalibrate.Location = new Point(206, 30);
+            buttonCalibrate.Margin = new Padding(3, 2, 3, 2);
             buttonCalibrate.Name = "buttonCalibrate";
             buttonCalibrate.Secondary = true;
-            buttonCalibrate.Size = new Size(141, 50);
+            buttonCalibrate.Size = new Size(106, 38);
             buttonCalibrate.TabIndex = 43;
             buttonCalibrate.Text = "Calibrate";
             buttonCalibrate.UseVisualStyleBackColor = false;
@@ -457,10 +456,9 @@ namespace GHelper
             // 
             labelFansResult.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             labelFansResult.ForeColor = Color.Red;
-            labelFansResult.Location = new Point(18, 2);
-            labelFansResult.Margin = new Padding(4, 0, 4, 0);
+            labelFansResult.Location = new Point(14, 2);
             labelFansResult.Name = "labelFansResult";
-            labelFansResult.Size = new Size(771, 32);
+            labelFansResult.Size = new Size(578, 24);
             labelFansResult.TabIndex = 42;
             labelFansResult.Visible = false;
             // 
@@ -469,11 +467,11 @@ namespace GHelper
             checkApplyFans.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             checkApplyFans.AutoSize = true;
             checkApplyFans.BackColor = SystemColors.ControlLight;
-            checkApplyFans.Location = new Point(454, 42);
+            checkApplyFans.Location = new Point(337, 31);
             checkApplyFans.Margin = new Padding(0);
             checkApplyFans.Name = "checkApplyFans";
-            checkApplyFans.Padding = new Padding(16, 6, 16, 6);
-            checkApplyFans.Size = new Size(341, 48);
+            checkApplyFans.Padding = new Padding(12, 4, 12, 4);
+            checkApplyFans.Size = new Size(258, 37);
             checkApplyFans.TabIndex = 19;
             checkApplyFans.Text = Properties.Strings.ApplyFanCurve;
             checkApplyFans.UseVisualStyleBackColor = false;
@@ -483,14 +481,15 @@ namespace GHelper
             buttonReset.Activated = false;
             buttonReset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             buttonReset.BackColor = SystemColors.ControlLight;
+            buttonReset.Badge = false;
             buttonReset.BorderColor = Color.Transparent;
             buttonReset.BorderRadius = 2;
             buttonReset.FlatStyle = FlatStyle.Flat;
-            buttonReset.Location = new Point(15, 40);
-            buttonReset.Margin = new Padding(4, 2, 4, 2);
+            buttonReset.Location = new Point(11, 30);
+            buttonReset.Margin = new Padding(3, 2, 3, 2);
             buttonReset.Name = "buttonReset";
             buttonReset.Secondary = true;
-            buttonReset.Size = new Size(252, 50);
+            buttonReset.Size = new Size(189, 38);
             buttonReset.TabIndex = 18;
             buttonReset.Text = Properties.Strings.FactoryDefaults;
             buttonReset.UseVisualStyleBackColor = false;
@@ -503,10 +502,9 @@ namespace GHelper
             comboBoost.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoost.FormattingEnabled = true;
             comboBoost.Items.AddRange(new object[] { "Disabled", "Enabled", "Aggressive", "Efficient Enabled", "Efficient Aggressive", "Aggressive at Guaranteed", "Efficient at Guaranteed" });
-            comboBoost.Location = new Point(13, 12);
-            comboBoost.Margin = new Padding(4);
+            comboBoost.Location = new Point(10, 9);
             comboBoost.Name = "comboBoost";
-            comboBoost.Size = new Size(329, 40);
+            comboBoost.Size = new Size(248, 33);
             comboBoost.TabIndex = 42;
             // 
             // panelSliders
@@ -518,10 +516,10 @@ namespace GHelper
             panelSliders.Dock = DockStyle.Left;
             panelSliders.Location = new Point(0, 0);
             panelSliders.Margin = new Padding(0);
-            panelSliders.MinimumSize = new Size(530, 0);
+            panelSliders.MinimumSize = new Size(398, 0);
             panelSliders.Name = "panelSliders";
-            panelSliders.Padding = new Padding(10, 0, 0, 0);
-            panelSliders.Size = new Size(530, 2119);
+            panelSliders.Padding = new Padding(8, 0, 0, 0);
+            panelSliders.Size = new Size(398, 1590);
             panelSliders.TabIndex = 13;
             // 
             // panelAdvanced
@@ -538,9 +536,10 @@ namespace GHelper
             panelAdvanced.Controls.Add(panelTitleTemp);
             panelAdvanced.Controls.Add(panelDownload);
             panelAdvanced.Dock = DockStyle.Top;
-            panelAdvanced.Location = new Point(10, 1768);
+            panelAdvanced.Location = new Point(8, 1330);
+            panelAdvanced.Margin = new Padding(2, 2, 2, 2);
             panelAdvanced.Name = "panelAdvanced";
-            panelAdvanced.Size = new Size(520, 992);
+            panelAdvanced.Size = new Size(390, 749);
             panelAdvanced.TabIndex = 14;
             panelAdvanced.Visible = false;
             // 
@@ -549,10 +548,11 @@ namespace GHelper
             panelAdvancedAlways.AutoSize = true;
             panelAdvancedAlways.Controls.Add(checkApplyUV);
             panelAdvancedAlways.Dock = DockStyle.Top;
-            panelAdvancedAlways.Location = new Point(0, 931);
+            panelAdvancedAlways.Location = new Point(0, 704);
+            panelAdvancedAlways.Margin = new Padding(2, 2, 2, 2);
             panelAdvancedAlways.Name = "panelAdvancedAlways";
-            panelAdvancedAlways.Padding = new Padding(16, 0, 16, 15);
-            panelAdvancedAlways.Size = new Size(520, 61);
+            panelAdvancedAlways.Padding = new Padding(12, 0, 12, 11);
+            panelAdvancedAlways.Size = new Size(390, 45);
             panelAdvancedAlways.TabIndex = 46;
             // 
             // checkApplyUV
@@ -560,11 +560,11 @@ namespace GHelper
             checkApplyUV.BackColor = SystemColors.ControlLight;
             checkApplyUV.Dock = DockStyle.Top;
             checkApplyUV.Enabled = false;
-            checkApplyUV.Location = new Point(16, 0);
-            checkApplyUV.Margin = new Padding(15, 15, 0, 0);
+            checkApplyUV.Location = new Point(12, 0);
+            checkApplyUV.Margin = new Padding(11, 11, 0, 0);
             checkApplyUV.Name = "checkApplyUV";
-            checkApplyUV.Padding = new Padding(16, 6, 16, 6);
-            checkApplyUV.Size = new Size(488, 46);
+            checkApplyUV.Padding = new Padding(12, 4, 12, 4);
+            checkApplyUV.Size = new Size(366, 34);
             checkApplyUV.TabIndex = 51;
             checkApplyUV.Text = "Auto Apply";
             checkApplyUV.TextAlign = ContentAlignment.MiddleCenter;
@@ -575,25 +575,27 @@ namespace GHelper
             panelAdvancedApply.AutoSize = true;
             panelAdvancedApply.Controls.Add(buttonApplyAdvanced);
             panelAdvancedApply.Dock = DockStyle.Top;
-            panelAdvancedApply.Location = new Point(0, 851);
+            panelAdvancedApply.Location = new Point(0, 644);
+            panelAdvancedApply.Margin = new Padding(2, 2, 2, 2);
             panelAdvancedApply.Name = "panelAdvancedApply";
-            panelAdvancedApply.Padding = new Padding(15);
-            panelAdvancedApply.Size = new Size(520, 80);
+            panelAdvancedApply.Padding = new Padding(11, 11, 11, 11);
+            panelAdvancedApply.Size = new Size(390, 60);
             panelAdvancedApply.TabIndex = 47;
             // 
             // buttonApplyAdvanced
             // 
             buttonApplyAdvanced.Activated = false;
             buttonApplyAdvanced.BackColor = SystemColors.ControlLight;
+            buttonApplyAdvanced.Badge = false;
             buttonApplyAdvanced.BorderColor = Color.Transparent;
             buttonApplyAdvanced.BorderRadius = 2;
             buttonApplyAdvanced.Dock = DockStyle.Top;
             buttonApplyAdvanced.FlatStyle = FlatStyle.Flat;
-            buttonApplyAdvanced.Location = new Point(15, 15);
-            buttonApplyAdvanced.Margin = new Padding(4, 2, 15, 15);
+            buttonApplyAdvanced.Location = new Point(11, 11);
+            buttonApplyAdvanced.Margin = new Padding(3, 2, 11, 11);
             buttonApplyAdvanced.Name = "buttonApplyAdvanced";
             buttonApplyAdvanced.Secondary = true;
-            buttonApplyAdvanced.Size = new Size(490, 50);
+            buttonApplyAdvanced.Size = new Size(368, 38);
             buttonApplyAdvanced.TabIndex = 49;
             buttonApplyAdvanced.Text = "Apply";
             buttonApplyAdvanced.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -604,11 +606,11 @@ namespace GHelper
             labelRisky.BackColor = Color.IndianRed;
             labelRisky.Dock = DockStyle.Top;
             labelRisky.ForeColor = SystemColors.ControlLightLight;
-            labelRisky.Location = new Point(0, 608);
+            labelRisky.Location = new Point(0, 462);
             labelRisky.Margin = new Padding(0);
             labelRisky.Name = "labelRisky";
-            labelRisky.Padding = new Padding(10, 10, 10, 5);
-            labelRisky.Size = new Size(520, 243);
+            labelRisky.Padding = new Padding(8, 8, 8, 4);
+            labelRisky.Size = new Size(390, 182);
             labelRisky.TabIndex = 46;
             labelRisky.Text = resources.GetString("labelRisky.Text");
             // 
@@ -620,20 +622,18 @@ namespace GHelper
             panelUViGPU.Controls.Add(labelLeftUViGPU);
             panelUViGPU.Controls.Add(trackUViGPU);
             panelUViGPU.Dock = DockStyle.Top;
-            panelUViGPU.Location = new Point(0, 484);
-            panelUViGPU.Margin = new Padding(4);
-            panelUViGPU.MaximumSize = new Size(0, 124);
+            panelUViGPU.Location = new Point(0, 369);
+            panelUViGPU.MaximumSize = new Size(0, 93);
             panelUViGPU.Name = "panelUViGPU";
-            panelUViGPU.Size = new Size(520, 124);
+            panelUViGPU.Size = new Size(390, 93);
             panelUViGPU.TabIndex = 49;
             // 
             // labelUViGPU
             // 
-            labelUViGPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelUViGPU.Location = new Point(347, 9);
-            labelUViGPU.Margin = new Padding(4, 0, 4, 0);
+            labelUViGPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelUViGPU.Location = new Point(260, 7);
             labelUViGPU.Name = "labelUViGPU";
-            labelUViGPU.Size = new Size(148, 32);
+            labelUViGPU.Size = new Size(111, 24);
             labelUViGPU.TabIndex = 13;
             labelUViGPU.Text = "UV";
             labelUViGPU.TextAlign = ContentAlignment.TopRight;
@@ -641,21 +641,20 @@ namespace GHelper
             // labelLeftUViGPU
             // 
             labelLeftUViGPU.AutoSize = true;
-            labelLeftUViGPU.Location = new Point(10, 10);
-            labelLeftUViGPU.Margin = new Padding(4, 0, 4, 0);
+            labelLeftUViGPU.Location = new Point(8, 8);
             labelLeftUViGPU.Name = "labelLeftUViGPU";
-            labelLeftUViGPU.Size = new Size(65, 32);
+            labelLeftUViGPU.Size = new Size(50, 25);
             labelLeftUViGPU.TabIndex = 12;
             labelLeftUViGPU.Text = "iGPU";
             // 
             // trackUViGPU
             // 
-            trackUViGPU.Location = new Point(6, 48);
-            trackUViGPU.Margin = new Padding(4, 2, 4, 2);
+            trackUViGPU.Location = new Point(4, 36);
+            trackUViGPU.Margin = new Padding(3, 2, 3, 2);
             trackUViGPU.Maximum = 0;
             trackUViGPU.Minimum = -40;
             trackUViGPU.Name = "trackUViGPU";
-            trackUViGPU.Size = new Size(508, 90);
+            trackUViGPU.Size = new Size(381, 69);
             trackUViGPU.TabIndex = 11;
             trackUViGPU.TickFrequency = 5;
             trackUViGPU.TickStyle = TickStyle.TopLeft;
@@ -668,20 +667,18 @@ namespace GHelper
             panelUV.Controls.Add(labelLeftUV);
             panelUV.Controls.Add(trackUV);
             panelUV.Dock = DockStyle.Top;
-            panelUV.Location = new Point(0, 360);
-            panelUV.Margin = new Padding(4);
-            panelUV.MaximumSize = new Size(0, 124);
+            panelUV.Location = new Point(0, 276);
+            panelUV.MaximumSize = new Size(0, 93);
             panelUV.Name = "panelUV";
-            panelUV.Size = new Size(520, 124);
+            panelUV.Size = new Size(390, 93);
             panelUV.TabIndex = 46;
             // 
             // labelUV
             // 
-            labelUV.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelUV.Location = new Point(347, 13);
-            labelUV.Margin = new Padding(4, 0, 4, 0);
+            labelUV.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelUV.Location = new Point(260, 10);
             labelUV.Name = "labelUV";
-            labelUV.Size = new Size(148, 32);
+            labelUV.Size = new Size(111, 24);
             labelUV.TabIndex = 13;
             labelUV.Text = "UV";
             labelUV.TextAlign = ContentAlignment.TopRight;
@@ -689,21 +686,20 @@ namespace GHelper
             // labelLeftUV
             // 
             labelLeftUV.AutoSize = true;
-            labelLeftUV.Location = new Point(10, 10);
-            labelLeftUV.Margin = new Padding(4, 0, 4, 0);
+            labelLeftUV.Location = new Point(8, 8);
             labelLeftUV.Name = "labelLeftUV";
-            labelLeftUV.Size = new Size(58, 32);
+            labelLeftUV.Size = new Size(45, 25);
             labelLeftUV.TabIndex = 12;
             labelLeftUV.Text = "CPU";
             // 
             // trackUV
             // 
-            trackUV.Location = new Point(6, 48);
-            trackUV.Margin = new Padding(4, 2, 4, 2);
+            trackUV.Location = new Point(4, 36);
+            trackUV.Margin = new Padding(3, 2, 3, 2);
             trackUV.Maximum = 0;
             trackUV.Minimum = -40;
             trackUV.Name = "trackUV";
-            trackUV.Size = new Size(508, 90);
+            trackUV.Size = new Size(381, 69);
             trackUV.TabIndex = 11;
             trackUV.TickFrequency = 5;
             trackUV.TickStyle = TickStyle.TopLeft;
@@ -713,9 +709,10 @@ namespace GHelper
             panelTitleAdvanced.Controls.Add(pictureUV);
             panelTitleAdvanced.Controls.Add(labelTitleUV);
             panelTitleAdvanced.Dock = DockStyle.Top;
-            panelTitleAdvanced.Location = new Point(0, 294);
+            panelTitleAdvanced.Location = new Point(0, 226);
+            panelTitleAdvanced.Margin = new Padding(2, 2, 2, 2);
             panelTitleAdvanced.Name = "panelTitleAdvanced";
-            panelTitleAdvanced.Size = new Size(520, 66);
+            panelTitleAdvanced.Size = new Size(390, 50);
             panelTitleAdvanced.TabIndex = 48;
             // 
             // pictureUV
@@ -723,21 +720,20 @@ namespace GHelper
             pictureUV.BackgroundImage = Properties.Resources.icons8_voltage_32;
             pictureUV.BackgroundImageLayout = ImageLayout.Zoom;
             pictureUV.InitialImage = null;
-            pictureUV.Location = new Point(10, 18);
-            pictureUV.Margin = new Padding(4, 2, 4, 10);
+            pictureUV.Location = new Point(8, 14);
+            pictureUV.Margin = new Padding(3, 2, 3, 8);
             pictureUV.Name = "pictureUV";
-            pictureUV.Size = new Size(32, 32);
+            pictureUV.Size = new Size(24, 24);
             pictureUV.TabIndex = 48;
             pictureUV.TabStop = false;
             // 
             // labelTitleUV
             // 
             labelTitleUV.AutoSize = true;
-            labelTitleUV.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelTitleUV.Location = new Point(43, 17);
-            labelTitleUV.Margin = new Padding(4, 0, 4, 0);
+            labelTitleUV.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelTitleUV.Location = new Point(32, 13);
             labelTitleUV.Name = "labelTitleUV";
-            labelTitleUV.Size = new Size(166, 32);
+            labelTitleUV.Size = new Size(125, 25);
             labelTitleUV.TabIndex = 47;
             labelTitleUV.Text = "Undervolting";
             // 
@@ -749,20 +745,18 @@ namespace GHelper
             panelTemperature.Controls.Add(labelLeftTemp);
             panelTemperature.Controls.Add(trackTemp);
             panelTemperature.Dock = DockStyle.Top;
-            panelTemperature.Location = new Point(0, 170);
-            panelTemperature.Margin = new Padding(4);
-            panelTemperature.MaximumSize = new Size(0, 124);
+            panelTemperature.Location = new Point(0, 133);
+            panelTemperature.MaximumSize = new Size(0, 93);
             panelTemperature.Name = "panelTemperature";
-            panelTemperature.Size = new Size(520, 124);
+            panelTemperature.Size = new Size(390, 93);
             panelTemperature.TabIndex = 51;
             // 
             // labelTemp
             // 
-            labelTemp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelTemp.Location = new Point(347, 13);
-            labelTemp.Margin = new Padding(4, 0, 4, 0);
+            labelTemp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelTemp.Location = new Point(260, 10);
             labelTemp.Name = "labelTemp";
-            labelTemp.Size = new Size(148, 32);
+            labelTemp.Size = new Size(111, 24);
             labelTemp.TabIndex = 13;
             labelTemp.Text = "T";
             labelTemp.TextAlign = ContentAlignment.TopRight;
@@ -770,21 +764,20 @@ namespace GHelper
             // labelLeftTemp
             // 
             labelLeftTemp.AutoSize = true;
-            labelLeftTemp.Location = new Point(10, 10);
-            labelLeftTemp.Margin = new Padding(4, 0, 4, 0);
+            labelLeftTemp.Location = new Point(8, 8);
             labelLeftTemp.Name = "labelLeftTemp";
-            labelLeftTemp.Size = new Size(183, 32);
+            labelLeftTemp.Size = new Size(136, 25);
             labelLeftTemp.TabIndex = 12;
             labelLeftTemp.Text = "CPU Temp Limit";
             // 
             // trackTemp
             // 
-            trackTemp.Location = new Point(6, 48);
-            trackTemp.Margin = new Padding(4, 2, 4, 2);
+            trackTemp.Location = new Point(4, 36);
+            trackTemp.Margin = new Padding(3, 2, 3, 2);
             trackTemp.Maximum = 0;
             trackTemp.Minimum = -40;
             trackTemp.Name = "trackTemp";
-            trackTemp.Size = new Size(508, 90);
+            trackTemp.Size = new Size(381, 69);
             trackTemp.TabIndex = 11;
             trackTemp.TickFrequency = 5;
             trackTemp.TickStyle = TickStyle.TopLeft;
@@ -794,9 +787,10 @@ namespace GHelper
             panelTitleTemp.Controls.Add(pictureTemp);
             panelTitleTemp.Controls.Add(labelTempLimit);
             panelTitleTemp.Dock = DockStyle.Top;
-            panelTitleTemp.Location = new Point(0, 104);
+            panelTitleTemp.Location = new Point(0, 83);
+            panelTitleTemp.Margin = new Padding(2, 2, 2, 2);
             panelTitleTemp.Name = "panelTitleTemp";
-            panelTitleTemp.Size = new Size(520, 66);
+            panelTitleTemp.Size = new Size(390, 50);
             panelTitleTemp.TabIndex = 50;
             // 
             // pictureTemp
@@ -804,21 +798,20 @@ namespace GHelper
             pictureTemp.BackgroundImage = Properties.Resources.icons8_temperature_32;
             pictureTemp.BackgroundImageLayout = ImageLayout.Zoom;
             pictureTemp.InitialImage = null;
-            pictureTemp.Location = new Point(10, 18);
-            pictureTemp.Margin = new Padding(4, 2, 4, 10);
+            pictureTemp.Location = new Point(8, 14);
+            pictureTemp.Margin = new Padding(3, 2, 3, 8);
             pictureTemp.Name = "pictureTemp";
-            pictureTemp.Size = new Size(32, 32);
+            pictureTemp.Size = new Size(24, 24);
             pictureTemp.TabIndex = 48;
             pictureTemp.TabStop = false;
             // 
             // labelTempLimit
             // 
             labelTempLimit.AutoSize = true;
-            labelTempLimit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelTempLimit.Location = new Point(46, 17);
-            labelTempLimit.Margin = new Padding(4, 0, 4, 0);
+            labelTempLimit.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelTempLimit.Location = new Point(34, 13);
             labelTempLimit.Name = "labelTempLimit";
-            labelTempLimit.Size = new Size(140, 32);
+            labelTempLimit.Size = new Size(105, 25);
             labelTempLimit.TabIndex = 47;
             labelTempLimit.Text = "Temp Limit";
             // 
@@ -828,9 +821,10 @@ namespace GHelper
             panelDownload.Controls.Add(buttonDownload);
             panelDownload.Dock = DockStyle.Top;
             panelDownload.Location = new Point(0, 0);
+            panelDownload.Margin = new Padding(2, 2, 2, 2);
             panelDownload.Name = "panelDownload";
-            panelDownload.Padding = new Padding(20);
-            panelDownload.Size = new Size(520, 104);
+            panelDownload.Padding = new Padding(15, 15, 15, 15);
+            panelDownload.Size = new Size(390, 83);
             panelDownload.TabIndex = 52;
             panelDownload.Visible = false;
             // 
@@ -840,16 +834,17 @@ namespace GHelper
             buttonDownload.AutoSize = true;
             buttonDownload.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             buttonDownload.BackColor = SystemColors.ControlLight;
+            buttonDownload.Badge = false;
             buttonDownload.BorderColor = Color.Transparent;
             buttonDownload.BorderRadius = 2;
             buttonDownload.Dock = DockStyle.Top;
             buttonDownload.FlatStyle = FlatStyle.Flat;
-            buttonDownload.Location = new Point(20, 20);
-            buttonDownload.Margin = new Padding(20);
+            buttonDownload.Location = new Point(15, 15);
+            buttonDownload.Margin = new Padding(15, 15, 15, 15);
             buttonDownload.Name = "buttonDownload";
-            buttonDownload.Padding = new Padding(10);
+            buttonDownload.Padding = new Padding(8, 8, 8, 8);
             buttonDownload.Secondary = true;
-            buttonDownload.Size = new Size(480, 64);
+            buttonDownload.Size = new Size(360, 53);
             buttonDownload.TabIndex = 19;
             buttonDownload.Text = "Download Advanced Settings Plugin";
             buttonDownload.UseVisualStyleBackColor = false;
@@ -869,10 +864,9 @@ namespace GHelper
             panelPower.Controls.Add(panelPowerMode);
             panelPower.Controls.Add(panelPowerModeTItle);
             panelPower.Dock = DockStyle.Top;
-            panelPower.Location = new Point(10, 888);
-            panelPower.Margin = new Padding(4);
+            panelPower.Location = new Point(8, 668);
             panelPower.Name = "panelPower";
-            panelPower.Size = new Size(520, 880);
+            panelPower.Size = new Size(390, 662);
             panelPower.TabIndex = 43;
             // 
             // panelApplyPower
@@ -880,21 +874,22 @@ namespace GHelper
             panelApplyPower.AutoSize = true;
             panelApplyPower.Controls.Add(checkApplyPower);
             panelApplyPower.Dock = DockStyle.Top;
-            panelApplyPower.Location = new Point(0, 804);
+            panelApplyPower.Location = new Point(0, 606);
+            panelApplyPower.Margin = new Padding(2, 2, 2, 2);
             panelApplyPower.Name = "panelApplyPower";
-            panelApplyPower.Padding = new Padding(15);
-            panelApplyPower.Size = new Size(520, 76);
+            panelApplyPower.Padding = new Padding(11, 11, 11, 11);
+            panelApplyPower.Size = new Size(390, 56);
             panelApplyPower.TabIndex = 47;
             // 
             // checkApplyPower
             // 
             checkApplyPower.BackColor = SystemColors.ControlLight;
             checkApplyPower.Dock = DockStyle.Top;
-            checkApplyPower.Location = new Point(15, 15);
+            checkApplyPower.Location = new Point(11, 11);
             checkApplyPower.Margin = new Padding(0);
             checkApplyPower.Name = "checkApplyPower";
-            checkApplyPower.Padding = new Padding(16, 6, 16, 6);
-            checkApplyPower.Size = new Size(490, 46);
+            checkApplyPower.Padding = new Padding(12, 4, 12, 4);
+            checkApplyPower.Size = new Size(368, 34);
             checkApplyPower.TabIndex = 45;
             checkApplyPower.Text = "Apply Power Limits";
             checkApplyPower.UseVisualStyleBackColor = false;
@@ -907,20 +902,18 @@ namespace GHelper
             panelCPU.Controls.Add(labelLeftCPU);
             panelCPU.Controls.Add(trackCPU);
             panelCPU.Dock = DockStyle.Top;
-            panelCPU.Location = new Point(0, 680);
-            panelCPU.Margin = new Padding(4);
-            panelCPU.MaximumSize = new Size(0, 124);
+            panelCPU.Location = new Point(0, 513);
+            panelCPU.MaximumSize = new Size(0, 93);
             panelCPU.Name = "panelCPU";
-            panelCPU.Size = new Size(520, 124);
+            panelCPU.Size = new Size(390, 93);
             panelCPU.TabIndex = 41;
             // 
             // labelCPU
             // 
-            labelCPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelCPU.Location = new Point(398, 8);
-            labelCPU.Margin = new Padding(4, 0, 4, 0);
+            labelCPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelCPU.Location = new Point(298, 6);
             labelCPU.Name = "labelCPU";
-            labelCPU.Size = new Size(116, 32);
+            labelCPU.Size = new Size(87, 24);
             labelCPU.TabIndex = 13;
             labelCPU.Text = "CPU";
             labelCPU.TextAlign = ContentAlignment.TopRight;
@@ -928,21 +921,20 @@ namespace GHelper
             // labelLeftCPU
             // 
             labelLeftCPU.AutoSize = true;
-            labelLeftCPU.Location = new Point(10, 8);
-            labelLeftCPU.Margin = new Padding(4, 0, 4, 0);
+            labelLeftCPU.Location = new Point(8, 6);
             labelLeftCPU.Name = "labelLeftCPU";
-            labelLeftCPU.Size = new Size(58, 32);
+            labelLeftCPU.Size = new Size(45, 25);
             labelLeftCPU.TabIndex = 12;
             labelLeftCPU.Text = "CPU";
             // 
             // trackCPU
             // 
-            trackCPU.Location = new Point(6, 44);
-            trackCPU.Margin = new Padding(4, 2, 4, 2);
+            trackCPU.Location = new Point(4, 33);
+            trackCPU.Margin = new Padding(3, 2, 3, 2);
             trackCPU.Maximum = 85;
             trackCPU.Minimum = 5;
             trackCPU.Name = "trackCPU";
-            trackCPU.Size = new Size(508, 90);
+            trackCPU.Size = new Size(381, 69);
             trackCPU.TabIndex = 11;
             trackCPU.TickFrequency = 5;
             trackCPU.TickStyle = TickStyle.TopLeft;
@@ -956,20 +948,18 @@ namespace GHelper
             panelFast.Controls.Add(labelLeftFast);
             panelFast.Controls.Add(trackFast);
             panelFast.Dock = DockStyle.Top;
-            panelFast.Location = new Point(0, 556);
-            panelFast.Margin = new Padding(4);
-            panelFast.MaximumSize = new Size(0, 124);
+            panelFast.Location = new Point(0, 420);
+            panelFast.MaximumSize = new Size(0, 93);
             panelFast.Name = "panelFast";
-            panelFast.Size = new Size(520, 124);
+            panelFast.Size = new Size(390, 93);
             panelFast.TabIndex = 45;
             // 
             // labelFast
             // 
-            labelFast.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelFast.Location = new Point(396, 8);
-            labelFast.Margin = new Padding(4, 0, 4, 0);
+            labelFast.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelFast.Location = new Point(297, 6);
             labelFast.Name = "labelFast";
-            labelFast.Size = new Size(114, 32);
+            labelFast.Size = new Size(86, 24);
             labelFast.TabIndex = 13;
             labelFast.Text = "FPPT";
             labelFast.TextAlign = ContentAlignment.TopRight;
@@ -977,21 +967,20 @@ namespace GHelper
             // labelLeftFast
             // 
             labelLeftFast.AutoSize = true;
-            labelLeftFast.Location = new Point(10, 8);
-            labelLeftFast.Margin = new Padding(4, 0, 4, 0);
+            labelLeftFast.Location = new Point(8, 6);
             labelLeftFast.Name = "labelLeftFast";
-            labelLeftFast.Size = new Size(65, 32);
+            labelLeftFast.Size = new Size(50, 25);
             labelLeftFast.TabIndex = 12;
             labelLeftFast.Text = "FPPT";
             // 
             // trackFast
             // 
-            trackFast.Location = new Point(6, 48);
-            trackFast.Margin = new Padding(4, 2, 4, 2);
+            trackFast.Location = new Point(4, 36);
+            trackFast.Margin = new Padding(3, 2, 3, 2);
             trackFast.Maximum = 85;
             trackFast.Minimum = 5;
             trackFast.Name = "trackFast";
-            trackFast.Size = new Size(508, 90);
+            trackFast.Size = new Size(381, 69);
             trackFast.TabIndex = 11;
             trackFast.TickFrequency = 5;
             trackFast.TickStyle = TickStyle.TopLeft;
@@ -1005,20 +994,18 @@ namespace GHelper
             panelSlow.Controls.Add(labelLeftSlow);
             panelSlow.Controls.Add(trackSlow);
             panelSlow.Dock = DockStyle.Top;
-            panelSlow.Location = new Point(0, 432);
-            panelSlow.Margin = new Padding(4);
-            panelSlow.MaximumSize = new Size(0, 124);
+            panelSlow.Location = new Point(0, 327);
+            panelSlow.MaximumSize = new Size(0, 93);
             panelSlow.Name = "panelSlow";
-            panelSlow.Size = new Size(520, 124);
+            panelSlow.Size = new Size(390, 93);
             panelSlow.TabIndex = 51;
             // 
             // labelSlow
             // 
-            labelSlow.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelSlow.Location = new Point(396, 10);
-            labelSlow.Margin = new Padding(4, 0, 4, 0);
+            labelSlow.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelSlow.Location = new Point(297, 8);
             labelSlow.Name = "labelSlow";
-            labelSlow.Size = new Size(116, 32);
+            labelSlow.Size = new Size(87, 24);
             labelSlow.TabIndex = 12;
             labelSlow.Text = "SPPT";
             labelSlow.TextAlign = ContentAlignment.TopRight;
@@ -1026,21 +1013,20 @@ namespace GHelper
             // labelLeftSlow
             // 
             labelLeftSlow.AutoSize = true;
-            labelLeftSlow.Location = new Point(10, 10);
-            labelLeftSlow.Margin = new Padding(4, 0, 4, 0);
+            labelLeftSlow.Location = new Point(8, 8);
             labelLeftSlow.Name = "labelLeftSlow";
-            labelLeftSlow.Size = new Size(66, 32);
+            labelLeftSlow.Size = new Size(51, 25);
             labelLeftSlow.TabIndex = 11;
             labelLeftSlow.Text = "SPPT";
             // 
             // trackSlow
             // 
-            trackSlow.Location = new Point(6, 48);
-            trackSlow.Margin = new Padding(4, 2, 4, 2);
+            trackSlow.Location = new Point(4, 36);
+            trackSlow.Margin = new Padding(3, 2, 3, 2);
             trackSlow.Maximum = 180;
             trackSlow.Minimum = 10;
             trackSlow.Name = "trackSlow";
-            trackSlow.Size = new Size(508, 90);
+            trackSlow.Size = new Size(381, 69);
             trackSlow.TabIndex = 10;
             trackSlow.TickFrequency = 5;
             trackSlow.TickStyle = TickStyle.TopLeft;
@@ -1054,20 +1040,18 @@ namespace GHelper
             panelTotal.Controls.Add(labelLeftTotal);
             panelTotal.Controls.Add(trackTotal);
             panelTotal.Dock = DockStyle.Top;
-            panelTotal.Location = new Point(0, 308);
-            panelTotal.Margin = new Padding(4);
-            panelTotal.MaximumSize = new Size(0, 124);
+            panelTotal.Location = new Point(0, 234);
+            panelTotal.MaximumSize = new Size(0, 93);
             panelTotal.Name = "panelTotal";
-            panelTotal.Size = new Size(520, 124);
+            panelTotal.Size = new Size(390, 93);
             panelTotal.TabIndex = 40;
             // 
             // labelTotal
             // 
-            labelTotal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelTotal.Location = new Point(396, 10);
-            labelTotal.Margin = new Padding(4, 0, 4, 0);
+            labelTotal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelTotal.Location = new Point(297, 8);
             labelTotal.Name = "labelTotal";
-            labelTotal.Size = new Size(116, 32);
+            labelTotal.Size = new Size(87, 24);
             labelTotal.TabIndex = 12;
             labelTotal.Text = "SPL";
             labelTotal.TextAlign = ContentAlignment.TopRight;
@@ -1075,21 +1059,20 @@ namespace GHelper
             // labelLeftTotal
             // 
             labelLeftTotal.AutoSize = true;
-            labelLeftTotal.Location = new Point(10, 10);
-            labelLeftTotal.Margin = new Padding(4, 0, 4, 0);
+            labelLeftTotal.Location = new Point(8, 8);
             labelLeftTotal.Name = "labelLeftTotal";
-            labelLeftTotal.Size = new Size(51, 32);
+            labelLeftTotal.Size = new Size(40, 25);
             labelLeftTotal.TabIndex = 11;
             labelLeftTotal.Text = "SPL";
             // 
             // trackTotal
             // 
-            trackTotal.Location = new Point(6, 48);
-            trackTotal.Margin = new Padding(4, 2, 4, 2);
+            trackTotal.Location = new Point(4, 36);
+            trackTotal.Margin = new Padding(3, 2, 3, 2);
             trackTotal.Maximum = 180;
             trackTotal.Minimum = 10;
             trackTotal.Name = "trackTotal";
-            trackTotal.Size = new Size(508, 90);
+            trackTotal.Size = new Size(381, 69);
             trackTotal.TabIndex = 10;
             trackTotal.TickFrequency = 5;
             trackTotal.TickStyle = TickStyle.TopLeft;
@@ -1102,10 +1085,9 @@ namespace GHelper
             panelTitleCPU.Controls.Add(pictureBoxCPU);
             panelTitleCPU.Controls.Add(labelPowerLimits);
             panelTitleCPU.Dock = DockStyle.Top;
-            panelTitleCPU.Location = new Point(0, 248);
-            panelTitleCPU.Margin = new Padding(4);
+            panelTitleCPU.Location = new Point(0, 188);
             panelTitleCPU.Name = "panelTitleCPU";
-            panelTitleCPU.Size = new Size(520, 60);
+            panelTitleCPU.Size = new Size(390, 46);
             panelTitleCPU.TabIndex = 42;
             // 
             // pictureBoxCPU
@@ -1113,21 +1095,20 @@ namespace GHelper
             pictureBoxCPU.BackgroundImage = Properties.Resources.icons8_processor_32;
             pictureBoxCPU.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBoxCPU.InitialImage = null;
-            pictureBoxCPU.Location = new Point(10, 18);
-            pictureBoxCPU.Margin = new Padding(4, 2, 4, 10);
+            pictureBoxCPU.Location = new Point(8, 14);
+            pictureBoxCPU.Margin = new Padding(3, 2, 3, 8);
             pictureBoxCPU.Name = "pictureBoxCPU";
-            pictureBoxCPU.Size = new Size(32, 32);
+            pictureBoxCPU.Size = new Size(24, 24);
             pictureBoxCPU.TabIndex = 40;
             pictureBoxCPU.TabStop = false;
             // 
             // labelPowerLimits
             // 
             labelPowerLimits.AutoSize = true;
-            labelPowerLimits.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPowerLimits.Location = new Point(46, 16);
-            labelPowerLimits.Margin = new Padding(4, 0, 4, 0);
+            labelPowerLimits.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPowerLimits.Location = new Point(34, 12);
             labelPowerLimits.Name = "labelPowerLimits";
-            labelPowerLimits.Size = new Size(160, 32);
+            labelPowerLimits.Size = new Size(119, 25);
             labelPowerLimits.TabIndex = 39;
             labelPowerLimits.Text = "Power Limits";
             // 
@@ -1135,10 +1116,9 @@ namespace GHelper
             // 
             panelBoost.Controls.Add(comboBoost);
             panelBoost.Dock = DockStyle.Top;
-            panelBoost.Location = new Point(0, 184);
-            panelBoost.Margin = new Padding(4);
+            panelBoost.Location = new Point(0, 140);
             panelBoost.Name = "panelBoost";
-            panelBoost.Size = new Size(520, 64);
+            panelBoost.Size = new Size(390, 48);
             panelBoost.TabIndex = 13;
             // 
             // panelBoostTitle
@@ -1148,10 +1128,9 @@ namespace GHelper
             panelBoostTitle.Controls.Add(pictureBoost);
             panelBoostTitle.Controls.Add(labelBoost);
             panelBoostTitle.Dock = DockStyle.Top;
-            panelBoostTitle.Location = new Point(0, 124);
-            panelBoostTitle.Margin = new Padding(4);
+            panelBoostTitle.Location = new Point(0, 94);
             panelBoostTitle.Name = "panelBoostTitle";
-            panelBoostTitle.Size = new Size(520, 60);
+            panelBoostTitle.Size = new Size(390, 46);
             panelBoostTitle.TabIndex = 48;
             // 
             // pictureBoost
@@ -1159,21 +1138,20 @@ namespace GHelper
             pictureBoost.BackgroundImage = Properties.Resources.icons8_rocket_32;
             pictureBoost.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBoost.InitialImage = null;
-            pictureBoost.Location = new Point(10, 18);
-            pictureBoost.Margin = new Padding(4, 2, 4, 10);
+            pictureBoost.Location = new Point(8, 14);
+            pictureBoost.Margin = new Padding(3, 2, 3, 8);
             pictureBoost.Name = "pictureBoost";
-            pictureBoost.Size = new Size(32, 32);
+            pictureBoost.Size = new Size(24, 24);
             pictureBoost.TabIndex = 40;
             pictureBoost.TabStop = false;
             // 
             // labelBoost
             // 
             labelBoost.AutoSize = true;
-            labelBoost.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelBoost.Location = new Point(46, 18);
-            labelBoost.Margin = new Padding(4, 0, 4, 0);
+            labelBoost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelBoost.Location = new Point(34, 14);
             labelBoost.Name = "labelBoost";
-            labelBoost.Size = new Size(133, 32);
+            labelBoost.Size = new Size(101, 25);
             labelBoost.TabIndex = 39;
             labelBoost.Text = "CPU Boost";
             // 
@@ -1181,10 +1159,9 @@ namespace GHelper
             // 
             panelPowerMode.Controls.Add(comboPowerMode);
             panelPowerMode.Dock = DockStyle.Top;
-            panelPowerMode.Location = new Point(0, 60);
-            panelPowerMode.Margin = new Padding(4);
+            panelPowerMode.Location = new Point(0, 46);
             panelPowerMode.Name = "panelPowerMode";
-            panelPowerMode.Size = new Size(520, 64);
+            panelPowerMode.Size = new Size(390, 48);
             panelPowerMode.TabIndex = 49;
             // 
             // comboPowerMode
@@ -1195,10 +1172,9 @@ namespace GHelper
             comboPowerMode.DropDownStyle = ComboBoxStyle.DropDownList;
             comboPowerMode.FormattingEnabled = true;
             comboPowerMode.Items.AddRange(new object[] { "Disabled", "Enabled", "Aggressive", "Efficient Enabled", "Efficient Aggressive", "Aggressive at Guaranteed", "Efficient at Guaranteed" });
-            comboPowerMode.Location = new Point(13, 12);
-            comboPowerMode.Margin = new Padding(4);
+            comboPowerMode.Location = new Point(10, 9);
             comboPowerMode.Name = "comboPowerMode";
-            comboPowerMode.Size = new Size(329, 40);
+            comboPowerMode.Size = new Size(248, 33);
             comboPowerMode.TabIndex = 42;
             // 
             // panelPowerModeTItle
@@ -1209,9 +1185,8 @@ namespace GHelper
             panelPowerModeTItle.Controls.Add(labelPowerModeTitle);
             panelPowerModeTItle.Dock = DockStyle.Top;
             panelPowerModeTItle.Location = new Point(0, 0);
-            panelPowerModeTItle.Margin = new Padding(4);
             panelPowerModeTItle.Name = "panelPowerModeTItle";
-            panelPowerModeTItle.Size = new Size(520, 60);
+            panelPowerModeTItle.Size = new Size(390, 46);
             panelPowerModeTItle.TabIndex = 50;
             // 
             // picturePowerMode
@@ -1219,21 +1194,20 @@ namespace GHelper
             picturePowerMode.BackgroundImage = Properties.Resources.icons8_gauge_32;
             picturePowerMode.BackgroundImageLayout = ImageLayout.Zoom;
             picturePowerMode.InitialImage = null;
-            picturePowerMode.Location = new Point(10, 18);
-            picturePowerMode.Margin = new Padding(4, 2, 4, 10);
+            picturePowerMode.Location = new Point(8, 14);
+            picturePowerMode.Margin = new Padding(3, 2, 3, 8);
             picturePowerMode.Name = "picturePowerMode";
-            picturePowerMode.Size = new Size(32, 32);
+            picturePowerMode.Size = new Size(24, 24);
             picturePowerMode.TabIndex = 40;
             picturePowerMode.TabStop = false;
             // 
             // labelPowerModeTitle
             // 
             labelPowerModeTitle.AutoSize = true;
-            labelPowerModeTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPowerModeTitle.Location = new Point(46, 18);
-            labelPowerModeTitle.Margin = new Padding(4, 0, 4, 0);
+            labelPowerModeTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPowerModeTitle.Location = new Point(34, 14);
             labelPowerModeTitle.Name = "labelPowerModeTitle";
-            labelPowerModeTitle.Size = new Size(271, 32);
+            labelPowerModeTitle.Size = new Size(201, 25);
             labelPowerModeTitle.TabIndex = 39;
             labelPowerModeTitle.Text = "Windows Power Mode";
             // 
@@ -1248,11 +1222,10 @@ namespace GHelper
             panelGPU.Controls.Add(panelGPUClockLimit);
             panelGPU.Controls.Add(panelTitleGPU);
             panelGPU.Dock = DockStyle.Top;
-            panelGPU.Location = new Point(10, 66);
-            panelGPU.Margin = new Padding(4);
+            panelGPU.Location = new Point(8, 50);
             panelGPU.Name = "panelGPU";
-            panelGPU.Padding = new Padding(0, 0, 0, 18);
-            panelGPU.Size = new Size(520, 822);
+            panelGPU.Padding = new Padding(0, 0, 0, 14);
+            panelGPU.Size = new Size(390, 618);
             panelGPU.TabIndex = 44;
             panelGPU.Visible = false;
             // 
@@ -1264,20 +1237,18 @@ namespace GHelper
             panelGPUTemp.Controls.Add(labelGPUTempTitle);
             panelGPUTemp.Controls.Add(trackGPUTemp);
             panelGPUTemp.Dock = DockStyle.Top;
-            panelGPUTemp.Location = new Point(0, 680);
-            panelGPUTemp.Margin = new Padding(4);
-            panelGPUTemp.MaximumSize = new Size(0, 124);
+            panelGPUTemp.Location = new Point(0, 511);
+            panelGPUTemp.MaximumSize = new Size(0, 93);
             panelGPUTemp.Name = "panelGPUTemp";
-            panelGPUTemp.Size = new Size(520, 124);
+            panelGPUTemp.Size = new Size(390, 93);
             panelGPUTemp.TabIndex = 47;
             // 
             // labelGPUTemp
             // 
-            labelGPUTemp.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUTemp.Location = new Point(378, 14);
-            labelGPUTemp.Margin = new Padding(4, 0, 4, 0);
+            labelGPUTemp.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUTemp.Location = new Point(284, 10);
             labelGPUTemp.Name = "labelGPUTemp";
-            labelGPUTemp.Size = new Size(124, 32);
+            labelGPUTemp.Size = new Size(93, 24);
             labelGPUTemp.TabIndex = 44;
             labelGPUTemp.Text = "87C";
             labelGPUTemp.TextAlign = ContentAlignment.TopRight;
@@ -1285,21 +1256,20 @@ namespace GHelper
             // labelGPUTempTitle
             // 
             labelGPUTempTitle.AutoSize = true;
-            labelGPUTempTitle.Location = new Point(10, 14);
-            labelGPUTempTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUTempTitle.Location = new Point(8, 10);
             labelGPUTempTitle.Name = "labelGPUTempTitle";
-            labelGPUTempTitle.Size = new Size(173, 32);
+            labelGPUTempTitle.Size = new Size(128, 25);
             labelGPUTempTitle.TabIndex = 43;
             labelGPUTempTitle.Text = "Thermal Target";
             // 
             // trackGPUTemp
             // 
-            trackGPUTemp.Location = new Point(6, 56);
-            trackGPUTemp.Margin = new Padding(4, 2, 4, 2);
+            trackGPUTemp.Location = new Point(4, 42);
+            trackGPUTemp.Margin = new Padding(3, 2, 3, 2);
             trackGPUTemp.Maximum = 87;
             trackGPUTemp.Minimum = 75;
             trackGPUTemp.Name = "trackGPUTemp";
-            trackGPUTemp.Size = new Size(496, 90);
+            trackGPUTemp.Size = new Size(372, 69);
             trackGPUTemp.TabIndex = 42;
             trackGPUTemp.TickFrequency = 5;
             trackGPUTemp.TickStyle = TickStyle.TopLeft;
@@ -1313,20 +1283,18 @@ namespace GHelper
             panelGPUBoost.Controls.Add(labelGPUBoostTitle);
             panelGPUBoost.Controls.Add(trackGPUBoost);
             panelGPUBoost.Dock = DockStyle.Top;
-            panelGPUBoost.Location = new Point(0, 556);
-            panelGPUBoost.Margin = new Padding(4);
-            panelGPUBoost.MaximumSize = new Size(0, 124);
+            panelGPUBoost.Location = new Point(0, 418);
+            panelGPUBoost.MaximumSize = new Size(0, 93);
             panelGPUBoost.Name = "panelGPUBoost";
-            panelGPUBoost.Size = new Size(520, 124);
+            panelGPUBoost.Size = new Size(390, 93);
             panelGPUBoost.TabIndex = 46;
             // 
             // labelGPUBoost
             // 
-            labelGPUBoost.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUBoost.Location = new Point(374, 14);
-            labelGPUBoost.Margin = new Padding(4, 0, 4, 0);
+            labelGPUBoost.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUBoost.Location = new Point(280, 10);
             labelGPUBoost.Name = "labelGPUBoost";
-            labelGPUBoost.Size = new Size(124, 32);
+            labelGPUBoost.Size = new Size(93, 24);
             labelGPUBoost.TabIndex = 44;
             labelGPUBoost.Text = "25W";
             labelGPUBoost.TextAlign = ContentAlignment.TopRight;
@@ -1334,21 +1302,20 @@ namespace GHelper
             // labelGPUBoostTitle
             // 
             labelGPUBoostTitle.AutoSize = true;
-            labelGPUBoostTitle.Location = new Point(10, 14);
-            labelGPUBoostTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUBoostTitle.Location = new Point(8, 10);
             labelGPUBoostTitle.Name = "labelGPUBoostTitle";
-            labelGPUBoostTitle.Size = new Size(174, 32);
+            labelGPUBoostTitle.Size = new Size(132, 25);
             labelGPUBoostTitle.TabIndex = 43;
             labelGPUBoostTitle.Text = "Dynamic Boost";
             // 
             // trackGPUBoost
             // 
-            trackGPUBoost.Location = new Point(6, 48);
-            trackGPUBoost.Margin = new Padding(4, 2, 4, 2);
+            trackGPUBoost.Location = new Point(4, 36);
+            trackGPUBoost.Margin = new Padding(3, 2, 3, 2);
             trackGPUBoost.Maximum = 25;
             trackGPUBoost.Minimum = 5;
             trackGPUBoost.Name = "trackGPUBoost";
-            trackGPUBoost.Size = new Size(496, 90);
+            trackGPUBoost.Size = new Size(372, 69);
             trackGPUBoost.TabIndex = 42;
             trackGPUBoost.TickFrequency = 5;
             trackGPUBoost.TickStyle = TickStyle.TopLeft;
@@ -1362,20 +1329,18 @@ namespace GHelper
             panelGPUPower.Controls.Add(labelGPUPowerTitle);
             panelGPUPower.Controls.Add(trackGPUPower);
             panelGPUPower.Dock = DockStyle.Top;
-            panelGPUPower.Location = new Point(0, 432);
-            panelGPUPower.Margin = new Padding(4);
-            panelGPUPower.MaximumSize = new Size(0, 124);
+            panelGPUPower.Location = new Point(0, 325);
+            panelGPUPower.MaximumSize = new Size(0, 93);
             panelGPUPower.Name = "panelGPUPower";
-            panelGPUPower.Size = new Size(520, 124);
+            panelGPUPower.Size = new Size(390, 93);
             panelGPUPower.TabIndex = 49;
             // 
             // labelGPUPower
             // 
-            labelGPUPower.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUPower.Location = new Point(374, 14);
-            labelGPUPower.Margin = new Padding(4, 0, 4, 0);
+            labelGPUPower.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUPower.Location = new Point(280, 10);
             labelGPUPower.Name = "labelGPUPower";
-            labelGPUPower.Size = new Size(124, 32);
+            labelGPUPower.Size = new Size(93, 24);
             labelGPUPower.TabIndex = 44;
             labelGPUPower.Text = "105W";
             labelGPUPower.TextAlign = ContentAlignment.TopRight;
@@ -1383,21 +1348,20 @@ namespace GHelper
             // labelGPUPowerTitle
             // 
             labelGPUPowerTitle.AutoSize = true;
-            labelGPUPowerTitle.Location = new Point(10, 14);
-            labelGPUPowerTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUPowerTitle.Location = new Point(8, 10);
             labelGPUPowerTitle.Name = "labelGPUPowerTitle";
-            labelGPUPowerTitle.Size = new Size(130, 32);
+            labelGPUPowerTitle.Size = new Size(99, 25);
             labelGPUPowerTitle.TabIndex = 43;
             labelGPUPowerTitle.Text = "GPU Power";
             // 
             // trackGPUPower
             // 
-            trackGPUPower.Location = new Point(6, 48);
-            trackGPUPower.Margin = new Padding(4, 2, 4, 2);
+            trackGPUPower.Location = new Point(4, 36);
+            trackGPUPower.Margin = new Padding(3, 2, 3, 2);
             trackGPUPower.Maximum = 25;
             trackGPUPower.Minimum = 5;
             trackGPUPower.Name = "trackGPUPower";
-            trackGPUPower.Size = new Size(496, 90);
+            trackGPUPower.Size = new Size(372, 69);
             trackGPUPower.TabIndex = 42;
             trackGPUPower.TickFrequency = 5;
             trackGPUPower.TickStyle = TickStyle.TopLeft;
@@ -1411,20 +1375,18 @@ namespace GHelper
             panelGPUMemory.Controls.Add(labelGPUMemoryTitle);
             panelGPUMemory.Controls.Add(trackGPUMemory);
             panelGPUMemory.Dock = DockStyle.Top;
-            panelGPUMemory.Location = new Point(0, 308);
-            panelGPUMemory.Margin = new Padding(4);
-            panelGPUMemory.MaximumSize = new Size(0, 124);
+            panelGPUMemory.Location = new Point(0, 232);
+            panelGPUMemory.MaximumSize = new Size(0, 93);
             panelGPUMemory.Name = "panelGPUMemory";
-            panelGPUMemory.Size = new Size(520, 124);
+            panelGPUMemory.Size = new Size(390, 93);
             panelGPUMemory.TabIndex = 45;
             // 
             // labelGPUMemory
             // 
-            labelGPUMemory.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUMemory.Location = new Point(344, 14);
-            labelGPUMemory.Margin = new Padding(4, 0, 4, 0);
+            labelGPUMemory.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUMemory.Location = new Point(258, 10);
             labelGPUMemory.Name = "labelGPUMemory";
-            labelGPUMemory.Size = new Size(160, 32);
+            labelGPUMemory.Size = new Size(120, 24);
             labelGPUMemory.TabIndex = 44;
             labelGPUMemory.Text = "2000 MHz";
             labelGPUMemory.TextAlign = ContentAlignment.TopRight;
@@ -1432,21 +1394,20 @@ namespace GHelper
             // labelGPUMemoryTitle
             // 
             labelGPUMemoryTitle.AutoSize = true;
-            labelGPUMemoryTitle.Location = new Point(10, 14);
-            labelGPUMemoryTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUMemoryTitle.Location = new Point(8, 10);
             labelGPUMemoryTitle.Name = "labelGPUMemoryTitle";
-            labelGPUMemoryTitle.Size = new Size(241, 32);
+            labelGPUMemoryTitle.Size = new Size(181, 25);
             labelGPUMemoryTitle.TabIndex = 43;
             labelGPUMemoryTitle.Text = "Memory Clock Offset";
             // 
             // trackGPUMemory
             // 
             trackGPUMemory.LargeChange = 100;
-            trackGPUMemory.Location = new Point(6, 48);
-            trackGPUMemory.Margin = new Padding(4, 2, 4, 2);
+            trackGPUMemory.Location = new Point(4, 36);
+            trackGPUMemory.Margin = new Padding(3, 2, 3, 2);
             trackGPUMemory.Maximum = 300;
             trackGPUMemory.Name = "trackGPUMemory";
-            trackGPUMemory.Size = new Size(496, 90);
+            trackGPUMemory.Size = new Size(372, 69);
             trackGPUMemory.SmallChange = 10;
             trackGPUMemory.TabIndex = 42;
             trackGPUMemory.TickFrequency = 50;
@@ -1460,20 +1421,18 @@ namespace GHelper
             panelGPUCore.Controls.Add(trackGPUCore);
             panelGPUCore.Controls.Add(labelGPUCoreTitle);
             panelGPUCore.Dock = DockStyle.Top;
-            panelGPUCore.Location = new Point(0, 184);
-            panelGPUCore.Margin = new Padding(4);
-            panelGPUCore.MaximumSize = new Size(0, 124);
+            panelGPUCore.Location = new Point(0, 139);
+            panelGPUCore.MaximumSize = new Size(0, 93);
             panelGPUCore.Name = "panelGPUCore";
-            panelGPUCore.Size = new Size(520, 124);
+            panelGPUCore.Size = new Size(390, 93);
             panelGPUCore.TabIndex = 44;
             // 
             // labelGPUCore
             // 
-            labelGPUCore.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUCore.Location = new Point(326, 16);
-            labelGPUCore.Margin = new Padding(4, 0, 4, 0);
+            labelGPUCore.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUCore.Location = new Point(244, 12);
             labelGPUCore.Name = "labelGPUCore";
-            labelGPUCore.Size = new Size(176, 32);
+            labelGPUCore.Size = new Size(132, 24);
             labelGPUCore.TabIndex = 29;
             labelGPUCore.Text = "1500 MHz";
             labelGPUCore.TextAlign = ContentAlignment.TopRight;
@@ -1481,12 +1440,12 @@ namespace GHelper
             // trackGPUCore
             // 
             trackGPUCore.LargeChange = 100;
-            trackGPUCore.Location = new Point(6, 48);
-            trackGPUCore.Margin = new Padding(4, 2, 4, 2);
+            trackGPUCore.Location = new Point(4, 36);
+            trackGPUCore.Margin = new Padding(3, 2, 3, 2);
             trackGPUCore.Maximum = 300;
             trackGPUCore.Name = "trackGPUCore";
             trackGPUCore.RightToLeft = RightToLeft.No;
-            trackGPUCore.Size = new Size(496, 90);
+            trackGPUCore.Size = new Size(372, 69);
             trackGPUCore.SmallChange = 10;
             trackGPUCore.TabIndex = 18;
             trackGPUCore.TickFrequency = 50;
@@ -1495,10 +1454,9 @@ namespace GHelper
             // labelGPUCoreTitle
             // 
             labelGPUCoreTitle.AutoSize = true;
-            labelGPUCoreTitle.Location = new Point(10, 16);
-            labelGPUCoreTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUCoreTitle.Location = new Point(8, 12);
             labelGPUCoreTitle.Name = "labelGPUCoreTitle";
-            labelGPUCoreTitle.Size = new Size(201, 32);
+            labelGPUCoreTitle.Size = new Size(151, 25);
             labelGPUCoreTitle.TabIndex = 17;
             labelGPUCoreTitle.Text = "Core Clock Offset";
             // 
@@ -1510,20 +1468,18 @@ namespace GHelper
             panelGPUClockLimit.Controls.Add(trackGPUClockLimit);
             panelGPUClockLimit.Controls.Add(labelGPUClockLimitTitle);
             panelGPUClockLimit.Dock = DockStyle.Top;
-            panelGPUClockLimit.Location = new Point(0, 60);
-            panelGPUClockLimit.Margin = new Padding(4);
-            panelGPUClockLimit.MaximumSize = new Size(0, 124);
+            panelGPUClockLimit.Location = new Point(0, 46);
+            panelGPUClockLimit.MaximumSize = new Size(0, 93);
             panelGPUClockLimit.Name = "panelGPUClockLimit";
-            panelGPUClockLimit.Size = new Size(520, 124);
+            panelGPUClockLimit.Size = new Size(390, 93);
             panelGPUClockLimit.TabIndex = 48;
             // 
             // labelGPUClockLimit
             // 
-            labelGPUClockLimit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPUClockLimit.Location = new Point(326, 16);
-            labelGPUClockLimit.Margin = new Padding(4, 0, 4, 0);
+            labelGPUClockLimit.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPUClockLimit.Location = new Point(244, 12);
             labelGPUClockLimit.Name = "labelGPUClockLimit";
-            labelGPUClockLimit.Size = new Size(176, 32);
+            labelGPUClockLimit.Size = new Size(132, 24);
             labelGPUClockLimit.TabIndex = 29;
             labelGPUClockLimit.Text = "1500 MHz";
             labelGPUClockLimit.TextAlign = ContentAlignment.TopRight;
@@ -1531,12 +1487,12 @@ namespace GHelper
             // trackGPUClockLimit
             // 
             trackGPUClockLimit.LargeChange = 100;
-            trackGPUClockLimit.Location = new Point(6, 48);
-            trackGPUClockLimit.Margin = new Padding(4, 2, 4, 2);
+            trackGPUClockLimit.Location = new Point(4, 36);
+            trackGPUClockLimit.Margin = new Padding(3, 2, 3, 2);
             trackGPUClockLimit.Maximum = 3000;
             trackGPUClockLimit.Name = "trackGPUClockLimit";
             trackGPUClockLimit.RightToLeft = RightToLeft.No;
-            trackGPUClockLimit.Size = new Size(496, 90);
+            trackGPUClockLimit.Size = new Size(372, 69);
             trackGPUClockLimit.SmallChange = 10;
             trackGPUClockLimit.TabIndex = 18;
             trackGPUClockLimit.TickFrequency = 50;
@@ -1545,10 +1501,9 @@ namespace GHelper
             // labelGPUClockLimitTitle
             // 
             labelGPUClockLimitTitle.AutoSize = true;
-            labelGPUClockLimitTitle.Location = new Point(10, 16);
-            labelGPUClockLimitTitle.Margin = new Padding(4, 0, 4, 0);
+            labelGPUClockLimitTitle.Location = new Point(8, 12);
             labelGPUClockLimitTitle.Name = "labelGPUClockLimitTitle";
-            labelGPUClockLimitTitle.Size = new Size(188, 32);
+            labelGPUClockLimitTitle.Size = new Size(140, 25);
             labelGPUClockLimitTitle.TabIndex = 17;
             labelGPUClockLimitTitle.Text = "Core Clock Limit";
             // 
@@ -1560,9 +1515,8 @@ namespace GHelper
             panelTitleGPU.Controls.Add(labelGPU);
             panelTitleGPU.Dock = DockStyle.Top;
             panelTitleGPU.Location = new Point(0, 0);
-            panelTitleGPU.Margin = new Padding(4);
             panelTitleGPU.Name = "panelTitleGPU";
-            panelTitleGPU.Size = new Size(520, 60);
+            panelTitleGPU.Size = new Size(390, 46);
             panelTitleGPU.TabIndex = 43;
             // 
             // pictureGPU
@@ -1571,21 +1525,20 @@ namespace GHelper
             pictureGPU.BackgroundImageLayout = ImageLayout.Zoom;
             pictureGPU.ErrorImage = null;
             pictureGPU.InitialImage = null;
-            pictureGPU.Location = new Point(10, 18);
-            pictureGPU.Margin = new Padding(4, 2, 4, 10);
+            pictureGPU.Location = new Point(8, 14);
+            pictureGPU.Margin = new Padding(3, 2, 3, 8);
             pictureGPU.Name = "pictureGPU";
-            pictureGPU.Size = new Size(32, 32);
+            pictureGPU.Size = new Size(24, 24);
             pictureGPU.TabIndex = 41;
             pictureGPU.TabStop = false;
             // 
             // labelGPU
             // 
             labelGPU.AutoSize = true;
-            labelGPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGPU.Location = new Point(45, 17);
-            labelGPU.Margin = new Padding(4, 0, 4, 0);
+            labelGPU.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelGPU.Location = new Point(34, 13);
             labelGPU.Name = "labelGPU";
-            labelGPU.Size = new Size(162, 32);
+            labelGPU.Size = new Size(123, 25);
             labelGPU.TabIndex = 40;
             labelGPU.Text = "GPU Settings";
             // 
@@ -1595,10 +1548,9 @@ namespace GHelper
             panelNav.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panelNav.Controls.Add(tableNav);
             panelNav.Dock = DockStyle.Top;
-            panelNav.Location = new Point(10, 0);
-            panelNav.Margin = new Padding(4);
+            panelNav.Location = new Point(8, 0);
             panelNav.Name = "panelNav";
-            panelNav.Size = new Size(520, 66);
+            panelNav.Size = new Size(390, 50);
             panelNav.TabIndex = 45;
             // 
             // tableNav
@@ -1612,27 +1564,29 @@ namespace GHelper
             tableNav.Controls.Add(buttonCPU, 0, 0);
             tableNav.Dock = DockStyle.Top;
             tableNav.Location = new Point(0, 0);
-            tableNav.MinimumSize = new Size(0, 62);
+            tableNav.Margin = new Padding(2, 2, 2, 2);
+            tableNav.MinimumSize = new Size(0, 46);
             tableNav.Name = "tableNav";
-            tableNav.Padding = new Padding(0, 3, 0, 1);
+            tableNav.Padding = new Padding(0, 2, 0, 1);
             tableNav.RowCount = 1;
             tableNav.RowStyles.Add(new RowStyle());
-            tableNav.Size = new Size(520, 66);
+            tableNav.Size = new Size(390, 50);
             tableNav.TabIndex = 42;
             // 
             // buttonAdvanced
             // 
             buttonAdvanced.Activated = false;
             buttonAdvanced.BackColor = SystemColors.ControlLight;
+            buttonAdvanced.Badge = false;
             buttonAdvanced.BorderColor = Color.Transparent;
             buttonAdvanced.BorderRadius = 2;
             buttonAdvanced.Dock = DockStyle.Fill;
             buttonAdvanced.FlatStyle = FlatStyle.Flat;
-            buttonAdvanced.Location = new Point(350, 5);
-            buttonAdvanced.Margin = new Padding(4, 2, 4, 2);
+            buttonAdvanced.Location = new Point(261, 4);
+            buttonAdvanced.Margin = new Padding(3, 2, 3, 2);
             buttonAdvanced.Name = "buttonAdvanced";
             buttonAdvanced.Secondary = true;
-            buttonAdvanced.Size = new Size(166, 58);
+            buttonAdvanced.Size = new Size(126, 44);
             buttonAdvanced.TabIndex = 51;
             buttonAdvanced.Text = "Advanced";
             buttonAdvanced.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1642,15 +1596,16 @@ namespace GHelper
             // 
             buttonGPU.Activated = false;
             buttonGPU.BackColor = SystemColors.ControlLight;
+            buttonGPU.Badge = false;
             buttonGPU.BorderColor = Color.Transparent;
             buttonGPU.BorderRadius = 2;
             buttonGPU.Dock = DockStyle.Fill;
             buttonGPU.FlatStyle = FlatStyle.Flat;
-            buttonGPU.Location = new Point(177, 5);
-            buttonGPU.Margin = new Padding(4, 2, 4, 2);
+            buttonGPU.Location = new Point(132, 4);
+            buttonGPU.Margin = new Padding(3, 2, 3, 2);
             buttonGPU.Name = "buttonGPU";
             buttonGPU.Secondary = true;
-            buttonGPU.Size = new Size(165, 58);
+            buttonGPU.Size = new Size(123, 44);
             buttonGPU.TabIndex = 52;
             buttonGPU.Text = "GPU";
             buttonGPU.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1660,15 +1615,16 @@ namespace GHelper
             // 
             buttonCPU.Activated = false;
             buttonCPU.BackColor = SystemColors.ControlLight;
+            buttonCPU.Badge = false;
             buttonCPU.BorderColor = Color.Transparent;
             buttonCPU.BorderRadius = 2;
             buttonCPU.Dock = DockStyle.Fill;
             buttonCPU.FlatStyle = FlatStyle.Flat;
-            buttonCPU.Location = new Point(4, 5);
-            buttonCPU.Margin = new Padding(4, 2, 4, 2);
+            buttonCPU.Location = new Point(3, 4);
+            buttonCPU.Margin = new Padding(3, 2, 3, 2);
             buttonCPU.Name = "buttonCPU";
             buttonCPU.Secondary = true;
-            buttonCPU.Size = new Size(165, 58);
+            buttonCPU.Size = new Size(123, 44);
             buttonCPU.TabIndex = 50;
             buttonCPU.Text = "CPU";
             buttonCPU.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -1676,16 +1632,16 @@ namespace GHelper
             // 
             // Fans
             // 
-            AutoScaleDimensions = new SizeF(192F, 192F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1350, 2119);
+            ClientSize = new Size(1012, 1590);
             Controls.Add(panelFans);
             Controls.Add(panelSliders);
-            Margin = new Padding(4, 2, 4, 2);
+            Margin = new Padding(3, 2, 3, 2);
             MinimizeBox = false;
-            MinimumSize = new Size(26, 1100);
+            MinimumSize = new Size(25, 839);
             Name = "Fans";
             ShowIcon = false;
             ShowInTaskbar = false;

@@ -12,6 +12,7 @@ namespace GHelper
 {
     public partial class Fans : RForm
     {
+        #region Properties
 
         int curIndex = -1;
         DataPoint? curPoint = null;
@@ -34,16 +35,16 @@ namespace GHelper
         static int gpuPowerBase = 0;
         static bool isGPUPower => gpuPowerBase > 0;
 
+        #endregion
+
         public Fans()
         {
-
-            InitializeComponent();
-
             fanSensorControl = new FanSensorControl(this);
 
-            //float dpi = ControlHelper.GetDpiScale(this).Value;
-            //comboModes.Size = new Size(comboModes.Width, (int)dpi * 18);
-            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
+            InitializeComponent();//
+            InitTheme(true);//
+
+            #region Strings
 
             Text = Properties.Strings.FansAndPower;
             labelPowerLimits.Text = Properties.Strings.PowerLimits;
@@ -68,7 +69,13 @@ namespace GHelper
 
             buttonCalibrate.Text = Properties.Strings.Calibrate;
 
-            InitTheme(true);
+            #endregion
+
+            FormClosed += Fans_FormClosed;
+
+            //float dpi = ControlHelper.GetDpiScale(this).Value;
+            //comboModes.Size = new Size(comboModes.Width, (int)dpi * 18);
+            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
 
             labelTip.Visible = false;
             labelTip.BackColor = Color.Transparent;
@@ -231,11 +238,9 @@ namespace GHelper
             ToggleNavigation(0);
 
             if (Program.acpi.DeviceGet(AsusACPI.DevsCPUFanCurve) < 0) buttonCalibrate.Visible = false;
-
-            FormClosed += Fans_FormClosed;
-
         }
 
+        #region Click Events
 
         private void ButtonDownload_Click(object? sender, EventArgs e)
         {
@@ -277,17 +282,387 @@ namespace GHelper
 
         }
 
+        private void CheckApplyUV_Click(object? sender, EventArgs e)
+        {
+            AppConfig.SetMode("auto_uv", checkApplyUV.Checked ? 1 : 0);
+            modeControl.AutoRyzen();
+        }
+
+        private void ButtonAdvanced_Click(object? sender, EventArgs e)
+        {
+            ToggleNavigation(2);
+        }
+
+        private void ButtonGPU_Click(object? sender, EventArgs e)
+        {
+            ToggleNavigation(1);
+        }
+
+        private void ButtonCPU_Click(object? sender, EventArgs e)
+        {
+            ToggleNavigation(0);
+        }
+
+        private void ButtonApplyAdvanced_Click(object? sender, EventArgs e)
+        {
+            modeControl.SetRyzen(true);
+            checkApplyUV.Enabled = true;
+        }
+
+        private void ButtonRename_Click(object? sender, EventArgs e)
+        {
+            RenameToggle();
+        }
+
+        private void ButtonRemove_Click(object? sender, EventArgs e)
+        {
+            int mode = Modes.GetCurrent();
+            if (!Modes.IsCurrentCustom()) return;
+
+            Modes.Remove(mode);
+            FillModes();
+
+            modeControl.SetPerformanceMode(AsusACPI.PerformanceBalanced);
+
+        }
+
+        private void ButtonAdd_Click(object? sender, EventArgs e)
+        {
+            int mode = Modes.Add();
+            FillModes();
+            modeControl.SetPerformanceMode(mode);
+        }
+
+        private void CheckApplyPower_Click(object? sender, EventArgs e)
+        {
+            if (sender is null) return;
+            CheckBox chk = (CheckBox)sender;
+
+            AppConfig.SetMode("auto_apply_power", chk.Checked ? 1 : 0);
+            modeControl.SetPerformanceMode();
+
+        }
+
+        private void CheckApplyFans_Click(object? sender, EventArgs e)
+        {
+            if (sender is null) return;
+            CheckBox chk = (CheckBox)sender;
+
+            AppConfig.SetMode("auto_apply", chk.Checked ? 1 : 0);
+            modeControl.SetPerformanceMode();
+
+        }
+
+        private void ButtonReset_Click(object? sender, EventArgs e)
+        {
+
+            LoadProfile(seriesCPU, AsusFan.CPU, true);
+            LoadProfile(seriesGPU, AsusFan.GPU, true);
+
+            if (AppConfig.Is("mid_fan"))
+                LoadProfile(seriesMid, AsusFan.Mid, true);
+
+            if (AppConfig.Is("xgm_fan"))
+                LoadProfile(seriesXGM, AsusFan.XGM, true);
+
+            checkApplyFans.Checked = false;
+            checkApplyPower.Checked = false;
+
+            AppConfig.SetMode("auto_apply", 0);
+            AppConfig.SetMode("auto_apply_power", 0);
+
+            trackUV.Value = RyzenControl.MaxCPUUV;
+            trackUViGPU.Value = RyzenControl.MaxIGPUUV;
+            trackTemp.Value = RyzenControl.MaxTemp;
+
+            AdvancedScroll();
+            AppConfig.RemoveMode("cpu_temp");
+
+            modeControl.ResetPerformanceMode();
+
+            InitPowerPlan();
+
+            if (Program.acpi.IsXGConnected()) XGM.Reset();
+
+
+            if (gpuVisible)
+            {
+                trackGPUClockLimit.Value = NvidiaGpuControl.MaxClockLimit;
+                trackGPUCore.Value = 0;
+                trackGPUMemory.Value = 0;
+
+                trackGPUBoost.Value = AsusACPI.MaxGPUBoost;
+                trackGPUTemp.Value = AsusACPI.MaxGPUTemp;
+
+                //AppConfig.SetMode("gpu_boost", trackGPUBoost.Value);
+                //AppConfig.SetMode("gpu_temp", trackGPUTemp.Value);
+
+                AppConfig.RemoveMode("gpu_boost");
+                AppConfig.RemoveMode("gpu_temp");
+
+                AppConfig.RemoveMode("gpu_power");
+                AppConfig.RemoveMode("gpu_clock_limit");
+                AppConfig.RemoveMode("gpu_core");
+                AppConfig.RemoveMode("gpu_memory");
+
+                InitGPUPower();
+
+                VisualiseGPUSettings();
+                modeControl.SetGPUClocks(true, true);
+                modeControl.SetGPUPower();
+            }
+
+        }
+
+        #endregion
+
+        #region Other Events
+
         private void Fans_FormClosed(object? sender, FormClosedEventArgs e)
         {
             //Because windows charts seem to eat a lot of memory :(
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
         }
 
-        private void CheckApplyUV_Click(object? sender, EventArgs e)
+        private void TrackUV_Scroll(object? sender, EventArgs e)
         {
-            AppConfig.SetMode("auto_uv", checkApplyUV.Checked ? 1 : 0);
-            modeControl.AutoRyzen();
+            AdvancedScroll();
         }
+
+        private void ComboModes_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13) RenameToggle();
+        }
+
+        private void ComboModes_TextChanged(object? sender, EventArgs e)
+        {
+            if (comboModes.DropDownStyle == ComboBoxStyle.DropDownList) return;
+            if (!Modes.IsCurrentCustom()) return;
+            AppConfig.SetMode("mode_name", comboModes.Text);
+        }
+
+        private void ComboModes_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            var selectedMode = comboModes.SelectedValue;
+
+            if (selectedMode == null) return;
+            if ((int)selectedMode == Modes.GetCurrent()) return;
+
+            Debug.WriteLine(selectedMode);
+
+            modeControl.SetPerformanceMode((int)selectedMode);
+        }
+
+        private void TrackGPU_MouseUp(object? sender, MouseEventArgs e)
+        {
+            modeControl.SetGPUPower();
+        }
+
+        private void TrackGPUClocks_MouseUp(object? sender, MouseEventArgs e)
+        {
+            modeControl.SetGPUClocks(true);
+        }
+
+        private void trackGPUClockLimit_Scroll(object? sender, EventArgs e)
+        {
+
+            int maxClock = (int)Math.Round((float)trackGPUClockLimit.Value / 5) * 5;
+
+            trackGPUClockLimit.Value = maxClock;
+            AppConfig.SetMode("gpu_clock_limit", maxClock);
+            VisualiseGPUSettings();
+        }
+
+        private void trackGPU_Scroll(object? sender, EventArgs e)
+        {
+            if (sender is null) return;
+            TrackBar track = (TrackBar)sender;
+            track.Value = (int)Math.Round((float)track.Value / 5) * 5;
+
+            AppConfig.SetMode("gpu_core", trackGPUCore.Value);
+            AppConfig.SetMode("gpu_memory", trackGPUMemory.Value);
+
+
+            VisualiseGPUSettings();
+
+        }
+
+        private void trackGPUPower_Scroll(object? sender, EventArgs e)
+        {
+            AppConfig.SetMode("gpu_boost", trackGPUBoost.Value);
+            AppConfig.SetMode("gpu_temp", trackGPUTemp.Value);
+
+            if (isGPUPower) AppConfig.SetMode("gpu_power", trackGPUPower.Value);
+
+            VisualiseGPUSettings();
+        }
+
+        private void Fans_Shown(object? sender, EventArgs e)
+        {
+            FormPosition();
+        }
+
+
+        private void TrackPower_MouseUp(object? sender, MouseEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                modeControl.AutoPower(true);
+            });
+        }
+
+
+        private void TrackPower_KeyUp(object? sender, KeyEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                modeControl.AutoPower(true);
+            });
+        }
+
+        private void ComboPowerMode_Changed(object? sender, EventArgs e)
+        {
+            string powerMode = (string)comboPowerMode.SelectedValue;
+            PowerNative.SetPowerMode(powerMode);
+
+            if (PowerNative.GetDefaultPowerMode(Modes.GetCurrentBase()) != powerMode)
+                AppConfig.SetMode("powermode", powerMode);
+            else
+                AppConfig.RemoveMode("powermode");
+        }
+
+        private void ComboBoost_Changed(object? sender, EventArgs e)
+        {
+            if (AppConfig.GetMode("auto_boost") != comboBoost.SelectedIndex)
+            {
+                PowerNative.SetCPUBoost(comboBoost.SelectedIndex);
+            }
+            AppConfig.SetMode("auto_boost", comboBoost.SelectedIndex);
+        }
+
+        private void TrackTotal_Scroll(object? sender, EventArgs e)
+        {
+            if (trackTotal.Value > trackSlow.Value) trackSlow.Value = trackTotal.Value;
+            if (trackTotal.Value > trackFast.Value) trackFast.Value = trackTotal.Value;
+            if (trackTotal.Value < trackCPU.Value) trackCPU.Value = trackTotal.Value;
+            SavePower();
+        }
+
+        private void TrackSlow_Scroll(object? sender, EventArgs e)
+        {
+            if (trackSlow.Value < trackTotal.Value) trackTotal.Value = trackSlow.Value;
+            if (trackSlow.Value > trackFast.Value) trackFast.Value = trackSlow.Value;
+            SavePower();
+        }
+
+        private void TrackFast_Scroll(object? sender, EventArgs e)
+        {
+            if (trackFast.Value < trackSlow.Value) trackSlow.Value = trackFast.Value;
+            if (trackFast.Value < trackTotal.Value) trackTotal.Value = trackFast.Value;
+            SavePower();
+        }
+
+        private void TrackCPU_Scroll(object? sender, EventArgs e)
+        {
+            if (trackCPU.Value > trackTotal.Value) trackTotal.Value = trackCPU.Value;
+            SavePower();
+        }
+
+        private void ChartCPU_MouseUp(object? sender, MouseEventArgs e)
+        {
+            Chart_Save();
+        }
+
+
+        private void ChartCPU_MouseLeave(object? sender, EventArgs e)
+        {
+            curPoint = null;
+            curIndex = -1;
+            labelTip.Visible = false;
+        }
+
+        private void ChartCPU_MouseMove(object? sender, MouseEventArgs e, AsusFan device)
+        {
+
+            if (sender is null) return;
+            Chart chart = (Chart)sender;
+
+            ChartArea ca = chart.ChartAreas[0];
+            Axis ax = ca.AxisX;
+            Axis ay = ca.AxisY;
+
+            bool tip = false;
+
+            HitTestResult hit = chart.HitTest(e.X, e.Y);
+            Series series = chart.Series[0];
+
+            if (hit.Series is not null && hit.PointIndex >= 0)
+            {
+                curIndex = hit.PointIndex;
+                curPoint = hit.Series.Points[curIndex];
+                tip = true;
+            }
+
+
+            if (curPoint != null)
+            {
+
+                double dx, dy, dymin;
+
+                try
+                {
+                    dx = ax.PixelPositionToValue(e.X);
+                    dy = ay.PixelPositionToValue(e.Y);
+
+                    if (dx < 20) dx = 20;
+                    if (dx > 100) dx = 100;
+
+                    if (dy < 0) dy = 0;
+                    if (dy > fansMax) dy = fansMax;
+
+                    dymin = (dx - 70) * 1.2;
+
+                    if (dy < dymin) dy = dymin;
+
+                    if (e.Button.HasFlag(MouseButtons.Left))
+                    {
+                        double deltaY = dy - curPoint.YValues[0];
+                        double deltaX = dx - curPoint.XValue;
+
+                        curPoint.XValue = dx;
+
+                        if (Control.ModifierKeys == Keys.Shift)
+                            AdjustAll(0, deltaY, series);
+                        else
+                        {
+                            curPoint.YValues[0] = dy;
+                            AdjustAllLevels(curIndex, dx, dy, series);
+                        }
+
+                        tip = true;
+                    }
+
+                    labelTip.Text = Math.Floor(curPoint.XValue) + "C, " + ChartYLabel((int)curPoint.YValues[0], device, " " + Properties.Strings.RPM);
+                    labelTip.Top = e.Y + ((Control)sender).Top;
+                    labelTip.Left = Math.Min(chart.Width - labelTip.Width - 20, e.X - 50);
+
+                }
+                catch
+                {
+                    Debug.WriteLine(e.Y);
+                    tip = false;
+                }
+
+            }
+
+            labelTip.Visible = tip;
+
+
+        }
+
+        #endregion
+
+        #region Others
 
         public void InitAll()
         {
@@ -347,27 +722,6 @@ namespace GHelper
 
             ResumeLayout(false);
             PerformLayout();
-        }
-
-        private void ButtonAdvanced_Click(object? sender, EventArgs e)
-        {
-            ToggleNavigation(2);
-        }
-
-        private void ButtonGPU_Click(object? sender, EventArgs e)
-        {
-            ToggleNavigation(1);
-        }
-
-        private void ButtonCPU_Click(object? sender, EventArgs e)
-        {
-            ToggleNavigation(0);
-        }
-
-        private void ButtonApplyAdvanced_Click(object? sender, EventArgs e)
-        {
-            modeControl.SetRyzen(true);
-            checkApplyUV.Enabled = true;
         }
 
         public void InitUV()
@@ -444,24 +798,6 @@ namespace GHelper
             AppConfig.SetMode("igpu_uv", trackUViGPU.Value);
         }
 
-
-        private void TrackUV_Scroll(object? sender, EventArgs e)
-        {
-            AdvancedScroll();
-        }
-
-        private void ComboModes_KeyPress(object? sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13) RenameToggle();
-        }
-
-        private void ComboModes_TextChanged(object? sender, EventArgs e)
-        {
-            if (comboModes.DropDownStyle == ComboBoxStyle.DropDownList) return;
-            if (!Modes.IsCurrentCustom()) return;
-            AppConfig.SetMode("mode_name", comboModes.Text);
-        }
-
         private void RenameToggle()
         {
             if (comboModes.DropDownStyle == ComboBoxStyle.DropDownList)
@@ -474,23 +810,6 @@ namespace GHelper
             }
         }
 
-        private void ButtonRename_Click(object? sender, EventArgs e)
-        {
-            RenameToggle();
-        }
-
-        private void ButtonRemove_Click(object? sender, EventArgs e)
-        {
-            int mode = Modes.GetCurrent();
-            if (!Modes.IsCurrentCustom()) return;
-
-            Modes.Remove(mode);
-            FillModes();
-
-            modeControl.SetPerformanceMode(AsusACPI.PerformanceBalanced);
-
-        }
-
         private void FillModes()
         {
             comboModes.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -499,40 +818,11 @@ namespace GHelper
             comboModes.ValueMember = "Key";
         }
 
-        private void ButtonAdd_Click(object? sender, EventArgs e)
-        {
-            int mode = Modes.Add();
-            FillModes();
-            modeControl.SetPerformanceMode(mode);
-        }
-
         public void InitMode()
         {
             int mode = Modes.GetCurrent();
             comboModes.SelectedValue = mode;
             buttonRename.Visible = buttonRemove.Visible = Modes.IsCurrentCustom();
-        }
-
-        private void ComboModes_SelectedValueChanged(object? sender, EventArgs e)
-        {
-            var selectedMode = comboModes.SelectedValue;
-
-            if (selectedMode == null) return;
-            if ((int)selectedMode == Modes.GetCurrent()) return;
-
-            Debug.WriteLine(selectedMode);
-
-            modeControl.SetPerformanceMode((int)selectedMode);
-        }
-
-        private void TrackGPU_MouseUp(object? sender, MouseEventArgs e)
-        {
-            modeControl.SetGPUPower();
-        }
-
-        private void TrackGPUClocks_MouseUp(object? sender, MouseEventArgs e)
-        {
-            modeControl.SetGPUClocks(true);
         }
 
         private void InitGPUPower()
@@ -672,40 +962,6 @@ namespace GHelper
 
         }
 
-        private void trackGPUClockLimit_Scroll(object? sender, EventArgs e)
-        {
-
-            int maxClock = (int)Math.Round((float)trackGPUClockLimit.Value / 5) * 5;
-
-            trackGPUClockLimit.Value = maxClock;
-            AppConfig.SetMode("gpu_clock_limit", maxClock);
-            VisualiseGPUSettings();
-        }
-
-        private void trackGPU_Scroll(object? sender, EventArgs e)
-        {
-            if (sender is null) return;
-            TrackBar track = (TrackBar)sender;
-            track.Value = (int)Math.Round((float)track.Value / 5) * 5;
-
-            AppConfig.SetMode("gpu_core", trackGPUCore.Value);
-            AppConfig.SetMode("gpu_memory", trackGPUMemory.Value);
-
-
-            VisualiseGPUSettings();
-
-        }
-
-        private void trackGPUPower_Scroll(object? sender, EventArgs e)
-        {
-            AppConfig.SetMode("gpu_boost", trackGPUBoost.Value);
-            AppConfig.SetMode("gpu_temp", trackGPUTemp.Value);
-
-            if (isGPUPower) AppConfig.SetMode("gpu_power", trackGPUPower.Value);
-
-            VisualiseGPUSettings();
-        }
-
         static string ChartYLabel(int percentage, AsusFan device, string unit = "")
         {
             if (percentage == 0) return "OFF";
@@ -794,29 +1050,6 @@ namespace GHelper
             Left = Program.settingsForm.Left - Width - 5;
         }
 
-        private void Fans_Shown(object? sender, EventArgs e)
-        {
-            FormPosition();
-        }
-
-
-        private void TrackPower_MouseUp(object? sender, MouseEventArgs e)
-        {
-            Task.Run(() =>
-            {
-                modeControl.AutoPower(true);
-            });
-        }
-
-
-        private void TrackPower_KeyUp(object? sender, KeyEventArgs e)
-        {
-            Task.Run(() =>
-            {
-                modeControl.AutoPower(true);
-            });
-        }
-
         public void InitPowerPlan()
         {
             int boost = PowerNative.GetCPUBoost();
@@ -832,46 +1065,6 @@ namespace GHelper
                 comboPowerMode.SelectedIndex = 0;
             else
                 comboPowerMode.SelectedValue = powerMode;
-
-        }
-
-        private void ComboPowerMode_Changed(object? sender, EventArgs e)
-        {
-            string powerMode = (string)comboPowerMode.SelectedValue;
-            PowerNative.SetPowerMode(powerMode);
-
-            if (PowerNative.GetDefaultPowerMode(Modes.GetCurrentBase()) != powerMode)
-                AppConfig.SetMode("powermode", powerMode);
-            else
-                AppConfig.RemoveMode("powermode");
-        }
-
-        private void ComboBoost_Changed(object? sender, EventArgs e)
-        {
-            if (AppConfig.GetMode("auto_boost") != comboBoost.SelectedIndex)
-            {
-                PowerNative.SetCPUBoost(comboBoost.SelectedIndex);
-            }
-            AppConfig.SetMode("auto_boost", comboBoost.SelectedIndex);
-        }
-
-        private void CheckApplyPower_Click(object? sender, EventArgs e)
-        {
-            if (sender is null) return;
-            CheckBox chk = (CheckBox)sender;
-
-            AppConfig.SetMode("auto_apply_power", chk.Checked ? 1 : 0);
-            modeControl.SetPerformanceMode();
-
-        }
-
-        private void CheckApplyFans_Click(object? sender, EventArgs e)
-        {
-            if (sender is null) return;
-            CheckBox chk = (CheckBox)sender;
-
-            AppConfig.SetMode("auto_apply", chk.Checked ? 1 : 0);
-            modeControl.SetPerformanceMode();
 
         }
 
@@ -900,7 +1093,6 @@ namespace GHelper
                 labelFansResult.Visible = (text.Length > 0);
             });
         }
-
 
         public void InitPower()
         {
@@ -985,34 +1177,6 @@ namespace GHelper
             AppConfig.SetMode("limit_fast", trackFast.Value);
         }
 
-        private void TrackTotal_Scroll(object? sender, EventArgs e)
-        {
-            if (trackTotal.Value > trackSlow.Value) trackSlow.Value = trackTotal.Value;
-            if (trackTotal.Value > trackFast.Value) trackFast.Value = trackTotal.Value;
-            if (trackTotal.Value < trackCPU.Value) trackCPU.Value = trackTotal.Value;
-            SavePower();
-        }
-
-        private void TrackSlow_Scroll(object? sender, EventArgs e)
-        {
-            if (trackSlow.Value < trackTotal.Value) trackTotal.Value = trackSlow.Value;
-            if (trackSlow.Value > trackFast.Value) trackFast.Value = trackSlow.Value;
-            SavePower();
-        }
-
-        private void TrackFast_Scroll(object? sender, EventArgs e)
-        {
-            if (trackFast.Value < trackSlow.Value) trackSlow.Value = trackFast.Value;
-            if (trackFast.Value < trackTotal.Value) trackTotal.Value = trackFast.Value;
-            SavePower();
-        }
-
-        private void TrackCPU_Scroll(object? sender, EventArgs e)
-        {
-            if (trackCPU.Value > trackTotal.Value) trackTotal.Value = trackCPU.Value;
-            SavePower();
-        }
-
         public void InitFans()
         {
 
@@ -1067,7 +1231,6 @@ namespace GHelper
 
         }
 
-
         void LoadProfile(Series series, AsusFan device, bool reset = false)
         {
 
@@ -1120,67 +1283,6 @@ namespace GHelper
 
         }
 
-        private void ButtonReset_Click(object? sender, EventArgs e)
-        {
-
-            LoadProfile(seriesCPU, AsusFan.CPU, true);
-            LoadProfile(seriesGPU, AsusFan.GPU, true);
-
-            if (AppConfig.Is("mid_fan"))
-                LoadProfile(seriesMid, AsusFan.Mid, true);
-
-            if (AppConfig.Is("xgm_fan"))
-                LoadProfile(seriesXGM, AsusFan.XGM, true);
-
-            checkApplyFans.Checked = false;
-            checkApplyPower.Checked = false;
-
-            AppConfig.SetMode("auto_apply", 0);
-            AppConfig.SetMode("auto_apply_power", 0);
-
-            trackUV.Value = RyzenControl.MaxCPUUV;
-            trackUViGPU.Value = RyzenControl.MaxIGPUUV;
-            trackTemp.Value = RyzenControl.MaxTemp;
-
-            AdvancedScroll();
-            AppConfig.RemoveMode("cpu_temp");
-
-            modeControl.ResetPerformanceMode();
-
-            InitPowerPlan();
-
-            if (Program.acpi.IsXGConnected()) XGM.Reset();
-
-
-            if (gpuVisible)
-            {
-                trackGPUClockLimit.Value = NvidiaGpuControl.MaxClockLimit;
-                trackGPUCore.Value = 0;
-                trackGPUMemory.Value = 0;
-                
-                trackGPUBoost.Value = AsusACPI.MaxGPUBoost;
-                trackGPUTemp.Value = AsusACPI.MaxGPUTemp;
-
-                //AppConfig.SetMode("gpu_boost", trackGPUBoost.Value);
-                //AppConfig.SetMode("gpu_temp", trackGPUTemp.Value);
-                
-                AppConfig.RemoveMode("gpu_boost");
-                AppConfig.RemoveMode("gpu_temp");
-
-                AppConfig.RemoveMode("gpu_power");
-                AppConfig.RemoveMode("gpu_clock_limit");
-                AppConfig.RemoveMode("gpu_core");
-                AppConfig.RemoveMode("gpu_memory");
-
-                InitGPUPower();
-
-                VisualiseGPUSettings();
-                modeControl.SetGPUClocks(true, true);
-                modeControl.SetGPUPower();
-            }
-
-        }
-
         private void Chart_Save()
         {
             curPoint = null;
@@ -1197,98 +1299,6 @@ namespace GHelper
                 SaveProfile(seriesXGM, AsusFan.XGM);
 
             modeControl.AutoFans();
-        }
-
-        private void ChartCPU_MouseUp(object? sender, MouseEventArgs e)
-        {
-            Chart_Save();
-        }
-
-
-        private void ChartCPU_MouseLeave(object? sender, EventArgs e)
-        {
-            curPoint = null;
-            curIndex = -1;
-            labelTip.Visible = false;
-        }
-
-        private void ChartCPU_MouseMove(object? sender, MouseEventArgs e, AsusFan device)
-        {
-
-            if (sender is null) return;
-            Chart chart = (Chart)sender;
-
-            ChartArea ca = chart.ChartAreas[0];
-            Axis ax = ca.AxisX;
-            Axis ay = ca.AxisY;
-
-            bool tip = false;
-
-            HitTestResult hit = chart.HitTest(e.X, e.Y);
-            Series series = chart.Series[0];
-
-            if (hit.Series is not null && hit.PointIndex >= 0)
-            {
-                curIndex = hit.PointIndex;
-                curPoint = hit.Series.Points[curIndex];
-                tip = true;
-            }
-
-
-            if (curPoint != null)
-            {
-
-                double dx, dy, dymin;
-
-                try
-                {
-                    dx = ax.PixelPositionToValue(e.X);
-                    dy = ay.PixelPositionToValue(e.Y);
-
-                    if (dx < 20) dx = 20;
-                    if (dx > 100) dx = 100;
-
-                    if (dy < 0) dy = 0;
-                    if (dy > fansMax) dy = fansMax;
-
-                    dymin = (dx - 70) * 1.2;
-
-                    if (dy < dymin) dy = dymin;
-
-                    if (e.Button.HasFlag(MouseButtons.Left))
-                    {
-                        double deltaY = dy - curPoint.YValues[0];
-                        double deltaX = dx - curPoint.XValue;
-
-                        curPoint.XValue = dx;
-
-                        if (Control.ModifierKeys == Keys.Shift)
-                            AdjustAll(0, deltaY, series);
-                        else
-                        {
-                            curPoint.YValues[0] = dy;
-                            AdjustAllLevels(curIndex, dx, dy, series);
-                        }
-
-                        tip = true;
-                    }
-
-                    labelTip.Text = Math.Floor(curPoint.XValue) + "C, " + ChartYLabel((int)curPoint.YValues[0], device, " " + Properties.Strings.RPM);
-                    labelTip.Top = e.Y + ((Control)sender).Top;
-                    labelTip.Left = Math.Min(chart.Width - labelTip.Width - 20, e.X - 50);
-
-                }
-                catch
-                {
-                    Debug.WriteLine(e.Y);
-                    tip = false;
-                }
-
-            }
-
-            labelTip.Visible = tip;
-
-
         }
 
         private void AdjustAll(double deltaX, double deltaY, Series series)
@@ -1370,6 +1380,6 @@ namespace GHelper
             }
         }
 
+        #endregion
     }
-
 }
