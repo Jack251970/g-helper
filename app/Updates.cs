@@ -192,7 +192,6 @@ namespace GHelper
                                 Logger.WriteLine(driver.title + " " + deviceID + " " + driver.version + " vs " + localVersion + " = " + newer);
                                 tip = "Download: " + driver.version + "\n" + "Installed: " + localVersion;
                             }
-
                         }
 
                     if (type == 1)
