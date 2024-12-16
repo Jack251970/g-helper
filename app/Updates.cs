@@ -218,7 +218,6 @@ namespace GHelper
             catch (Exception ex)
             {
                 Logger.WriteLine(ex.ToString());
-
             }
         }
 
