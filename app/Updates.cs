@@ -236,7 +236,6 @@ namespace GHelper
 
                     Cursor = Cursors.Hand
                 };
-                versionLabel.Font = new Font(versionLabel.Font, FontStyle.Underline);
                 versionLabel.LinkColor = colorEco;
                 versionLabel.Padding = new Padding(5, 5, 5, 5);
                 versionLabel.LinkClicked += (s, e) =>
@@ -287,7 +286,6 @@ namespace GHelper
                 if (newer == DRIVER_NEWER)
                 {
                     label.AccessibleName += Properties.Strings.NewUpdates;
-                    label.Font = new Font(label.Font, FontStyle.Underline | FontStyle.Bold);
                     label.LinkColor = colorTurbo;
                 }
 
@@ -314,7 +312,6 @@ namespace GHelper
         {
             labelUpdates.Text = $"{Properties.Strings.NewUpdates}: {updatesCount}";
             labelUpdates.ForeColor = colorTurbo;
-            labelUpdates.Font = new Font(labelUpdates.Font, FontStyle.Bold);
             panelBios.AccessibleName = labelUpdates.Text;
         }
 
