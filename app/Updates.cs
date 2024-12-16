@@ -232,11 +232,10 @@ namespace GHelper
                     AccessibleName = driver.title,
                     TabStop = true,
                     TabIndex = table.RowCount + 1,
-
-                    Cursor = Cursors.Hand
+                    Cursor = Cursors.Hand,
+                    LinkColor = colorEco,
+                    Padding = new Padding(5, 5, 5, 5)
                 };
-                versionLabel.LinkColor = colorEco;
-                versionLabel.Padding = new Padding(5, 5, 5, 5);
                 versionLabel.LinkClicked += (s, e) =>
                 {
                     Process.Start(new ProcessStartInfo(driver.downloadUrl) { UseShellExecute = true });
