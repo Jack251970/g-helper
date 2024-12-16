@@ -61,7 +61,6 @@ namespace GHelper
             labelUpdates.Text = Properties.Strings.NoNewUpdates;
 
             panelBios.AccessibleRole = AccessibleRole.Grouping;
-            panelBios.AccessibleName = Properties.Strings.NoNewUpdates;
             panelBios.TabStop = true;
 
             Text = Properties.Strings.BiosAndDriverUpdates + ": " + model + " " + bios;
@@ -285,7 +284,6 @@ namespace GHelper
 
                 if (newer == DRIVER_NEWER)
                 {
-                    label.AccessibleName += Properties.Strings.NewUpdates;
                     label.LinkColor = colorTurbo;
                 }
 
@@ -312,7 +310,6 @@ namespace GHelper
         {
             labelUpdates.Text = $"{Properties.Strings.NewUpdates}: {updatesCount}";
             labelUpdates.ForeColor = colorTurbo;
-            panelBios.AccessibleName = labelUpdates.Text;
         }
 
         private static string CleanupDeviceId(string input)
