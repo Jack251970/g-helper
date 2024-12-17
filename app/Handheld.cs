@@ -5,9 +5,12 @@ namespace GHelper
 {
     public partial class Handheld : RForm
     {
+        #region Properties
 
-        static string activeBinding = "";
-        static RButton? activeButton;
+        private static string activeBinding = "";
+        private static RButton? activeButton;
+
+        #endregion
 
         public Handheld()
         {
@@ -88,26 +91,69 @@ namespace GHelper
 
             checkController.Checked = AppConfig.Is("controller_disabled");
             checkController.CheckedChanged += CheckController_CheckedChanged;
+        }
 
+        #region Click Events
+
+        private void buttonBinding_Click(object sender, EventArgs e, string binding, string label)
+        {
+            if (sender is null) return;
+            RButton button = (RButton)sender;
+
+            panelBinding.Visible = true;
+
+            activeButton = button;
+            activeBinding = binding;
+
+            labelBinding.Text = Properties.Strings.Binding + ": " + label;
+
+            SetComboValue(comboPrimary, AppConfig.GetString("bind_" + binding, ""));
+            SetComboValue(comboSecondary, AppConfig.GetString("bind2_" + binding, ""));
+        }
+
+        private void ButtonReset_Click(object? sender, EventArgs e)
+        {
+            trackLSMin.Value = 0;
+            trackLSMax.Value = 100;
+            trackRSMin.Value = 0;
+            trackRSMax.Value = 100;
+
+            trackLTMin.Value = 0;
+            trackLTMax.Value = 100;
+            trackRTMin.Value = 0;
+            trackRTMax.Value = 100;
+
+            trackVibra.Value = 100;
+
+            AppConfig.Remove("ls_min");
+            AppConfig.Remove("ls_max");
+            AppConfig.Remove("rs_min");
+            AppConfig.Remove("rs_max");
+
+            AppConfig.Remove("lt_min");
+            AppConfig.Remove("lt_max");
+            AppConfig.Remove("rt_min");
+            AppConfig.Remove("rt_max");
+            AppConfig.Remove("vibra");
+
+            VisualiseController();
+        }
+
+        #endregion
+
+        #region Other Events
+
+        private void Handheld_Shown(object? sender, EventArgs e)
+        {
+            Height = Program.settingsForm.Height;
+            Top = Program.settingsForm.Top;
+            Left = Program.settingsForm.Left - Width - 5;
         }
 
         private void CheckController_CheckedChanged(object? sender, EventArgs e)
         {
             AppConfig.Set("controller_disabled", checkController.Checked ? 1 : 0);
             AllyControl.DisableXBoxController(checkController.Checked);
-        }
-
-        private void ComboBinding(RComboBox combo)
-        {
-
-            combo.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo.DisplayMember = "Value";
-            combo.ValueMember = "Key";
-            foreach (var item in AllyControl.BindCodes)
-                combo.Items.Add(new KeyValuePair<string, string>(item.Key, item.Value));
-
-            combo.SelectedValueChanged += Binding_SelectedValueChanged;
-
         }
 
         private void Binding_SelectedValueChanged(object? sender, EventArgs e)
@@ -124,6 +170,39 @@ namespace GHelper
             VisualiseButton(activeButton, activeBinding);
 
             AllyControl.ApplyMode();
+        }
+
+        private void Controller_Complete(object? sender, EventArgs e)
+        {
+            AllyControl.SetDeadzones();
+        }
+
+        private void Controller_Scroll(object? sender, EventArgs e)
+        {
+            AppConfig.Set("ls_min", trackLSMin.Value);
+            AppConfig.Set("ls_max", trackLSMax.Value);
+            AppConfig.Set("rs_min", trackRSMin.Value);
+            AppConfig.Set("rs_max", trackRSMax.Value);
+
+            AppConfig.Set("lt_min", trackLTMin.Value);
+            AppConfig.Set("lt_max", trackLTMax.Value);
+            AppConfig.Set("rt_min", trackRTMin.Value);
+            AppConfig.Set("rt_max", trackRTMax.Value);
+
+            AppConfig.Set("vibra", trackVibra.Value);
+
+            VisualiseController();
+        }
+
+        private void ComboBinding(RComboBox combo)
+        {
+            combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.DisplayMember = "Value";
+            combo.ValueMember = "Key";
+            foreach (var item in AllyControl.BindCodes)
+                combo.Items.Add(new KeyValuePair<string, string>(item.Key, item.Value));
+
+            combo.SelectedValueChanged += Binding_SelectedValueChanged;
         }
 
         private void SetComboValue(RComboBox combo, string value)
@@ -162,60 +241,6 @@ namespace GHelper
             VisualiseButton(button, binding);
         }
 
-        void buttonBinding_Click(object sender, EventArgs e, string binding, string label)
-        {
-
-            if (sender is null) return;
-            RButton button = (RButton)sender;
-
-            panelBinding.Visible = true;
-
-            activeButton = button;
-            activeBinding = binding;
-
-            labelBinding.Text = Properties.Strings.Binding + ": " + label;
-
-            SetComboValue(comboPrimary, AppConfig.GetString("bind_" + binding, ""));
-            SetComboValue(comboSecondary, AppConfig.GetString("bind2_" + binding, ""));
-
-        }
-
-
-
-        private void Controller_Complete(object? sender, EventArgs e)
-        {
-            AllyControl.SetDeadzones();
-        }
-
-        private void ButtonReset_Click(object? sender, EventArgs e)
-        {
-            trackLSMin.Value = 0;
-            trackLSMax.Value = 100;
-            trackRSMin.Value = 0;
-            trackRSMax.Value = 100;
-
-            trackLTMin.Value = 0;
-            trackLTMax.Value = 100;
-            trackRTMin.Value = 0;
-            trackRTMax.Value = 100;
-
-            trackVibra.Value = 100;
-
-            AppConfig.Remove("ls_min");
-            AppConfig.Remove("ls_max");
-            AppConfig.Remove("rs_min");
-            AppConfig.Remove("rs_max");
-
-            AppConfig.Remove("lt_min");
-            AppConfig.Remove("lt_max");
-            AppConfig.Remove("rt_min");
-            AppConfig.Remove("rt_max");
-            AppConfig.Remove("vibra");
-
-            VisualiseController();
-
-        }
-
         private void Init()
         {
             trackLSMin.Value = AppConfig.Get("ls_min", 0);
@@ -244,30 +269,6 @@ namespace GHelper
             labelVibra.Text = $"{trackVibra.Value}%";
         }
 
-        private void Controller_Scroll(object? sender, EventArgs e)
-        {
-            AppConfig.Set("ls_min", trackLSMin.Value);
-            AppConfig.Set("ls_max", trackLSMax.Value);
-            AppConfig.Set("rs_min", trackRSMin.Value);
-            AppConfig.Set("rs_max", trackRSMax.Value);
-
-            AppConfig.Set("lt_min", trackLTMin.Value);
-            AppConfig.Set("lt_max", trackLTMax.Value);
-            AppConfig.Set("rt_min", trackRTMin.Value);
-            AppConfig.Set("rt_max", trackRTMax.Value);
-
-            AppConfig.Set("vibra", trackVibra.Value);
-
-            VisualiseController();
-
-        }
-
-        private void Handheld_Shown(object? sender, EventArgs e)
-        {
-            Height = Program.settingsForm.Height;
-            Top = Program.settingsForm.Top;
-            Left = Program.settingsForm.Left - Width - 5;
-        }
-
+        #endregion
     }
 }
