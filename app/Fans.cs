@@ -177,10 +177,7 @@ namespace GHelper
             trackGPUTemp.MouseUp += TrackGPU_MouseUp;
             trackGPUPower.MouseUp += TrackGPU_MouseUp;
 
-
-            //labelInfo.MaximumSize = new Size(280, 0);
             labelFansResult.Visible = false;
-
 
             trackUV.Minimum = RyzenControl.MinCPUUV;
             trackUV.Maximum = RyzenControl.MaxCPUUV;
@@ -203,7 +200,6 @@ namespace GHelper
             comboBoost.SelectedValueChanged += ComboBoost_Changed;
             comboPowerMode.SelectedValueChanged += ComboPowerMode_Changed;
 
-
             comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;
             comboModes.TextChanged += ComboModes_TextChanged;
             comboModes.KeyPress += ComboModes_KeyPress;
@@ -213,7 +209,6 @@ namespace GHelper
             buttonAdd.Click += ButtonAdd_Click;
             buttonRemove.Click += ButtonRemove_Click;
             buttonRename.Click += ButtonRename_Click;
-
 
             trackUV.Scroll += TrackUV_Scroll;
             trackUViGPU.Scroll += TrackUV_Scroll;
