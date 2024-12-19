@@ -71,150 +71,10 @@ namespace GHelper
 
             #endregion
 
+            Shown += Fans_Shown;
             FormClosed += Fans_FormClosed;
 
-            //float dpi = ControlHelper.GetDpiScale(this).Value;
-            //comboModes.Size = new Size(comboModes.Width, (int)dpi * 18);
-            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
-
-            labelTip.Visible = false;
-            labelTip.BackColor = Color.Transparent;
-
-            seriesCPU = chartCPU.Series.Add("CPU");
-            seriesGPU = chartGPU.Series.Add("GPU");
-            seriesMid = chartMid.Series.Add("Mid");
-            seriesXGM = chartXGM.Series.Add("XGM");
-
-            seriesCPU.Color = colorStandard;
-            seriesGPU.Color = colorTurbo;
-            seriesMid.Color = colorEco;
-            seriesXGM.Color = Color.Orange;
-
-            chartCPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.CPU);
-            chartCPU.MouseUp += ChartCPU_MouseUp;
-            chartCPU.MouseLeave += ChartCPU_MouseLeave;
-
-            chartGPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.GPU);
-            chartGPU.MouseUp += ChartCPU_MouseUp;
-            chartGPU.MouseLeave += ChartCPU_MouseLeave;
-
-            chartMid.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.Mid);
-            chartMid.MouseUp += ChartCPU_MouseUp;
-            chartMid.MouseLeave += ChartCPU_MouseLeave;
-
-            chartXGM.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.XGM);
-            chartXGM.MouseUp += ChartCPU_MouseUp;
-            chartXGM.MouseLeave += ChartCPU_MouseLeave;
-
-            chartCPU.MouseClick += ChartCPU_MouseClick;
-            chartGPU.MouseClick += ChartCPU_MouseClick;
-            chartMid.MouseClick += ChartCPU_MouseClick;
-            chartXGM.MouseClick += ChartCPU_MouseClick;
-
-            buttonReset.Click += ButtonReset_Click;
-
-            trackTotal.Maximum = AsusACPI.MaxTotal;
-            trackTotal.Minimum = AsusACPI.MinTotal;
-
-            trackSlow.Maximum = AsusACPI.MaxTotal;
-            trackSlow.Minimum = AsusACPI.MinTotal;
-
-            trackCPU.Maximum = AsusACPI.MaxCPU;
-            trackCPU.Minimum = AsusACPI.MinCPU;
-
-            trackFast.Maximum = AsusACPI.MaxTotal;
-            trackFast.Minimum = AsusACPI.MinTotal;
-
-            trackTotal.Scroll += TrackTotal_Scroll;
-            trackSlow.Scroll += TrackSlow_Scroll;
-            trackFast.Scroll += TrackFast_Scroll;
-            trackCPU.Scroll += TrackCPU_Scroll;
-
-            trackFast.MouseUp += TrackPower_MouseUp;
-            trackCPU.MouseUp += TrackPower_MouseUp;
-            trackTotal.MouseUp += TrackPower_MouseUp;
-            trackSlow.MouseUp += TrackPower_MouseUp;
-
-            trackFast.KeyUp += TrackPower_KeyUp;
-            trackCPU.KeyUp += TrackPower_KeyUp;
-            trackTotal.KeyUp += TrackPower_KeyUp;
-            trackSlow.KeyUp += TrackPower_KeyUp;
-
-            checkApplyFans.Click += CheckApplyFans_Click;
-            checkApplyPower.Click += CheckApplyPower_Click;
-
-            trackGPUClockLimit.Minimum = NvidiaGpuControl.MinClockLimit;
-            trackGPUClockLimit.Maximum = NvidiaGpuControl.MaxClockLimit;
-
-            trackGPUCore.Minimum = NvidiaGpuControl.MinCoreOffset;
-            trackGPUCore.Maximum = NvidiaGpuControl.MaxCoreOffset;
-
-            trackGPUMemory.Minimum = NvidiaGpuControl.MinMemoryOffset;
-            trackGPUMemory.Maximum = NvidiaGpuControl.MaxMemoryOffset;
-
-            trackGPUBoost.Minimum = AsusACPI.MinGPUBoost;
-            trackGPUBoost.Maximum = AsusACPI.MaxGPUBoost;
-
-            trackGPUTemp.Minimum = AsusACPI.MinGPUTemp;
-            trackGPUTemp.Maximum = AsusACPI.MaxGPUTemp;
-
-            trackGPUPower.Minimum = AsusACPI.MinGPUPower;
-            trackGPUPower.Maximum = AsusACPI.MaxGPUPower;
-
-            trackGPUClockLimit.Scroll += trackGPUClockLimit_Scroll;
-            trackGPUCore.Scroll += trackGPU_Scroll;
-            trackGPUMemory.Scroll += trackGPU_Scroll;
-
-            trackGPUBoost.Scroll += trackGPUPower_Scroll;
-            trackGPUTemp.Scroll += trackGPUPower_Scroll;
-            trackGPUPower.Scroll += trackGPUPower_Scroll;
-
-            trackGPUCore.MouseUp += TrackGPUClocks_MouseUp;
-            trackGPUMemory.MouseUp += TrackGPUClocks_MouseUp;
-            trackGPUClockLimit.MouseUp += TrackGPUClocks_MouseUp;
-
-            trackGPUBoost.MouseUp += TrackGPU_MouseUp;
-            trackGPUTemp.MouseUp += TrackGPU_MouseUp;
-            trackGPUPower.MouseUp += TrackGPU_MouseUp;
-
-            labelFansResult.Visible = false;
-
-            trackUV.Minimum = RyzenControl.MinCPUUV;
-            trackUV.Maximum = RyzenControl.MaxCPUUV;
-
-            trackUViGPU.Minimum = RyzenControl.MinIGPUUV;
-            trackUViGPU.Maximum = RyzenControl.MaxIGPUUV;
-
-            trackTemp.Minimum = RyzenControl.MinTemp;
-            trackTemp.Maximum = RyzenControl.MaxTemp;
-
-            comboPowerMode.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboPowerMode.DataSource = new BindingSource(PowerNative.powerModes, null);
-            comboPowerMode.DisplayMember = "Value";
-            comboPowerMode.ValueMember = "Key";
-
-            FillModes();
-            InitAll();
-            InitCPU();
-
-            comboBoost.SelectedValueChanged += ComboBoost_Changed;
-            comboPowerMode.SelectedValueChanged += ComboPowerMode_Changed;
-
-            comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;
-            comboModes.TextChanged += ComboModes_TextChanged;
-            comboModes.KeyPress += ComboModes_KeyPress;
-
-            Shown += Fans_Shown;
-
-            buttonAdd.Click += ButtonAdd_Click;
-            buttonRemove.Click += ButtonRemove_Click;
-            buttonRename.Click += ButtonRename_Click;
-
-            trackUV.Scroll += TrackUV_Scroll;
-            trackUViGPU.Scroll += TrackUV_Scroll;
-            trackTemp.Scroll += TrackUV_Scroll;
-
-            buttonApplyAdvanced.Click += ButtonApplyAdvanced_Click;
+            #region Title
 
             buttonCPU.BorderColor = colorStandard;
             buttonGPU.BorderColor = colorTurbo;
@@ -224,11 +84,170 @@ namespace GHelper
             buttonGPU.Click += ButtonGPU_Click;
             buttonAdvanced.Click += ButtonAdvanced_Click;
 
+            #endregion
+
+            #region GPU Settings
+
+            trackGPUClockLimit.Minimum = NvidiaGpuControl.MinClockLimit;
+            trackGPUClockLimit.Maximum = NvidiaGpuControl.MaxClockLimit;
+            trackGPUClockLimit.Scroll += trackGPUClockLimit_Scroll;
+            trackGPUClockLimit.MouseUp += TrackGPUClocks_MouseUp;
+
+            trackGPUCore.Minimum = NvidiaGpuControl.MinCoreOffset;
+            trackGPUCore.Maximum = NvidiaGpuControl.MaxCoreOffset;
+            trackGPUCore.Scroll += trackGPU_Scroll;
+            trackGPUCore.MouseUp += TrackGPUClocks_MouseUp;
+
+            trackGPUMemory.Minimum = NvidiaGpuControl.MinMemoryOffset;
+            trackGPUMemory.Maximum = NvidiaGpuControl.MaxMemoryOffset;
+            trackGPUMemory.Scroll += trackGPU_Scroll;
+            trackGPUMemory.MouseUp += TrackGPUClocks_MouseUp;
+
+            trackGPUPower.Minimum = AsusACPI.MinGPUPower;
+            trackGPUPower.Maximum = AsusACPI.MaxGPUPower;
+            trackGPUPower.Scroll += trackGPUPower_Scroll;
+            trackGPUPower.MouseUp += TrackGPU_MouseUp;
+
+            trackGPUBoost.Minimum = AsusACPI.MinGPUBoost;
+            trackGPUBoost.Maximum = AsusACPI.MaxGPUBoost;
+            trackGPUBoost.Scroll += trackGPUPower_Scroll;
+            trackGPUBoost.MouseUp += TrackGPU_MouseUp;
+
+            trackGPUTemp.Minimum = AsusACPI.MinGPUTemp;
+            trackGPUTemp.Maximum = AsusACPI.MaxGPUTemp;
+            trackGPUTemp.Scroll += trackGPUPower_Scroll;
+            trackGPUTemp.MouseUp += TrackGPU_MouseUp;
+
+            #endregion
+
+            #region Window Power Mode
+
+            comboPowerMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboPowerMode.DataSource = new BindingSource(PowerNative.powerModes, null);
+            comboPowerMode.DisplayMember = "Value";
+            comboPowerMode.ValueMember = "Key";
+            comboPowerMode.SelectedValueChanged += ComboPowerMode_Changed;
+
+            #endregion
+
+            #region CPU Boost
+
+            comboBoost.SelectedValueChanged += ComboBoost_Changed;
+
+            #endregion
+
+            #region Power Limits
+
+            trackTotal.Maximum = AsusACPI.MaxTotal;
+            trackTotal.Minimum = AsusACPI.MinTotal;
+            trackTotal.Scroll += TrackTotal_Scroll;
+            trackTotal.MouseUp += TrackPower_MouseUp;
+            trackTotal.KeyUp += TrackPower_KeyUp;
+
+            trackSlow.Maximum = AsusACPI.MaxTotal;
+            trackSlow.Minimum = AsusACPI.MinTotal;
+            trackSlow.Scroll += TrackSlow_Scroll;
+            trackSlow.MouseUp += TrackPower_MouseUp;
+            trackSlow.KeyUp += TrackPower_KeyUp;
+
+            trackFast.Maximum = AsusACPI.MaxTotal;
+            trackFast.Minimum = AsusACPI.MinTotal;
+            trackFast.Scroll += TrackFast_Scroll;
+            trackFast.MouseUp += TrackPower_MouseUp;
+            trackFast.KeyUp += TrackPower_KeyUp;
+
+            trackCPU.Maximum = AsusACPI.MaxCPU;
+            trackCPU.Minimum = AsusACPI.MinCPU;
+            trackCPU.Scroll += TrackCPU_Scroll;
+            trackCPU.MouseUp += TrackPower_MouseUp;
+            trackCPU.KeyUp += TrackPower_KeyUp;
+
+            checkApplyPower.Click += CheckApplyPower_Click;
+
+            buttonDownload.Click += ButtonDownload_Click;
+
+            #endregion
+
+            #region Temp Limit
+
+            trackTemp.Minimum = RyzenControl.MinTemp;
+            trackTemp.Maximum = RyzenControl.MaxTemp;
+            trackTemp.Scroll += TrackUV_Scroll;
+
+            #endregion
+            
+            #region Undervolting
+
+            trackUV.Minimum = RyzenControl.MinCPUUV;
+            trackUV.Maximum = RyzenControl.MaxCPUUV;
+            trackUV.Scroll += TrackUV_Scroll;
+
+            trackUViGPU.Minimum = RyzenControl.MinIGPUUV;
+            trackUViGPU.Maximum = RyzenControl.MaxIGPUUV;
+            trackUViGPU.Scroll += TrackUV_Scroll;
+
+            buttonApplyAdvanced.Click += ButtonApplyAdvanced_Click;
+
             checkApplyUV.Click += CheckApplyUV_Click;
+
+            #endregion
+
+            #region Profiles
+
+            buttonRemove.Click += ButtonRemove_Click;
+            buttonRename.Click += ButtonRename_Click;
+
+            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
+            comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;
+            comboModes.TextChanged += ComboModes_TextChanged;
+            comboModes.KeyPress += ComboModes_KeyPress;
+
+            buttonAdd.Click += ButtonAdd_Click;
+
+            labelTip.Visible = false;
+            labelTip.BackColor = Color.Transparent;
+
+            seriesCPU = chartCPU.Series.Add("CPU");
+            seriesCPU.Color = colorStandard;
+            chartCPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.CPU);
+            chartCPU.MouseUp += ChartCPU_MouseUp;
+            chartCPU.MouseLeave += ChartCPU_MouseLeave;
+            chartCPU.MouseClick += ChartCPU_MouseClick;
+
+            seriesGPU = chartGPU.Series.Add("GPU");
+            seriesGPU.Color = colorTurbo;
+            chartGPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.GPU);
+            chartGPU.MouseUp += ChartCPU_MouseUp;
+            chartGPU.MouseLeave += ChartCPU_MouseLeave;
+            chartGPU.MouseClick += ChartCPU_MouseClick;
+
+            seriesMid = chartMid.Series.Add("Mid");
+            seriesMid.Color = colorEco;
+            chartMid.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.Mid);
+            chartMid.MouseUp += ChartCPU_MouseUp;
+            chartMid.MouseLeave += ChartCPU_MouseLeave;
+            chartMid.MouseClick += ChartCPU_MouseClick;
+
+            seriesXGM = chartXGM.Series.Add("XGM");
+            seriesXGM.Color = Color.Orange;
+            chartXGM.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.XGM);
+            chartXGM.MouseUp += ChartCPU_MouseUp;
+            chartXGM.MouseLeave += ChartCPU_MouseLeave;
+            chartXGM.MouseClick += ChartCPU_MouseClick;
+
+            labelFansResult.Visible = false;
+
+            buttonReset.Click += ButtonReset_Click;
 
             buttonCalibrate.Click += ButtonCalibrate_Click;
 
-            buttonDownload.Click += ButtonDownload_Click;
+            checkApplyFans.Click += CheckApplyFans_Click;
+
+            #endregion
+
+            FillModes();
+            InitAll();
+            InitCPU();
 
             ToggleNavigation(0);
 
@@ -651,8 +670,6 @@ namespace GHelper
             }
 
             labelTip.Visible = tip;
-
-
         }
 
         #endregion
