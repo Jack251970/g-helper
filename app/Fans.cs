@@ -757,7 +757,8 @@ namespace GHelper
                 panelAdvancedApply.Visible = false;
                 panelDownload.Visible = true;
 
-            } else
+            }
+            else
             {
                 panelDownload.Visible = false;
             }
@@ -1056,7 +1057,7 @@ namespace GHelper
 
             comboPowerMode.Enabled = !batterySaver;
 
-            if (batterySaver) 
+            if (batterySaver)
                 comboPowerMode.SelectedIndex = 0;
             else
                 comboPowerMode.SelectedValue = powerMode;
@@ -1120,7 +1121,7 @@ namespace GHelper
                     labelLeftSlow.Text = "sPPT (CPU 2 min boost)";
                     labelLeftFast.Text = "fPPT (CPU 2 sec boost)";
                     panelFast.Visible = modeC1;
-                    
+
                 }
                 else
                 {
@@ -1143,7 +1144,7 @@ namespace GHelper
 
             if (limit_cpu > AsusACPI.MaxCPU) limit_cpu = AsusACPI.MaxCPU;
             if (limit_cpu < AsusACPI.MinCPU) limit_cpu = AsusACPI.MinCPU;
-            
+
             if (limit_slow > AsusACPI.MaxTotal) limit_slow = AsusACPI.MaxTotal;
             if (limit_slow < AsusACPI.MinTotal) limit_slow = AsusACPI.MinTotal;
 
