@@ -5,6 +5,8 @@ namespace GHelper
 {
     public partial class AsusMouseSettings : RForm
     {
+        #region Properties
+
         private static Dictionary<LightingMode, string> lightingModeNames = new Dictionary<LightingMode, string>()
         {
             { LightingMode.Static,Properties.Strings.AuraStatic},
@@ -16,6 +18,7 @@ namespace GHelper
             { LightingMode.BatteryState, Properties.Strings.AuraBatteryState},
             { LightingMode.Off, Properties.Strings.MatrixOff},
         };
+
         private List<LightingMode> supportedLightingModes = new List<LightingMode>();
 
         private readonly AsusMouse mouse;
@@ -24,13 +27,15 @@ namespace GHelper
 
         private bool updateMouseDPI = true;
 
+        #endregion
+
         public AsusMouseSettings(AsusMouse mouse)
         {
             this.mouse = mouse;
             InitializeComponent();
+            InitTheme();
 
-            dpiButtons = new RButton[] { buttonDPI1, buttonDPI2, buttonDPI3, buttonDPI4 };
-
+            #region Strings
 
             labelPollingRate.Text = Properties.Strings.PollingRate;
             labelLighting.Text = Properties.Strings.Lighting;
@@ -58,32 +63,46 @@ namespace GHelper
             buttonExport.Text = Properties.Strings.Export;
             buttonImport.Text = Properties.Strings.Import;
 
-            InitTheme();
+            #endregion
 
-            this.Text = mouse.GetDisplayName();
+            Text = mouse.GetDisplayName();
 
             Shown += AsusMouseSettings_Shown;
             FormClosing += AsusMouseSettings_FormClosing;
 
+            #region Title
+
             comboProfile.DropDownClosed += ComboProfile_DropDownClosed;
 
-            sliderDPI.ValueChanged += SliderDPI_ValueChanged;
-            numericUpDownCurrentDPI.ValueChanged += NumericUpDownCurrentDPI_ValueChanged;
-            sliderDPI.MouseUp += SliderDPI_MouseUp;
-            sliderDPI.MouseDown += SliderDPI_MouseDown;
-            buttonDPIColor.Click += ButtonDPIColor_Click;
+            #endregion
+
+            #region Performance
+
+            dpiButtons = [buttonDPI1, buttonDPI2, buttonDPI3, buttonDPI4];
             buttonDPI1.Click += ButtonDPI_Click;
             buttonDPI2.Click += ButtonDPI_Click;
             buttonDPI3.Click += ButtonDPI_Click;
             buttonDPI4.Click += ButtonDPI_Click;
 
+            buttonDPIColor.Click += ButtonDPIColor_Click;
+
+            numericUpDownCurrentDPI.ValueChanged += NumericUpDownCurrentDPI_ValueChanged;
+
+            sliderDPI.ValueChanged += SliderDPI_ValueChanged;
+            sliderDPI.MouseUp += SliderDPI_MouseUp;
+            sliderDPI.MouseDown += SliderDPI_MouseDown;
+
             comboBoxPollingRate.DropDownClosed += ComboBoxPollingRate_DropDownClosed;
+
             checkBoxAngleSnapping.CheckedChanged += CheckAngleSnapping_CheckedChanged;
+
             sliderAngleAdjustment.ValueChanged += SliderAngleAdjustment_ValueChanged;
             sliderAngleAdjustment.MouseUp += SliderAngleAdjustment_MouseUp;
-            comboBoxLiftOffDistance.DropDownClosed += ComboBoxLiftOffDistance_DropDownClosed;
+
             sliderButtonDebounce.ValueChanged += SliderButtonDebounce_ValueChanged;
             sliderButtonDebounce.MouseUp += SliderButtonDebounce_MouseUp;
+
+            comboBoxLiftOffDistance.DropDownClosed += ComboBoxLiftOffDistance_DropDownClosed;
 
             sliderAcceleration.MouseUp += SliderAcceleration_MouseUp;
             sliderAcceleration.ValueChanged += SliderAcceleration_ValueChanged;
@@ -91,28 +110,205 @@ namespace GHelper
             sliderDeceleration.MouseUp += SliderDeceleration_MouseUp;
             sliderDeceleration.ValueChanged += SliderDeceleration_ValueChanged;
 
-            buttonLightingColor.Click += ButtonLightingColor_Click;
-            comboBoxLightingMode.DropDownClosed += ComboBoxLightingMode_DropDownClosed;
+            #endregion
+
+            #region Lighting
+
             sliderBrightness.MouseUp += SliderBrightness_MouseUp;
+
+            buttonLightingZoneAll.Click += ButtonLightingZoneAll_Click;
+            buttonLightingZoneLogo.Click += ButtonLightingZoneLogo_Click;
+            buttonLightingZoneScroll.Click += ButtonLightingZoneScroll_Click;
+            buttonLightingZoneUnderglow.Click += ButtonLightingZoneUnderglow_Click;
+            buttonLightingZoneDock.Click += ButtonLightingZoneDock_Click;
+
+            comboBoxLightingMode.DropDownClosed += ComboBoxLightingMode_DropDownClosed;
+            buttonLightingColor.Click += ButtonLightingColor_Click;
+            checkBoxRandomColor.CheckedChanged += CheckBoxRandomColor_CheckedChanged;
+
             comboBoxAnimationSpeed.DropDownClosed += ComboBoxAnimationSpeed_DropDownClosed;
             comboBoxAnimationDirection.DropDownClosed += ComboBoxAnimationDirection_DropDownClosed;
-            checkBoxRandomColor.CheckedChanged += CheckBoxRandomColor_CheckedChanged;
+
+            #endregion
+
+            #region Energy
+
+            comboBoxAutoPowerOff.DropDownClosed += ComboBoxAutoPowerOff_DropDownClosed;
 
             sliderLowBatteryWarning.ValueChanged += SliderLowBatteryWarning_ValueChanged;
             sliderLowBatteryWarning.MouseUp += SliderLowBatteryWarning_MouseUp;
-            comboBoxAutoPowerOff.DropDownClosed += ComboBoxAutoPowerOff_DropDownClosed;
 
+            #endregion
 
-            buttonLightingZoneAll.Click += ButtonLightingZoneAll_Click;
-            buttonLightingZoneDock.Click += ButtonLightingZoneDock_Click;
-            buttonLightingZoneLogo.Click += ButtonLightingZoneLogo_Click;
-            buttonLightingZoneUnderglow.Click += ButtonLightingZoneUnderglow_Click;
-            buttonLightingZoneScroll.Click += ButtonLightingZoneScroll_Click;
+            #region Others
+
+            buttonImport.Click += ButtonImport_Click;
+            buttonExport.Click += ButtonExport_Click;
+            buttonSync.Click += ButtonSync_Click;
+
+            #endregion
 
             InitMouseCapabilities();
+            RefreshMouseData();
+
             Logger.WriteLine(mouse.GetDisplayName() + " (GUI): Initialized capabilities. Synchronizing mouse data");
+        }
+
+        #region Click
+
+        private void ButtonImport_Click(object? sender, EventArgs e)
+        {
+            byte[] data = null;
+
+            Thread t = new Thread(() =>
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    data = File.ReadAllBytes(ofd.FileName);
+                }
+            });
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+
+            if (data == null)
+            {
+                //User aborted loading
+                return;
+            }
+
+            if (!mouse.Import(data))
+            {
+                Logger.WriteLine("Failed to import mouse profile");
+                MessageBox.Show(Properties.Strings.MouseImportFailed);
+            }
+            else
+            {
+                if (!mouse.IsLightingZoned())
+                {
+                    visibleZone = LightingZone.All;
+                }
+
+                RefreshMouseData();
+            }
+        }
+
+        private void ButtonExport_Click(object? sender, EventArgs e)
+        {
+            Thread t = new Thread(() =>
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(sfd.FileName, mouse.Export());
+                }
+            });
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+        }
+
+        private void ButtonSync_Click(object? sender, EventArgs e)
+        {
             RefreshMouseData();
         }
+
+        private void ButtonLightingZoneScroll_Click(object? sender, EventArgs e)
+        {
+            SwitchLightingZone(LightingZone.Scrollwheel);
+        }
+
+        private void ButtonLightingZoneUnderglow_Click(object? sender, EventArgs e)
+        {
+            SwitchLightingZone(LightingZone.Underglow);
+        }
+
+        private void ButtonLightingZoneLogo_Click(object? sender, EventArgs e)
+        {
+            SwitchLightingZone(LightingZone.Logo);
+        }
+
+        private void ButtonLightingZoneDock_Click(object? sender, EventArgs e)
+        {
+            SwitchLightingZone(LightingZone.Dock);
+        }
+
+        private void ButtonLightingZoneAll_Click(object? sender, EventArgs e)
+        {
+            SwitchLightingZone(LightingZone.All);
+        }
+
+        private void ButtonDPI_Click(object? sender, EventArgs e)
+        {
+            int index = -1;
+
+            for (int i = 0; i < dpiButtons.Length; ++i)
+            {
+                if (sender == dpiButtons[i])
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index == -1)
+            {
+                //huh?
+                return;
+            }
+
+            mouse.SetDPIProfile(index + 1);
+            VisualizeDPIButtons();
+            VisualizeCurrentDPIProfile();
+        }
+
+        private void ButtonLightingColor_Click(object? sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog
+            {
+                AllowFullOpen = true,
+                Color = pictureBoxLightingColor.BackColor
+            };
+
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
+                ls.RGBColor = colorDlg.Color;
+
+                UpdateLightingSettings(ls, visibleZone);
+            }
+        }
+
+        private void ButtonDPIColor_Click(object? sender, EventArgs e)
+        {
+            ColorDialog colorDlg = new ColorDialog
+            {
+                AllowFullOpen = true,
+                Color = pictureDPIColor.BackColor
+            };
+
+            if (colorDlg.ShowDialog() == DialogResult.OK)
+            {
+                AsusMouseDPI dpi = mouse.DpiSettings[mouse.DpiProfile - 1];
+                dpi.Color = colorDlg.Color;
+
+                mouse.SetDPIForProfile(dpi, mouse.DpiProfile);
+
+                VisualizeDPIButtons();
+                VisualizeCurrentDPIProfile();
+            }
+        }
+
+        #endregion
+
+        #region Events
 
         private void SliderAcceleration_MouseUp(object? sender, MouseEventArgs e)
         {
@@ -146,42 +342,6 @@ namespace GHelper
             int time = mouse.DebounceTimeInMS(dbt);
 
             labelButtonDebounceValue.Text = time + "ms";
-        }
-
-        private void SwitchLightingZone(LightingZone zone)
-        {
-            if (!mouse.HasRGB())
-            {
-                return;
-            }
-            visibleZone = zone;
-            InitLightingModes();
-            VisusalizeLightingSettings();
-        }
-
-        private void ButtonLightingZoneScroll_Click(object? sender, EventArgs e)
-        {
-            SwitchLightingZone(LightingZone.Scrollwheel);
-        }
-
-        private void ButtonLightingZoneUnderglow_Click(object? sender, EventArgs e)
-        {
-            SwitchLightingZone(LightingZone.Underglow);
-        }
-
-        private void ButtonLightingZoneLogo_Click(object? sender, EventArgs e)
-        {
-            SwitchLightingZone(LightingZone.Logo);
-        }
-
-        private void ButtonLightingZoneDock_Click(object? sender, EventArgs e)
-        {
-            SwitchLightingZone(LightingZone.Dock);
-        }
-
-        private void ButtonLightingZoneAll_Click(object? sender, EventArgs e)
-        {
-            SwitchLightingZone(LightingZone.All);
         }
 
         private void AsusMouseSettings_FormClosing(object? sender, FormClosingEventArgs e)
@@ -235,56 +395,6 @@ namespace GHelper
             mouse.SetPollingRate(mouse.SupportedPollingrates()[comboBoxPollingRate.SelectedIndex]);
         }
 
-        private void ButtonDPIColor_Click(object? sender, EventArgs e)
-        {
-            ColorDialog colorDlg = new ColorDialog
-            {
-                AllowFullOpen = true,
-                Color = pictureDPIColor.BackColor
-            };
-
-            if (colorDlg.ShowDialog() == DialogResult.OK)
-            {
-                AsusMouseDPI dpi = mouse.DpiSettings[mouse.DpiProfile - 1];
-                dpi.Color = colorDlg.Color;
-
-                mouse.SetDPIForProfile(dpi, mouse.DpiProfile);
-
-                VisualizeDPIButtons();
-                VisualizeCurrentDPIProfile();
-            }
-        }
-
-        private void ButtonDPI_Click(object? sender, EventArgs e)
-        {
-            int index = -1;
-
-            for (int i = 0; i < dpiButtons.Length; ++i)
-            {
-                if (sender == dpiButtons[i])
-                {
-                    index = i;
-                    break;
-                }
-            }
-
-            if (index == -1)
-            {
-                //huh?
-                return;
-            }
-
-            mouse.SetDPIProfile(index + 1);
-            VisualizeDPIButtons();
-            VisualizeCurrentDPIProfile();
-        }
-
-        private void UpdateLightingSettings(LightingSetting settings, LightingZone zone)
-        {
-            mouse.SetLightingSetting(settings, visibleZone);
-            VisusalizeLightingSettings();
-        }
-
         private void CheckBoxRandomColor_CheckedChanged(object? sender, EventArgs e)
         {
             LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
@@ -327,7 +437,7 @@ namespace GHelper
             }
 
             var index = comboBoxLightingMode.SelectedIndex;
-            LightingMode lm = supportedLightingModes[index < supportedLightingModes.Count ? index : 0 ];
+            LightingMode lm = supportedLightingModes[index < supportedLightingModes.Count ? index : 0];
 
             LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
             if (ls.LightingMode == lm)
@@ -339,23 +449,6 @@ namespace GHelper
             ls.LightingMode = lm;
 
             UpdateLightingSettings(ls, visibleZone);
-        }
-
-        private void ButtonLightingColor_Click(object? sender, EventArgs e)
-        {
-            ColorDialog colorDlg = new ColorDialog
-            {
-                AllowFullOpen = true,
-                Color = pictureBoxLightingColor.BackColor
-            };
-
-            if (colorDlg.ShowDialog() == DialogResult.OK)
-            {
-                LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
-                ls.RGBColor = colorDlg.Color;
-
-                UpdateLightingSettings(ls, visibleZone);
-            }
         }
 
         private void SliderLowBatteryWarning_ValueChanged(object? sender, EventArgs e)
@@ -425,6 +518,60 @@ namespace GHelper
             UpdateMouseDPISettings();
         }
 
+        private void Mouse_Disconnect(object? sender, EventArgs e)
+        {
+            if (Disposing || IsDisposed)
+            {
+                return;
+            }
+            //Mouse disconnected. Bye bye.
+            this.Invoke(delegate
+            {
+                this.Close();
+            });
+        }
+
+        private void AsusMouseSettings_Shown(object? sender, EventArgs e)
+        {
+
+            if (Height > Program.settingsForm.Height)
+            {
+                Top = Program.settingsForm.Top + Program.settingsForm.Height - Height;
+            }
+            else
+            {
+                Top = Program.settingsForm.Top;
+            }
+
+            Left = Program.settingsForm.Left - Width - 5;
+
+
+            mouse.Disconnect += Mouse_Disconnect;
+            mouse.BatteryUpdated += Mouse_BatteryUpdated;
+            mouse.MouseReadyChanged += Mouse_MouseReadyChanged;
+        }
+
+        #endregion
+
+        #region Others
+
+        private void SwitchLightingZone(LightingZone zone)
+        {
+            if (!mouse.HasRGB())
+            {
+                return;
+            }
+            visibleZone = zone;
+            InitLightingModes();
+            VisusalizeLightingSettings();
+        }
+
+        private void UpdateLightingSettings(LightingSetting settings, LightingZone zone)
+        {
+            mouse.SetLightingSetting(settings, visibleZone);
+            VisusalizeLightingSettings();
+        }
+
         private void UpdateMouseDPISettings()
         {
             if (!updateMouseDPI)
@@ -438,20 +585,6 @@ namespace GHelper
 
             VisualizeDPIButtons();
             VisualizeCurrentDPIProfile();
-        }
-
-        private void Mouse_Disconnect(object? sender, EventArgs e)
-        {
-            if (Disposing || IsDisposed)
-            {
-                return;
-            }
-            //Mouse disconnected. Bye bye.
-            this.Invoke(delegate
-            {
-                this.Close();
-            });
-
         }
 
         private void RefreshMouseData()
@@ -672,7 +805,6 @@ namespace GHelper
             }
         }
 
-
         private void VisualizeMouseSettings()
         {
             if (mouse.Profile < comboProfile.Items.Count)
@@ -844,7 +976,6 @@ namespace GHelper
             comboBoxAnimationDirection.SelectedIndex = (int)ls.AnimationDirection;
         }
 
-
         private void VisualizeDPIButtons()
         {
             for (int i = 0; i < mouse.DPIProfileCount() && i < 4; ++i)
@@ -863,7 +994,6 @@ namespace GHelper
                 dpiButtons[i].Text = "DPI " + (i + 1) + "\n" + dpi.DPI;
             }
         }
-
 
         private void VisualizeCurrentDPIProfile()
         {
@@ -892,88 +1022,6 @@ namespace GHelper
             pictureDPIColor.BackColor = dpi.Color;
         }
 
-        private void AsusMouseSettings_Shown(object? sender, EventArgs e)
-        {
-
-            if (Height > Program.settingsForm.Height)
-            {
-                Top = Program.settingsForm.Top + Program.settingsForm.Height - Height;
-            }
-            else
-            {
-                Top = Program.settingsForm.Top;
-            }
-
-            Left = Program.settingsForm.Left - Width - 5;
-
-
-            mouse.Disconnect += Mouse_Disconnect;
-            mouse.BatteryUpdated += Mouse_BatteryUpdated;
-            mouse.MouseReadyChanged += Mouse_MouseReadyChanged;
-        }
-
-        private void ButtonSync_Click(object sender, EventArgs e)
-        {
-            RefreshMouseData();
-        }
-
-        private void buttonImport_Click(object sender, EventArgs e)
-        {
-            byte[] data = null;
-
-            Thread t = new Thread(() =>
-            {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
-
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    data = File.ReadAllBytes(ofd.FileName);
-                }
-            });
-
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-            t.Join();
-
-            if (data == null)
-            {
-                //User aborted loading
-                return;
-            }
-
-            if (!mouse.Import(data))
-            {
-                Logger.WriteLine("Failed to import mouse profile");
-                MessageBox.Show(Properties.Strings.MouseImportFailed);
-            }
-            else
-            {
-                if (!mouse.IsLightingZoned())
-                {
-                    visibleZone = LightingZone.All;
-                }
-
-                RefreshMouseData();
-            }
-        }
-
-        private void buttonExport_Click(object sender, EventArgs e)
-        {
-            Thread t = new Thread(() =>
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    File.WriteAllBytes(sfd.FileName, mouse.Export());
-                }
-            });
-
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-            t.Join();
-        }
+        #endregion
     }
 }
