@@ -17,6 +17,8 @@ namespace GHelper
             InitializeComponent();
             InitTheme(true);
 
+            #region Strings
+
             Text = Properties.Strings.Controller;
 
             labelLSTitle.Text = Properties.Strings.LSDeadzones;
@@ -30,35 +32,16 @@ namespace GHelper
             labelPrimary.Text = Properties.Strings.BindingPrimary;
             labelSecondary.Text = Properties.Strings.BindingSecondary;
 
+            #endregion
+
             Shown += Handheld_Shown;
 
             Init();
 
-            trackLSMin.Scroll += Controller_Scroll;
-            trackLSMax.Scroll += Controller_Scroll;
-            trackRSMin.Scroll += Controller_Scroll;
-            trackRSMax.Scroll += Controller_Scroll;
+            #region Panel 1
 
-            trackLTMin.Scroll += Controller_Scroll;
-            trackLTMax.Scroll += Controller_Scroll;
-            trackRTMin.Scroll += Controller_Scroll;
-            trackRTMax.Scroll += Controller_Scroll;
-
-            trackVibra.Scroll += Controller_Scroll;
-
-            buttonReset.Click += ButtonReset_Click;
-
-            trackLSMin.ValueChanged += Controller_Complete;
-            trackLSMax.ValueChanged += Controller_Complete;
-            trackRSMin.ValueChanged += Controller_Complete;
-            trackRSMax.ValueChanged += Controller_Complete;
-
-            trackLTMin.ValueChanged += Controller_Complete;
-            trackLTMax.ValueChanged += Controller_Complete;
-            trackRTMin.ValueChanged += Controller_Complete;
-            trackRTMax.ValueChanged += Controller_Complete;
-
-            trackVibra.ValueChanged += Controller_Complete;
+            ComboBinding(comboPrimary);
+            ComboBinding(comboSecondary);
 
             ButtonBinding("m1", "M1", buttonM1);
             ButtonBinding("m2", "M2", buttonM2);
@@ -86,11 +69,43 @@ namespace GHelper
             ButtonBinding("vb", "View", buttonView);
             ButtonBinding("mb", "Menu", buttonMenu);
 
-            ComboBinding(comboPrimary);
-            ComboBinding(comboSecondary);
+            #endregion
+
+            #region Panel 2
+
+            trackLSMin.Scroll += Controller_Scroll;
+            trackLSMax.Scroll += Controller_Scroll;
+            trackLSMin.ValueChanged += Controller_Complete;
+            trackLSMax.ValueChanged += Controller_Complete;
+
+            trackRSMin.Scroll += Controller_Scroll;
+            trackRSMax.Scroll += Controller_Scroll;
+            trackRSMin.ValueChanged += Controller_Complete;
+            trackRSMax.ValueChanged += Controller_Complete;
+
+            trackLTMin.Scroll += Controller_Scroll;
+            trackLTMax.Scroll += Controller_Scroll;
+            trackLTMin.ValueChanged += Controller_Complete;
+            trackLTMax.ValueChanged += Controller_Complete;
+
+            trackRTMin.Scroll += Controller_Scroll;
+            trackRTMax.Scroll += Controller_Scroll;
+            trackRTMin.ValueChanged += Controller_Complete;
+            trackRTMax.ValueChanged += Controller_Complete;
+
+            trackVibra.Scroll += Controller_Scroll;
+            trackVibra.ValueChanged += Controller_Complete;
+
+            #endregion
+
+            #region Panel 3
 
             checkController.Checked = AppConfig.Is("controller_disabled");
             checkController.CheckedChanged += CheckController_CheckedChanged;
+
+            buttonReset.Click += ButtonReset_Click;
+
+            #endregion
         }
 
         #region Click Events
