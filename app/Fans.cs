@@ -198,15 +198,15 @@ namespace GHelper
 
             #region Profiles
 
-            buttonRemove.Click += ButtonRemove_Click;
-            buttonRename.Click += ButtonRename_Click;
+            buttonRemove.Click += ButtonRemove_Click;//
+            buttonRename.Click += ButtonRename_Click;//
 
             comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
             comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;
             comboModes.TextChanged += ComboModes_TextChanged;
             comboModes.KeyPress += ComboModes_KeyPress;
 
-            buttonAdd.Click += ButtonAdd_Click;
+            buttonAdd.Click += ButtonAdd_Click;//
 
             labelTip.Visible = false;
             labelTip.BackColor = Color.Transparent;
@@ -243,19 +243,19 @@ namespace GHelper
 
             buttonReset.Click += ButtonReset_Click;
 
-            buttonCalibrate.Click += ButtonCalibrate_Click;
+            buttonCalibrate.Click += ButtonCalibrate_Click;//
 
             checkApplyFans.Click += CheckApplyFans_Click;
 
             #endregion
 
-            FillModes();
+            FillModes();//
             InitAll();
-            InitCPU();
+            InitCPU();//
 
             ToggleNavigation(0);//
 
-            if (Program.acpi.DeviceGet(AsusACPI.DevsCPUFanCurve) < 0) buttonCalibrate.Visible = false;
+            if (Program.acpi.DeviceGet(AsusACPI.DevsCPUFanCurve) < 0) buttonCalibrate.Visible = false;//
         }
 
         #region Click Events
