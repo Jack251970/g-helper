@@ -258,7 +258,7 @@ namespace GHelper
             if (Program.acpi.DeviceGet(AsusACPI.DevsCPUFanCurve) < 0) buttonCalibrate.Visible = false;//
         }
 
-        #region Click Events
+        #region Click Events (Done)
 
         private void ButtonDownload_Click(object? sender, EventArgs e)
         {
