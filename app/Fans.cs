@@ -71,8 +71,8 @@ namespace GHelper
 
             #endregion
 
-            Shown += Fans_Shown;
-            FormClosed += Fans_FormClosed;
+            Shown += Fans_Shown;//
+            FormClosed += Fans_FormClosed;//
 
             #region Title
 
@@ -80,115 +80,119 @@ namespace GHelper
             buttonGPU.BorderColor = colorTurbo;
             buttonAdvanced.BorderColor = Color.Gray;
 
-            buttonCPU.Click += ButtonCPU_Click;
-            buttonGPU.Click += ButtonGPU_Click;
-            buttonAdvanced.Click += ButtonAdvanced_Click;
-
-            #endregion
-
-            #region GPU Settings
-
-            trackGPUClockLimit.Minimum = NvidiaGpuControl.MinClockLimit;
-            trackGPUClockLimit.Maximum = NvidiaGpuControl.MaxClockLimit;
-            trackGPUClockLimit.Scroll += trackGPUClockLimit_Scroll;
-            trackGPUClockLimit.MouseUp += TrackGPUClocks_MouseUp;
-
-            trackGPUCore.Minimum = NvidiaGpuControl.MinCoreOffset;
-            trackGPUCore.Maximum = NvidiaGpuControl.MaxCoreOffset;
-            trackGPUCore.Scroll += trackGPU_Scroll;
-            trackGPUCore.MouseUp += TrackGPUClocks_MouseUp;
-
-            trackGPUMemory.Minimum = NvidiaGpuControl.MinMemoryOffset;
-            trackGPUMemory.Maximum = NvidiaGpuControl.MaxMemoryOffset;
-            trackGPUMemory.Scroll += trackGPU_Scroll;
-            trackGPUMemory.MouseUp += TrackGPUClocks_MouseUp;
-
-            trackGPUPower.Minimum = AsusACPI.MinGPUPower;
-            trackGPUPower.Maximum = AsusACPI.MaxGPUPower;
-            trackGPUPower.Scroll += trackGPUPower_Scroll;
-            trackGPUPower.MouseUp += TrackGPU_MouseUp;
-
-            trackGPUBoost.Minimum = AsusACPI.MinGPUBoost;
-            trackGPUBoost.Maximum = AsusACPI.MaxGPUBoost;
-            trackGPUBoost.Scroll += trackGPUPower_Scroll;
-            trackGPUBoost.MouseUp += TrackGPU_MouseUp;
-
-            trackGPUTemp.Minimum = AsusACPI.MinGPUTemp;
-            trackGPUTemp.Maximum = AsusACPI.MaxGPUTemp;
-            trackGPUTemp.Scroll += trackGPUPower_Scroll;
-            trackGPUTemp.MouseUp += TrackGPU_MouseUp;
+            buttonCPU.Click += ButtonCPU_Click;//
+            buttonGPU.Click += ButtonGPU_Click;//
+            buttonAdvanced.Click += ButtonAdvanced_Click;//
 
             #endregion
 
             #region Window Power Mode
 
-            comboPowerMode.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboPowerMode.DataSource = new BindingSource(PowerNative.powerModes, null);
-            comboPowerMode.DisplayMember = "Value";
-            comboPowerMode.ValueMember = "Key";
-            comboPowerMode.SelectedValueChanged += ComboPowerMode_Changed;
+            comboPowerMode.DropDownStyle = ComboBoxStyle.DropDownList;//
+            comboPowerMode.DataSource = new BindingSource(PowerNative.powerModes, null);//
+            comboPowerMode.DisplayMember = "Value";//
+            comboPowerMode.ValueMember = "Key";//
+            comboPowerMode.SelectedValueChanged += ComboPowerMode_Changed;//
 
             #endregion
 
             #region CPU Boost
 
-            comboBoost.SelectedValueChanged += ComboBoost_Changed;
+            comboBoost.SelectedValueChanged += ComboBoost_Changed;//
 
             #endregion
 
             #region Power Limits
 
-            trackTotal.Maximum = AsusACPI.MaxTotal;
-            trackTotal.Minimum = AsusACPI.MinTotal;
-            trackTotal.Scroll += TrackTotal_Scroll;
-            trackTotal.MouseUp += TrackPower_MouseUp;
-            trackTotal.KeyUp += TrackPower_KeyUp;
+            trackTotal.Maximum = AsusACPI.MaxTotal;//
+            trackTotal.Minimum = AsusACPI.MinTotal;//
+            trackTotal.Scroll += TrackTotal_Scroll;//
+            trackTotal.MouseUp += TrackPower_MouseUp;//
+            trackTotal.KeyUp += TrackPower_KeyUp;//
 
-            trackSlow.Maximum = AsusACPI.MaxTotal;
-            trackSlow.Minimum = AsusACPI.MinTotal;
-            trackSlow.Scroll += TrackSlow_Scroll;
-            trackSlow.MouseUp += TrackPower_MouseUp;
-            trackSlow.KeyUp += TrackPower_KeyUp;
+            trackSlow.Maximum = AsusACPI.MaxTotal;//
+            trackSlow.Minimum = AsusACPI.MinTotal;//
+            trackSlow.Scroll += TrackSlow_Scroll;//
+            trackSlow.MouseUp += TrackPower_MouseUp;//
+            trackSlow.KeyUp += TrackPower_KeyUp;//
 
-            trackFast.Maximum = AsusACPI.MaxTotal;
-            trackFast.Minimum = AsusACPI.MinTotal;
-            trackFast.Scroll += TrackFast_Scroll;
-            trackFast.MouseUp += TrackPower_MouseUp;
-            trackFast.KeyUp += TrackPower_KeyUp;
+            trackFast.Maximum = AsusACPI.MaxTotal;//
+            trackFast.Minimum = AsusACPI.MinTotal;//
+            trackFast.Scroll += TrackFast_Scroll;//
+            trackFast.MouseUp += TrackPower_MouseUp;//
+            trackFast.KeyUp += TrackPower_KeyUp;//
 
-            trackCPU.Maximum = AsusACPI.MaxCPU;
-            trackCPU.Minimum = AsusACPI.MinCPU;
-            trackCPU.Scroll += TrackCPU_Scroll;
-            trackCPU.MouseUp += TrackPower_MouseUp;
-            trackCPU.KeyUp += TrackPower_KeyUp;
+            trackCPU.Maximum = AsusACPI.MaxCPU;//
+            trackCPU.Minimum = AsusACPI.MinCPU;//
+            trackCPU.Scroll += TrackCPU_Scroll;//
+            trackCPU.MouseUp += TrackPower_MouseUp;//
+            trackCPU.KeyUp += TrackPower_KeyUp;//
 
-            checkApplyPower.Click += CheckApplyPower_Click;
+            checkApplyPower.Click += CheckApplyPower_Click;//
 
-            buttonDownload.Click += ButtonDownload_Click;
+            #endregion
+
+            #region GPU Settings
+
+            trackGPUClockLimit.Minimum = NvidiaGpuControl.MinClockLimit;//
+            trackGPUClockLimit.Maximum = NvidiaGpuControl.MaxClockLimit;//
+            trackGPUClockLimit.Scroll += trackGPUClockLimit_Scroll;//
+            trackGPUClockLimit.MouseUp += TrackGPUClocks_MouseUp;//
+
+            trackGPUCore.Minimum = NvidiaGpuControl.MinCoreOffset;//
+            trackGPUCore.Maximum = NvidiaGpuControl.MaxCoreOffset;//
+            trackGPUCore.Scroll += trackGPU_Scroll;//
+            trackGPUCore.MouseUp += TrackGPUClocks_MouseUp;//
+
+            trackGPUMemory.Minimum = NvidiaGpuControl.MinMemoryOffset;//
+            trackGPUMemory.Maximum = NvidiaGpuControl.MaxMemoryOffset;//
+            trackGPUMemory.Scroll += trackGPU_Scroll;//
+            trackGPUMemory.MouseUp += TrackGPUClocks_MouseUp;//
+
+            trackGPUPower.Minimum = AsusACPI.MinGPUPower;//
+            trackGPUPower.Maximum = AsusACPI.MaxGPUPower;//
+            trackGPUPower.Scroll += trackGPUPower_Scroll;//
+            trackGPUPower.MouseUp += TrackGPU_MouseUp;//
+
+            trackGPUBoost.Minimum = AsusACPI.MinGPUBoost;//
+            trackGPUBoost.Maximum = AsusACPI.MaxGPUBoost;//
+            trackGPUBoost.Scroll += trackGPUPower_Scroll;//
+            trackGPUBoost.MouseUp += TrackGPU_MouseUp;//
+
+            trackGPUTemp.Minimum = AsusACPI.MinGPUTemp;//
+            trackGPUTemp.Maximum = AsusACPI.MaxGPUTemp;//
+            trackGPUTemp.Scroll += trackGPUPower_Scroll;//
+            trackGPUTemp.MouseUp += TrackGPU_MouseUp;//
+
+            #endregion
+
+            #region Download Advanced Settings Plugin
+
+            buttonDownload.Click += ButtonDownload_Click;//
 
             #endregion
 
             #region Temp Limit
 
-            trackTemp.Minimum = RyzenControl.MinTemp;
-            trackTemp.Maximum = RyzenControl.MaxTemp;
-            trackTemp.Scroll += TrackUV_Scroll;
+            trackTemp.Minimum = RyzenControl.MinTemp;//
+            trackTemp.Maximum = RyzenControl.MaxTemp;//
+            trackTemp.Scroll += TrackUV_Scroll;//
 
             #endregion
-            
+
             #region Undervolting
 
-            trackUV.Minimum = RyzenControl.MinCPUUV;
-            trackUV.Maximum = RyzenControl.MaxCPUUV;
-            trackUV.Scroll += TrackUV_Scroll;
+            trackUV.Minimum = RyzenControl.MinCPUUV;//
+            trackUV.Maximum = RyzenControl.MaxCPUUV;//
+            trackUV.Scroll += TrackUV_Scroll;//
 
-            trackUViGPU.Minimum = RyzenControl.MinIGPUUV;
-            trackUViGPU.Maximum = RyzenControl.MaxIGPUUV;
-            trackUViGPU.Scroll += TrackUV_Scroll;
+            trackUViGPU.Minimum = RyzenControl.MinIGPUUV;//
+            trackUViGPU.Maximum = RyzenControl.MaxIGPUUV;//
+            trackUViGPU.Scroll += TrackUV_Scroll;//
 
-            buttonApplyAdvanced.Click += ButtonApplyAdvanced_Click;
+            buttonApplyAdvanced.Click += ButtonApplyAdvanced_Click;//
 
-            checkApplyUV.Click += CheckApplyUV_Click;
+            checkApplyUV.Click += CheckApplyUV_Click;//
 
             #endregion
 
@@ -249,7 +253,7 @@ namespace GHelper
             InitAll();
             InitCPU();
 
-            ToggleNavigation(0);
+            ToggleNavigation(0);//
 
             if (Program.acpi.DeviceGet(AsusACPI.DevsCPUFanCurve) < 0) buttonCalibrate.Visible = false;
         }
