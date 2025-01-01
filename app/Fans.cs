@@ -201,56 +201,56 @@ namespace GHelper
             buttonRemove.Click += ButtonRemove_Click;//
             buttonRename.Click += ButtonRename_Click;//
 
-            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);
-            comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;
+            comboModes.ClientSize = new Size(comboModes.Width, comboModes.Height - 4);//
+            comboModes.SelectionChangeCommitted += ComboModes_SelectedValueChanged;//
             comboModes.TextChanged += ComboModes_TextChanged;
             comboModes.KeyPress += ComboModes_KeyPress;
 
             buttonAdd.Click += ButtonAdd_Click;//
 
-            labelTip.Visible = false;
-            labelTip.BackColor = Color.Transparent;
+            labelTip.Visible = false;//
+            labelTip.BackColor = Color.Transparent;//
 
-            seriesCPU = chartCPU.Series.Add("CPU");
-            seriesCPU.Color = colorStandard;
-            chartCPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.CPU);
-            chartCPU.MouseUp += ChartCPU_MouseUp;
-            chartCPU.MouseLeave += ChartCPU_MouseLeave;
-            chartCPU.MouseClick += ChartCPU_MouseClick;
+            seriesCPU = chartCPU.Series.Add("CPU");//
+            seriesCPU.Color = colorStandard;//
+            chartCPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.CPU);//
+            chartCPU.MouseUp += ChartCPU_MouseUp;//
+            chartCPU.MouseLeave += ChartCPU_MouseLeave;//
+            chartCPU.MouseClick += ChartCPU_MouseClick;//
 
-            seriesGPU = chartGPU.Series.Add("GPU");
-            seriesGPU.Color = colorTurbo;
-            chartGPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.GPU);
-            chartGPU.MouseUp += ChartCPU_MouseUp;
-            chartGPU.MouseLeave += ChartCPU_MouseLeave;
-            chartGPU.MouseClick += ChartCPU_MouseClick;
+            seriesGPU = chartGPU.Series.Add("GPU");//
+            seriesGPU.Color = colorTurbo;//
+            chartGPU.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.GPU);//
+            chartGPU.MouseUp += ChartCPU_MouseUp;//
+            chartGPU.MouseLeave += ChartCPU_MouseLeave;//
+            chartGPU.MouseClick += ChartCPU_MouseClick;//
 
-            seriesMid = chartMid.Series.Add("Mid");
-            seriesMid.Color = colorEco;
-            chartMid.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.Mid);
-            chartMid.MouseUp += ChartCPU_MouseUp;
-            chartMid.MouseLeave += ChartCPU_MouseLeave;
-            chartMid.MouseClick += ChartCPU_MouseClick;
+            seriesMid = chartMid.Series.Add("Mid");//
+            seriesMid.Color = colorEco;//
+            chartMid.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.Mid);//
+            chartMid.MouseUp += ChartCPU_MouseUp;//
+            chartMid.MouseLeave += ChartCPU_MouseLeave;//
+            chartMid.MouseClick += ChartCPU_MouseClick;//
 
-            seriesXGM = chartXGM.Series.Add("XGM");
-            seriesXGM.Color = Color.Orange;
-            chartXGM.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.XGM);
-            chartXGM.MouseUp += ChartCPU_MouseUp;
-            chartXGM.MouseLeave += ChartCPU_MouseLeave;
-            chartXGM.MouseClick += ChartCPU_MouseClick;
+            seriesXGM = chartXGM.Series.Add("XGM");//
+            seriesXGM.Color = Color.Orange;//
+            chartXGM.MouseMove += (sender, e) => ChartCPU_MouseMove(sender, e, AsusFan.XGM);//
+            chartXGM.MouseUp += ChartCPU_MouseUp;//
+            chartXGM.MouseLeave += ChartCPU_MouseLeave;//
+            chartXGM.MouseClick += ChartCPU_MouseClick;//
 
-            labelFansResult.Visible = false;
+            labelFansResult.Visible = false;//
 
-            buttonReset.Click += ButtonReset_Click;
+            buttonReset.Click += ButtonReset_Click;//
 
             buttonCalibrate.Click += ButtonCalibrate_Click;//
 
-            checkApplyFans.Click += CheckApplyFans_Click;
+            checkApplyFans.Click += CheckApplyFans_Click;//
 
             #endregion
 
             FillModes();//
-            InitAll();
+            InitAll();//
             InitCPU();//
 
             ToggleNavigation(0);//
@@ -520,7 +520,6 @@ namespace GHelper
             FormPosition();
         }
 
-
         private void TrackPower_MouseUp(object? sender, MouseEventArgs e)
         {
             Task.Run(() =>
@@ -528,7 +527,6 @@ namespace GHelper
                 modeControl.AutoPower(true);
             });
         }
-
 
         private void TrackPower_KeyUp(object? sender, KeyEventArgs e)
         {
@@ -590,7 +588,6 @@ namespace GHelper
         {
             Chart_Save();
         }
-
 
         private void ChartCPU_MouseLeave(object? sender, EventArgs e)
         {
