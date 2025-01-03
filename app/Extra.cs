@@ -94,13 +94,13 @@ namespace GHelper
 
             #endregion
 
-            Shown += Keyboard_Shown;
+            Shown += Keyboard_Shown;//
 
             toolTip.SetToolTip(checkAutoToggleClamshellMode, "Disable sleep on lid close when plugged in and external monitor is connected");
 
-            #region Bindings
+            #region Bindings//
 
-            pictureHelp.Click += PictureHelp_Click;
+            pictureHelp.Click += PictureHelp_Click;//
 
             if (AppConfig.IsARCNM())
             {
@@ -205,76 +205,24 @@ namespace GHelper
 
             #region Backlight
 
-            sliderBrightness.Value = InputDispatcher.GetBacklight();
-            sliderBrightness.ValueChanged += SliderBrightness_ValueChanged;
+            sliderBrightness.Value = InputDispatcher.GetBacklight();//
+            sliderBrightness.ValueChanged += SliderBrightness_ValueChanged;//
 
-            // Keyboard
-            checkAwake.Checked = AppConfig.IsNotFalse("keyboard_awake");
-            checkBattery.Checked = AppConfig.IsOnBattery("keyboard_awake");
-            checkBoot.Checked = AppConfig.IsNotFalse("keyboard_boot");
-            checkSleep.Checked = AppConfig.IsNotFalse("keyboard_sleep");
-            checkShutdown.Checked = AppConfig.IsNotFalse("keyboard_shutdown");
-            checkAwakeBar.CheckedChanged += CheckPower_CheckedChanged;
-            checkBatteryBar.CheckedChanged += CheckPower_CheckedChanged;
-            checkBootBar.CheckedChanged += CheckPower_CheckedChanged;
-            checkSleepBar.CheckedChanged += CheckPower_CheckedChanged;
-            checkShutdownBar.CheckedChanged += CheckPower_CheckedChanged;
-
-            // Logo
-            checkAwakeLogo.Checked = AppConfig.IsNotFalse("keyboard_awake_logo");
-            checkBatteryLogo.Checked = AppConfig.IsOnBattery("keyboard_awake_logo");
-            checkBootLogo.Checked = AppConfig.IsNotFalse("keyboard_boot_logo");
-            checkSleepLogo.Checked = AppConfig.IsNotFalse("keyboard_sleep_logo");
-            checkShutdownLogo.Checked = AppConfig.IsNotFalse("keyboard_shutdown_logo");
-            checkAwake.CheckedChanged += CheckPower_CheckedChanged;
-            checkBattery.CheckedChanged += CheckPower_CheckedChanged;
-            checkBoot.CheckedChanged += CheckPower_CheckedChanged;
-            checkSleep.CheckedChanged += CheckPower_CheckedChanged;
-            checkShutdown.CheckedChanged += CheckPower_CheckedChanged;
-
-            // Lightbar
-            checkAwakeBar.Checked = AppConfig.IsNotFalse("keyboard_awake_bar");
-            checkBatteryBar.Checked = AppConfig.IsOnBattery("keyboard_awake_bar");
-            checkBootBar.Checked = AppConfig.IsNotFalse("keyboard_boot_bar");
-            checkSleepBar.Checked = AppConfig.IsNotFalse("keyboard_sleep_bar");
-            checkShutdownBar.Checked = AppConfig.IsNotFalse("keyboard_shutdown_bar");
-            checkAwakeLogo.CheckedChanged += CheckPower_CheckedChanged;
-            checkBatteryLogo.CheckedChanged += CheckPower_CheckedChanged;
-            checkBootLogo.CheckedChanged += CheckPower_CheckedChanged;
-            checkSleepLogo.CheckedChanged += CheckPower_CheckedChanged;
-            checkShutdownLogo.CheckedChanged += CheckPower_CheckedChanged;
-
-            // Lid
-            checkAwakeLid.Checked = AppConfig.IsNotFalse("keyboard_awake_lid");
-            checkBatteryLid.Checked = AppConfig.IsOnBattery("keyboard_awake_lid");
-            checkBootLid.Checked = AppConfig.IsNotFalse("keyboard_boot_lid");
-            checkSleepLid.Checked = AppConfig.IsNotFalse("keyboard_sleep_lid");
-            checkShutdownLid.Checked = AppConfig.IsNotFalse("keyboard_shutdown_lid");
-            checkAwakeLid.CheckedChanged += CheckPower_CheckedChanged;
-            checkBatteryLid.CheckedChanged += CheckPower_CheckedChanged;
-            checkBootLid.CheckedChanged += CheckPower_CheckedChanged;
-            checkSleepLid.CheckedChanged += CheckPower_CheckedChanged;
-            checkShutdownLid.CheckedChanged += CheckPower_CheckedChanged;
-
-            panelXMG.Visible = (Program.acpi.DeviceGet(AsusACPI.GPUXGConnected) == 1);
-            checkXMG.Checked = !(AppConfig.Get("xmg_light") == 0);
-            checkXMG.CheckedChanged += CheckXMG_CheckedChanged;
-
-            comboKeyboardSpeed.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboKeyboardSpeed.DataSource = new BindingSource(Aura.GetSpeeds(), null);
-            comboKeyboardSpeed.DisplayMember = "Value";
-            comboKeyboardSpeed.ValueMember = "Key";
-            comboKeyboardSpeed.SelectedValue = Aura.Speed;
-            comboKeyboardSpeed.SelectedValueChanged += ComboKeyboardSpeed_SelectedValueChanged;
-
-            numericBacklightTime.Value = AppConfig.Get("keyboard_timeout", 60);
-            numericBacklightTime.ValueChanged += NumericBacklightTime_ValueChanged;
-            
-            numericBacklightPluggedTime.Value = AppConfig.Get("keyboard_ac_timeout", 0);
-            numericBacklightPluggedTime.ValueChanged += NumericBacklightTime_ValueChanged;
+            if (!AppConfig.IsBacklightZones())
+            {
+                labelBacklightKeyboard.Visible = false;
+                checkBattery.Visible = false;
+            }
 
             if (!AppConfig.IsBacklightZones() || AppConfig.IsStrixLimitedRGB() || AppConfig.IsARCNM())
             {
+                labelBacklightLogo.Visible = false;
+                checkAwakeLogo.Visible = false;
+                checkBatteryLogo.Visible = false;
+                checkBootLogo.Visible = false;
+                checkSleepLogo.Visible = false;
+                checkShutdownLogo.Visible = false;
+
                 if (!AppConfig.IsStrixLimitedRGB())
                 {
                     labelBacklightBar.Visible = false;
@@ -291,20 +239,72 @@ namespace GHelper
                 checkBootLid.Visible = false;
                 checkSleepLid.Visible = false;
                 checkShutdownLid.Visible = false;
-
-                labelBacklightLogo.Visible = false;
-                checkAwakeLogo.Visible = false;
-                checkBatteryLogo.Visible = false;
-                checkBootLogo.Visible = false;
-                checkSleepLogo.Visible = false;
-                checkShutdownLogo.Visible = false;
             }
 
-            if (!AppConfig.IsBacklightZones())
-            {
-                labelBacklightKeyboard.Visible = false;
-                checkBattery.Visible = false;
-            }
+            // Keyboard
+            checkAwake.Checked = AppConfig.IsNotFalse("keyboard_awake");//
+            checkBattery.Checked = AppConfig.IsOnBattery("keyboard_awake");//
+            checkBoot.Checked = AppConfig.IsNotFalse("keyboard_boot");//
+            checkSleep.Checked = AppConfig.IsNotFalse("keyboard_sleep");//
+            checkShutdown.Checked = AppConfig.IsNotFalse("keyboard_shutdown");//
+            checkAwakeBar.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBatteryBar.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBootBar.CheckedChanged += CheckPower_CheckedChanged;//
+            checkSleepBar.CheckedChanged += CheckPower_CheckedChanged;//
+            checkShutdownBar.CheckedChanged += CheckPower_CheckedChanged;//
+
+            // Logo
+            checkAwakeLogo.Checked = AppConfig.IsNotFalse("keyboard_awake_logo");//
+            checkBatteryLogo.Checked = AppConfig.IsOnBattery("keyboard_awake_logo");//
+            checkBootLogo.Checked = AppConfig.IsNotFalse("keyboard_boot_logo");//
+            checkSleepLogo.Checked = AppConfig.IsNotFalse("keyboard_sleep_logo");//
+            checkShutdownLogo.Checked = AppConfig.IsNotFalse("keyboard_shutdown_logo");//
+            checkAwake.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBattery.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBoot.CheckedChanged += CheckPower_CheckedChanged;//
+            checkSleep.CheckedChanged += CheckPower_CheckedChanged;//
+            checkShutdown.CheckedChanged += CheckPower_CheckedChanged;//
+
+            // Lightbar
+            checkAwakeBar.Checked = AppConfig.IsNotFalse("keyboard_awake_bar");//
+            checkBatteryBar.Checked = AppConfig.IsOnBattery("keyboard_awake_bar");//
+            checkBootBar.Checked = AppConfig.IsNotFalse("keyboard_boot_bar");//
+            checkSleepBar.Checked = AppConfig.IsNotFalse("keyboard_sleep_bar");//
+            checkShutdownBar.Checked = AppConfig.IsNotFalse("keyboard_shutdown_bar");//
+            checkAwakeLogo.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBatteryLogo.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBootLogo.CheckedChanged += CheckPower_CheckedChanged;//
+            checkSleepLogo.CheckedChanged += CheckPower_CheckedChanged;//
+            checkShutdownLogo.CheckedChanged += CheckPower_CheckedChanged;//
+
+            // Lid
+            checkAwakeLid.Checked = AppConfig.IsNotFalse("keyboard_awake_lid");//
+            checkBatteryLid.Checked = AppConfig.IsOnBattery("keyboard_awake_lid");//
+            checkBootLid.Checked = AppConfig.IsNotFalse("keyboard_boot_lid");//
+            checkSleepLid.Checked = AppConfig.IsNotFalse("keyboard_sleep_lid");//
+            checkShutdownLid.Checked = AppConfig.IsNotFalse("keyboard_shutdown_lid");//
+            checkAwakeLid.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBatteryLid.CheckedChanged += CheckPower_CheckedChanged;//
+            checkBootLid.CheckedChanged += CheckPower_CheckedChanged;//
+            checkSleepLid.CheckedChanged += CheckPower_CheckedChanged;//
+            checkShutdownLid.CheckedChanged += CheckPower_CheckedChanged;//
+
+            panelXMG.Visible = (Program.acpi.DeviceGet(AsusACPI.GPUXGConnected) == 1);//
+            checkXMG.Checked = !(AppConfig.Get("xmg_light") == 0);//
+            checkXMG.CheckedChanged += CheckXMG_CheckedChanged;//
+
+            comboKeyboardSpeed.DropDownStyle = ComboBoxStyle.DropDownList;//
+            comboKeyboardSpeed.DataSource = new BindingSource(Aura.GetSpeeds(), null);//
+            comboKeyboardSpeed.DisplayMember = "Value";//
+            comboKeyboardSpeed.ValueMember = "Key";//
+            comboKeyboardSpeed.SelectedValue = Aura.Speed;//
+            comboKeyboardSpeed.SelectedValueChanged += ComboKeyboardSpeed_SelectedValueChanged;//
+            
+            numericBacklightPluggedTime.Value = AppConfig.Get("keyboard_ac_timeout", 0);//
+            numericBacklightPluggedTime.ValueChanged += NumericBacklightTime_ValueChanged;//
+
+            numericBacklightTime.Value = AppConfig.Get("keyboard_timeout", 60);//
+            numericBacklightTime.ValueChanged += NumericBacklightTime_ValueChanged;//
 
             #endregion
 
