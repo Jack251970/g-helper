@@ -96,7 +96,7 @@ namespace GHelper
 
             Shown += Keyboard_Shown;//
 
-            toolTip.SetToolTip(checkAutoToggleClamshellMode, "Disable sleep on lid close when plugged in and external monitor is connected");
+            toolTip.SetToolTip(checkAutoToggleClamshellMode, "Disable sleep on lid close when plugged in and external monitor is connected");//
 
             #region Bindings//
 
@@ -310,14 +310,14 @@ namespace GHelper
 
             #region Other
 
-            pictureScan.Click += PictureScan_Click;
-            pictureLog.Click += PictureLog_Click;
+            pictureScan.Click += PictureScan_Click;//
+            pictureLog.Click += PictureLog_Click;//
 
             #region ACPI DEVS Test
 
-            buttonACPISend.Click += ButtonACPISend_Click;
+            buttonACPISend.Click += ButtonACPISend_Click;//
 
-            InitACPITesting();
+            InitACPITesting();//
 
             #endregion
 
@@ -329,66 +329,66 @@ namespace GHelper
 
             #region Memory Assigned to GPU
 
-            checkPerKeyRGB.Visible = AppConfig.IsPossible4ZoneRGB();
-            checkPerKeyRGB.Checked = AppConfig.Is("per_key_rgb");
-            checkPerKeyRGB.CheckedChanged += CheckPerKeyRGB_CheckedChanged;
+            checkPerKeyRGB.Visible = AppConfig.IsPossible4ZoneRGB();//
+            checkPerKeyRGB.Checked = AppConfig.Is("per_key_rgb");//
+            checkPerKeyRGB.CheckedChanged += CheckPerKeyRGB_CheckedChanged;//
 
-            var statusLed = Program.acpi.DeviceGet(AsusACPI.StatusLed);
-            checkStatusLed.Visible = statusLed >= 0;
-            checkStatusLed.Checked = (statusLed > 0);
-            checkStatusLed.CheckedChanged += CheckLEDStatus_CheckedChanged;
+            var statusLed = Program.acpi.DeviceGet(AsusACPI.StatusLed);//
+            checkStatusLed.Visible = statusLed >= 0;//
+            checkStatusLed.Checked = (statusLed > 0);//
+            checkStatusLed.CheckedChanged += CheckLEDStatus_CheckedChanged;//
 
-            checkGPUFix.Visible = Program.acpi.IsNVidiaGPU();
-            checkGPUFix.Checked = AppConfig.IsGPUFix();
-            checkGPUFix.CheckedChanged += CheckGPUFix_CheckedChanged;
+            checkGPUFix.Visible = Program.acpi.IsNVidiaGPU();//
+            checkGPUFix.Checked = AppConfig.IsGPUFix();//
+            checkGPUFix.CheckedChanged += CheckGPUFix_CheckedChanged;//
 
-            checkGpuApps.Checked = AppConfig.Is("kill_gpu_apps");
-            checkGpuApps.CheckedChanged += CheckGpuApps_CheckedChanged;
+            checkGpuApps.Checked = AppConfig.Is("kill_gpu_apps");//
+            checkGpuApps.CheckedChanged += CheckGpuApps_CheckedChanged;//
 
-            InitVariBright();
+            InitVariBright();//
 
-            checkUSBC.Checked = AppConfig.Is("optimized_usbc");
-            checkUSBC.CheckedChanged += CheckUSBC_CheckedChanged;
+            checkUSBC.Checked = AppConfig.Is("optimized_usbc");//
+            checkUSBC.CheckedChanged += CheckUSBC_CheckedChanged;//
 
             int bootSound = Program.acpi.DeviceGet(AsusACPI.BootSound);
             if (bootSound < 0 || bootSound > UInt16.MaxValue) bootSound = AppConfig.Get("boot_sound", 0);
 
-            checkBootSound.Checked = (bootSound == 1);
-            checkBootSound.CheckedChanged += CheckBootSound_CheckedChanged;
+            checkBootSound.Checked = (bootSound == 1);//
+            checkBootSound.CheckedChanged += CheckBootSound_CheckedChanged;//
 
-            checkNoOverdrive.Checked = AppConfig.IsNoOverdrive();
-            checkNoOverdrive.CheckedChanged += CheckNoOverdrive_CheckedChanged;
+            checkNoOverdrive.Checked = AppConfig.IsNoOverdrive();//
+            checkNoOverdrive.CheckedChanged += CheckNoOverdrive_CheckedChanged;//
 
-            checkTopmost.Checked = AppConfig.Is("topmost");
-            checkTopmost.CheckedChanged += CheckTopmost_CheckedChanged;
+            checkTopmost.Checked = AppConfig.Is("topmost");//
+            checkTopmost.CheckedChanged += CheckTopmost_CheckedChanged;//
 
-            checkBWIcon.Checked = AppConfig.IsBWIcon();
+            checkBWIcon.Checked = AppConfig.IsBWIcon();//
             checkBWIcon.CheckedChanged += CheckBWIcon_CheckedChanged;
 
             //checkAutoToggleClamshellMode.Visible = clamshellControl.IsExternalDisplayConnected();
-            checkAutoToggleClamshellMode.Checked = AppConfig.Is("toggle_clamshell_mode");
-            checkAutoToggleClamshellMode.CheckedChanged += checkAutoToggleClamshellMode_CheckedChanged;
+            checkAutoToggleClamshellMode.Checked = AppConfig.Is("toggle_clamshell_mode");//
+            checkAutoToggleClamshellMode.CheckedChanged += checkAutoToggleClamshellMode_CheckedChanged;//
 
             #endregion
 
             #region Hibernate
 
-            InitHibernate();
+            InitHibernate();//
 
             #endregion
 
             #region Asus Services Running
 
-            buttonServices.Click += ButtonServices_Click;
+            buttonServices.Click += ButtonServices_Click;//
 
-            InitServices();
+            InitServices();//
 
             #endregion
 
             #endregion
         }
 
-        #region Click
+        #region Click (Done)
 
         private void PictureHelp_Click(object? sender, EventArgs e)
         {
@@ -420,7 +420,6 @@ namespace GHelper
                 Process.Start("shutdown", "/r /t 1");
             }
         }
-
 
         private void PictureScan_Click(object? sender, EventArgs e)
         {
@@ -555,7 +554,6 @@ namespace GHelper
             screenControl.AutoScreen(true);
         }
 
-
         private void CheckTopmost_CheckedChanged(object? sender, EventArgs e)
         {
             AppConfig.Set("topmost", (checkTopmost.Checked ? 1 : 0));
@@ -602,7 +600,6 @@ namespace GHelper
             Aura.ApplyAura();
         }
 
-
         private void Keyboard_Shown(object? sender, EventArgs e)
         {
             if (Height > Program.settingsForm.Height)
@@ -627,7 +624,6 @@ namespace GHelper
 
             Left = Program.settingsForm.Left - Width - 5;
         }
-
 
         private void checkAutoToggleClamshellMode_CheckedChanged(object? sender, EventArgs e)
         {
